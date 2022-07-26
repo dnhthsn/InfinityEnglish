@@ -3,6 +3,7 @@ package com.example.infinityenglish.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,18 +11,23 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.infinityenglish.R;
-import com.example.infinityenglish.control.RequestManager;
+import com.example.infinityenglish.control.remote.RequestManager;
 import com.example.infinityenglish.databinding.ActivitySearchBinding;
 import com.example.infinityenglish.models.APIResponse;
+import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.adapter.MeaningAdapter;
 import com.example.infinityenglish.view.adapter.PhoneticAdapter;
+import com.example.infinityenglish.viewmodel.WordViewModel;
 
 public class SearchActivity extends AppCompatActivity implements RequestManager.OnFetchDataListener {
     private ActivitySearchBinding binding;
+    private WordViewModel wordViewModel;
+
     private ProgressDialog progressDialog;
 
     private PhoneticAdapter phoneticAdapter;
@@ -39,13 +45,18 @@ public class SearchActivity extends AppCompatActivity implements RequestManager.
 
         binding = DataBindingUtil.setContentView(SearchActivity.this, R.layout.activity_search);
 
+        wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
+        wordViewModel.init(this);
+
         progressDialog = new ProgressDialog(this);
 
         progressDialog.setTitle("Loading...");
         progressDialog.show();
 
-        RequestManager requestManager = new RequestManager(SearchActivity.this);
-        requestManager.getWordMeanings(SearchActivity.this, "Hello");
+        String word = getIntent().getStringExtra(Const.Sender.word);
+        String word1 = word==null ? "hello":word;
+
+        wordViewModel.getWordMeanings(SearchActivity.this, word1);
 
         binding.inputSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -53,14 +64,21 @@ public class SearchActivity extends AppCompatActivity implements RequestManager.
                 progressDialog.setTitle("Fetching response for: " + query);
                 progressDialog.show();
 
-                RequestManager requestManager = new RequestManager(SearchActivity.this);
-                requestManager.getWordMeanings(SearchActivity.this, query);
+                wordViewModel.getWordMeanings(SearchActivity.this, query);
+                wordViewModel.addWordSearched(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

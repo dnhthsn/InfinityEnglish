@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityMainBinding;
+import com.example.infinityenglish.util.Utility;
 
 import java.io.IOException;
 
@@ -41,18 +42,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String audioUrl = "https://api.dictionaryapi.dev/media/pronunciations/en/setting-us.mp3";
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                try {
-                    mediaPlayer.setDataSource(audioUrl);
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                Utility.Player.playAudio(audioUrl);
                 SettingsActivity.starter(MainActivity.this);
+            }
+        });
+
+        binding.history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HistoryActivity.starter(MainActivity.this);
             }
         });
     }

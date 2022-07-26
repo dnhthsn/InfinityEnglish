@@ -1,4 +1,4 @@
-package com.example.infinityenglish.control;
+package com.example.infinityenglish.control.remote;
 
 import android.content.Context;
 
@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 public class RequestManager {
     private Retrofit retrofit;
 
-    public RequestManager(Context context) {
+    public RequestManager() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.dictionaryapi.dev/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())

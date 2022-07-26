@@ -32,6 +32,7 @@ public interface Const {
         String url = "url";
         String SHARED_PREFERENCES = "dataLogin";
         String users = "users";
+        String word = "word";
     }
 
     interface Error {
@@ -51,5 +52,6 @@ public interface Const {
         String created = "Created success fully";
         String update = "Profile info update successfully";
         String login = "Logged in Successfully";
+        String deleted = "Delete successfully";
     }
 }
