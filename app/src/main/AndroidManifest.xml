@@ -16,6 +16,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.activity.UpdateNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.DeletedNotesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.WriteNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.BookmarkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.StartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.RandomActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.HistoryActivity"
             android:exported="false" />
         <activity

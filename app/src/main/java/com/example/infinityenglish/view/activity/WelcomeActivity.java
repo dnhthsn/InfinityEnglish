@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
 
         new Handler().postDelayed(() -> {
-            LoginActivity.starter(WelcomeActivity.this);
+            StartActivity.starter(WelcomeActivity.this);
         }, 8000);
     }
 }

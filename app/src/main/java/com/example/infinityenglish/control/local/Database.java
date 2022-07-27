@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.infinityenglish.models.Histories;
+import com.example.infinityenglish.models.Notes;
 
 public class Database extends SQLiteOpenHelper {
     private final static String DATABASE_NAME = "english_db";
@@ -17,7 +18,18 @@ public class Database extends SQLiteOpenHelper {
     private String TABLE_HISTORY = "histories";
     private String WORD = "word";
 
+    private String TABLE_NOTE = "notes";
+    private String ID = "id";
+    private String TITLE = "title";
+    private String CONTENT = "content";
+
     private String createTableHistory = "CREATE TABLE " + TABLE_HISTORY + " ( " + WORD + " TEXT PRIMARY KEY UNIQUE)";
+
+    private String createTableNote = "CREATE TABLE " + TABLE_NOTE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + TITLE + " TEXT, "
+            + CONTENT + " TEXT)";
+
+    private String createNote = "INSERT INTO " + TABLE_NOTE + " VAlUES (1,'admin','123')";
 
     public Database(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -26,16 +38,24 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(createTableHistory);
+        sqLiteDatabase.execSQL(createTableNote);
+
+        sqLiteDatabase.execSQL(createNote);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
     }
 
     public Cursor getHistory() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_HISTORY, null);
+        return res;
+    }
+
+    public Cursor getNote() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NOTE, null);
         return res;
     }
 
@@ -45,6 +65,16 @@ public class Database extends SQLiteOpenHelper {
         values.put(WORD, histories.getWordInput());
 
         db.insert(TABLE_HISTORY, null, values);
+        db.close();
+    }
+
+    public void addNote(Notes notes) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TITLE, notes.getTitle());
+        values.put(CONTENT, notes.getContent());
+
+        db.insert(TABLE_NOTE, null, values);
         db.close();
     }
 
@@ -62,13 +92,29 @@ public class Database extends SQLiteOpenHelper {
         return count >= 1;
     }
 
+    public void updateNote(Notes notes){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TITLE, notes.getTitle());
+        values.put(CONTENT, notes.getContent());
+
+        db.update(TABLE_NOTE, values, ID +" = " + notes.getId(), null);
+        db.close();
+    }
+
     public boolean deleteHistory(String word) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.delete(TABLE_HISTORY, WORD + "=?", new String[]{word}) > 0;
     }
 
+    public int deleteNote(Integer i) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int res = db.delete(TABLE_NOTE, ID + " = " + i, null);
+        return res;
+    }
+
     public void deleteAllHistory() {
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("DELETE FROM "+ TABLE_HISTORY);;
+        db.execSQL("DELETE FROM " + TABLE_HISTORY);
     }
 }

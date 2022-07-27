@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         binding.settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String audioUrl = "https://api.dictionaryapi.dev/media/pronunciations/en/setting-us.mp3";
-                Utility.Player.playAudio(audioUrl);
                 SettingsActivity.starter(MainActivity.this);
             }
         });
@@ -53,5 +51,23 @@ public class MainActivity extends AppCompatActivity {
                 HistoryActivity.starter(MainActivity.this);
             }
         });
+
+        binding.note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NoteActivity.starter(MainActivity.this);
+            }
+        });
+
+        binding.random.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RandomActivity.starter(MainActivity.this);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

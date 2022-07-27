@@ -61,8 +61,7 @@ public class HistoryActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
-                wordViewModel.deleteAllHistory(view);
-                historyAdapter.setHistories(new ArrayList<>());
+                wordViewModel.deleteAllHistory(view, historyAdapter);
                 historyAdapter.notifyDataSetChanged();
             }
         });

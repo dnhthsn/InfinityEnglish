@@ -12,6 +12,7 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.local.Database;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.models.Histories;
+import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 
@@ -40,18 +41,47 @@ public class Repository {
         cursor.close();
     }
 
+    public void getNote(Callback callback) {
+        Cursor cursor = database.getNote();
+        Notes notes;
+        List<Notes> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Integer id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String content = cursor.getString(2);
+            notes = new Notes(id, title, content);
+            list.add(notes);
+        }
+        callback.getNotes(list);
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
     public void addHistory(Histories histories) {
         if (!database.checkHistory(histories.getWordInput())) {
             database.addHistory(histories);
         }
     }
 
-    public void deleteWordHistory(String word, View view){
+    public void addNote(Notes notes) {
+        database.addNote(notes);
+    }
+
+    public void updateNote(Notes notes) {
+        database.updateNote(notes);
+    }
+
+    public void deleteWordHistory(String word, View view) {
         database.deleteHistory(word);
         Utility.Notice.snack(view, Const.Success.deleted);
     }
 
-    public void deleteAllHistory(View view){
+    public void deleteNote(Integer id, View view) {
+        database.deleteNote(id);
+        Utility.Notice.snack(view, Const.Success.deleted);
+    }
+
+    public void deleteAllHistory(View view) {
         MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.timo);
         mediaPlayer.start();
 

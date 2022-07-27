@@ -8,21 +8,26 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.control.local.Database;
+import com.example.infinityenglish.control.local.SharedPreference;
 import com.example.infinityenglish.control.remote.RequestManager;
 import com.example.infinityenglish.control.remote.RequestManager.OnFetchDataListener;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.models.Histories;
+import com.example.infinityenglish.view.adapter.HistoryAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WordViewModel extends ViewModel {
     private RequestManager requestManager;
     private Repository repository;
     private MutableLiveData<List<Histories>> histories = new MutableLiveData<>();
+    private SharedPreference sharedPreference;
 
     public void init(Context context){
         requestManager = new RequestManager();
         repository = new Repository(context);
+        sharedPreference = new SharedPreference(context);
     }
 
     public void getWordMeanings(OnFetchDataListener listener, String query){
@@ -34,7 +39,8 @@ public class WordViewModel extends ViewModel {
         repository.addHistory(histories);
     }
 
-    public void deleteAllHistory(View view){
+    public void deleteAllHistory(View view, HistoryAdapter historyAdapter){
+        historyAdapter.setHistories(new ArrayList<>());
         repository.deleteAllHistory(view);
     }
 
@@ -47,5 +53,16 @@ public class WordViewModel extends ViewModel {
             }
         });
         return histories;
+    }
+
+    public void saveStateBookmark(boolean state){
+        sharedPreference.saveStateBookmark(state);
+    }
+
+    public boolean getStateBookmarked(){
+        return sharedPreference.getStateBookmarked();
+    }
+    public void removeBookmarkedState(){
+        sharedPreference.removeBookmarkState();
     }
 }

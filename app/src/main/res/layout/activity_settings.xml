@@ -37,27 +37,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="80dp"
-                android:background="@drawable/round_corner_white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/profile"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_info_24"
-                    android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:padding="10dp"
-                    android:text="Profile"
-                    android:textSize="20dp" />
+                    android:background="@drawable/round_corner_white"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/backup"
+                    <TextView
+                        android:id="@+id/profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_info_24"
+                        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                        android:padding="10dp"
+                        android:text="Profile"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/backup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_baseline_backup_24"
+                        android:padding="10dp"
+                        android:text="Backup"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/click_logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_backup_24"
-                    android:padding="10dp"
-                    android:text="Backup"
-                    android:textSize="20dp" />
+                    android:layout_margin="15dp"
+                    android:background="@drawable/round_corner_button"
+                    android:text="Log out"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

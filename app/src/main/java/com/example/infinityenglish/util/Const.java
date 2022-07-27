@@ -33,6 +33,10 @@ public interface Const {
         String SHARED_PREFERENCES = "dataLogin";
         String users = "users";
         String word = "word";
+        String bookmarkState = "state";
+        String noteId = "id";
+        String noteTitle = "title";
+        String noteContent = "content";
     }
 
     interface Error {
