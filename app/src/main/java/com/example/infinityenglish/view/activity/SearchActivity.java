@@ -32,7 +32,6 @@ public class SearchActivity extends AppCompatActivity implements RequestManager.
 
     private PhoneticAdapter phoneticAdapter;
     private MeaningAdapter meaningAdapter;
-    private boolean isBookmarked;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);
@@ -58,22 +57,6 @@ public class SearchActivity extends AppCompatActivity implements RequestManager.
         String word1 = word==null ? "hello":word;
 
         wordViewModel.getWordMeanings(SearchActivity.this, word1);
-
-        isBookmarked = wordViewModel.getStateBookmarked();
-
-        binding.clickBookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isBookmarked){
-                    binding.clickBookmark.setImageResource(R.drawable.bookmarked);
-                    wordViewModel.saveStateBookmark(isBookmarked);
-                } else {
-                    binding.clickBookmark.setImageResource(R.drawable.unbookmark);
-                    wordViewModel.removeBookmarkedState();
-                }
-                isBookmarked = !isBookmarked;
-            }
-        });
 
         binding.inputSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

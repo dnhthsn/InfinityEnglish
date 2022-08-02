@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -13,10 +12,11 @@ import com.example.infinityenglish.control.local.Database;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
+import com.example.infinityenglish.view.activity.LoginActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,44 @@ public class Repository {
         cursor.close();
     }
 
+    public void getUser(Callback callback) {
+        Cursor cursor = database.getUser();
+        Users users;
+        List<Users> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(0);
+            String password = cursor.getString(1);
+            String address = cursor.getString(2);
+            String email = cursor.getString(3);
+            String phone = cursor.getString(4);
+            String gender = cursor.getString(5);
+            String avatar = cursor.getString(6);
+            users = new Users(name, password, address, email, phone, gender, avatar);
+            list.add(users);
+        }
+
+        callback.getUser(list);
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
+    public void updateUser(Users users) {
+        if (database.checkUser(users.getName())) {
+            database.updateUser(users);
+        }
+    }
+
+    public void updatePassword(Users users, View view) {
+        if (!database.checkUser(users.getName())) {
+            Utility.Notice.snack(view, Const.Error.notexisted);
+        } else if (database.checkUserAndPhone(users.getPhone(), users.getName())) {
+            database.updateUserPassword(users);
+            LoginActivity.starter(view.getContext());
+        } else {
+            Utility.Notice.snack(view, Const.Error.wrongPhone);
+        }
+    }
+
     public void getNote(Callback callback) {
         Cursor cursor = database.getNote();
         Notes notes;
@@ -57,14 +95,42 @@ public class Repository {
         cursor.close();
     }
 
+    public void getDeletedNote(Callback callback) {
+        Cursor cursor = database.getDeletedNote();
+        Notes notes;
+        List<Notes> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Integer id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String content = cursor.getString(2);
+            notes = new Notes(id, title, content);
+            list.add(notes);
+        }
+        callback.getDeletedNotes(list);
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
     public void addHistory(Histories histories) {
         if (!database.checkHistory(histories.getWordInput())) {
             database.addHistory(histories);
         }
     }
 
+    public void addUser(Users users, View view){
+        if (!database.checkUser(users.getName())){
+            database.addUser(users);
+        } else {
+            Utility.Notice.snack(view, Const.Error.existed);
+        }
+    }
+
     public void addNote(Notes notes) {
         database.addNote(notes);
+    }
+
+    public void addDeletedNote(Notes notes) {
+        database.addDeletedNote(notes);
     }
 
     public void updateNote(Notes notes) {
@@ -81,45 +147,67 @@ public class Repository {
         Utility.Notice.snack(view, Const.Success.deleted);
     }
 
-    public void deleteAllHistory(View view) {
-        MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.timo);
-        mediaPlayer.start();
-
+    public void deleteNotePermanently(View view, Integer id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                mediaPlayer.stop();
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog, null));
+
+        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mediaPlayer.stop();
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mediaPlayer.stop();
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                database.deleteNotePermanently(id);
+                //Utility.Notice.snack(view, Const.Success.deleted);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+        dialog.show();
+
+    }
+
+    public void deleteAllHistory(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete, null));
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
                 database.deleteAllHistory();
+                Utility.Notice.snack(view, Const.Success.deleted);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+        dialog.show();
+    }
+
+    public void deleteAllNote(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                database.deleteAllNote();
                 Utility.Notice.snack(view, Const.Success.deleted);
             }
         });

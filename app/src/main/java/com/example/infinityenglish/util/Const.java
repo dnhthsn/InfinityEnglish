@@ -44,6 +44,7 @@ public interface Const {
         String password = "Please write your password...";
         String phone = "Please write your phone...";
         String address = "Please write your address...";
+        String email = "Please write your email...";
         String information = "Wrong information";
         String wrongPhone = "You have input wrong phone number...";
         String existed = "existed";

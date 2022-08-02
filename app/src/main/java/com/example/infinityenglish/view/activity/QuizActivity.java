@@ -8,21 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.infinityenglish.R;
-import com.example.infinityenglish.databinding.ActivityRandomBinding;
+import com.example.infinityenglish.databinding.ActivityQuizBinding;
 
-public class RandomActivity extends AppCompatActivity {
-    private ActivityRandomBinding binding;
+public class QuizActivity extends AppCompatActivity {
+    private ActivityQuizBinding binding;
 
     public static void starter(Context context) {
-        Intent intent = new Intent(context, RandomActivity.class);
+        Intent intent = new Intent(context, QuizActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_random);
+        setContentView(R.layout.activity_quiz);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_random);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz);
     }
 }

@@ -16,10 +16,19 @@
             android:background="@drawable/round_corner_white"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/click_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_baseline_arrow_back_24" />
+
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/logo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_toRightOf="@id/click_back"
                 android:background="@drawable/history" />
 
             <Button

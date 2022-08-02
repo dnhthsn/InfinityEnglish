@@ -31,23 +31,8 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void saveBookmark(String word){
-        editor.putString(Const.Sender.word, word);
-        editor.commit();
-    }
-
-    public void saveStateBookmark(boolean state){
-        editor.putBoolean(Const.Sender.bookmarkState, state);
-        editor.commit();
-    }
-
-    public boolean getStateBookmarked(){
-        boolean state = sharedPreferences.getBoolean(Const.Sender.bookmarkState, false);
-        return  state;
-    }
-
-    public void removeBookmarkState(){
-        editor.remove(Const.Sender.bookmarkState);
+    public void removeCurrentUser(){
+        editor.remove(Const.Sender.users);
         editor.commit();
     }
 

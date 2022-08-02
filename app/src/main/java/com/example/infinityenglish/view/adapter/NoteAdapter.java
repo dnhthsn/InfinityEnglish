@@ -46,6 +46,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             @Override
             public void onClick(View view) {
                 repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot());
+                repository.addDeletedNote(notes.get(position));
                 notes.remove(position);
                 notifyDataSetChanged();
             }

@@ -65,5 +65,12 @@ public class HistoryActivity extends AppCompatActivity {
                 historyAdapter.notifyDataSetChanged();
             }
         });
+
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

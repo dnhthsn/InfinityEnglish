@@ -2,22 +2,22 @@ package com.example.infinityenglish.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityMainBinding;
-import com.example.infinityenglish.util.Utility;
-
-import java.io.IOException;
+import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private UserViewModel userViewModel;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -30,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         binding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
+
+        Users users = userViewModel.getCurrentUser();
+        String uri;
+        if (users != null){
+            uri = users.getAvatar();
+            String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
+            binding.userAvatar.setImageURI(Uri.parse(imageUri));
+        }
 
         binding.search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.settings.setOnClickListener(new View.OnClickListener() {
+        binding.userAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SettingsActivity.starter(MainActivity.this);
@@ -59,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.random.setOnClickListener(new View.OnClickListener() {
+        binding.quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RandomActivity.starter(MainActivity.this);
+                QuizActivity.starter(MainActivity.this);
             }
         });
     }

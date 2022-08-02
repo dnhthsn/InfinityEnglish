@@ -54,15 +54,4 @@ public class WordViewModel extends ViewModel {
         });
         return histories;
     }
-
-    public void saveStateBookmark(boolean state){
-        sharedPreference.saveStateBookmark(state);
-    }
-
-    public boolean getStateBookmarked(){
-        return sharedPreference.getStateBookmarked();
-    }
-    public void removeBookmarkedState(){
-        sharedPreference.removeBookmarkState();
-    }
 }

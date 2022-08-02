@@ -10,4 +10,5 @@ public abstract class Callback {
     public void getUser(List<Users> list){}
     public void getHistory(List<Histories> list){}
     public void getNotes(List<Notes> list){}
+    public void getDeletedNotes(List<Notes> list){}
 }

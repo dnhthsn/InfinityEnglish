@@ -63,15 +63,6 @@
                             android:text="Word"
                             android:textSize="24dp" />
 
-                        <ImageView
-                            android:id="@+id/click_bookmark"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="20dp"
-                            android:background="@color/white"
-                            android:src="@drawable/unbookmark" />
-
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
