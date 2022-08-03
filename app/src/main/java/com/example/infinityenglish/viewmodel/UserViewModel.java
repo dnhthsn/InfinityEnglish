@@ -1,17 +1,14 @@
 package com.example.infinityenglish.viewmodel;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.lifecycle.ViewModel;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
@@ -24,14 +21,6 @@ import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.LoginActivity;
 import com.example.infinityenglish.view.activity.MainActivity;
 import com.example.infinityenglish.view.activity.SignUpActivity;
-//import com.facebook.CallbackManager;
-//import com.facebook.FacebookCallback;
-//import com.facebook.FacebookException;
-//import com.facebook.login.LoginManager;
-//import com.facebook.login.LoginResult;
-//import com.google.android.gms.auth.api.signin.GoogleSignIn;
-//import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-//import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,10 +29,6 @@ public class UserViewModel extends ViewModel {
     private Repository repository;
     private SharedPreference sharedPreference;
     private String message;
-
-//    private GoogleSignInOptions gso;
-//    private GoogleSignInClient gsc;
-//    private CallbackManager callbackManager;
 
     public void init(Context context){
         this.repository = new Repository(context);
@@ -58,36 +43,6 @@ public class UserViewModel extends ViewModel {
         return message;
     }
 
-//    public void loginWithGoogle(Activity activity){
-//        callbackManager = CallbackManager.Factory.create();
-//        LoginManager.getInstance().registerCallback(callbackManager,
-//                new FacebookCallback<LoginResult>() {
-//                    @Override
-//                    public void onSuccess(LoginResult loginResult) {
-//                        MainActivity.starter(activity);
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        // App code
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException exception) {
-//                        // App code
-//                    }
-//                });
-//
-//        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .build();
-//
-//        gsc = GoogleSignIn.getClient(activity, gso);
-//
-//        Intent intent = gsc.getSignInIntent();
-//        activity.startActivityForResult(intent, 100);
-//    }
-
     public void addUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
         if (TextUtils.isEmpty(name)) {
             Utility.Notice.snack(view, Const.Error.name);
@@ -99,7 +54,9 @@ public class UserViewModel extends ViewModel {
             Utility.Notice.snack(view, Const.Error.address);
         } else if (TextUtils.isEmpty(email)) {
             Utility.Notice.snack(view, Const.Error.email);
-        } else {
+        } else if (avatar == "null") {
+            Utility.Notice.snack(view, Const.Error.avatar);
+        }else {
             Users users = new Users(name, password, address, email, phone, gender, avatar);
             LoginActivity.starter(view.getContext());
             repository.addUser(users, view);

@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.local.Database;
 import com.example.infinityenglish.control.rest.Callback;
@@ -16,15 +18,27 @@ import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Repository {
     private Database database;
+    private FirebaseDatabase db;
+    private DatabaseReference databaseReference;
 
     public Repository(Context context) {
         this.database = new Database(context);
+        this.db = FirebaseDatabase.getInstance("https://test-b2d47-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        this.databaseReference = db.getReference();
     }
 
     public void getHistory(Callback callback) {
@@ -42,42 +56,122 @@ public class Repository {
     }
 
     public void getUser(Callback callback) {
-        Cursor cursor = database.getUser();
-        Users users;
-        List<Users> list = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String password = cursor.getString(1);
-            String address = cursor.getString(2);
-            String email = cursor.getString(3);
-            String phone = cursor.getString(4);
-            String gender = cursor.getString(5);
-            String avatar = cursor.getString(6);
-            users = new Users(name, password, address, email, phone, gender, avatar);
-            list.add(users);
-        }
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Users> list = new ArrayList<>();
+                Users users;
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    users = data.getValue(Users.class);
+                    list.add(users);
+                }
+                callback.getUser(list);
+            }
 
-        callback.getUser(list);
-        cursor.moveToFirst();
-        cursor.close();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.child(Const.Database.user).addValueEventListener(postListener);
+    }
+
+    public void addUser(Users users, View view) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.child(Const.Database.user).child(users.getName()).exists()) {
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put(Const.Database.name, users.getName());
+                    userdataMap.put(Const.Database.password, users.getPassword());
+                    userdataMap.put(Const.Database.address, users.getAddress());
+                    userdataMap.put(Const.Database.email, users.getEmail());
+                    userdataMap.put(Const.Database.phone, users.getPhone());
+                    userdataMap.put(Const.Database.gender, users.getGender());
+                    userdataMap.put(Const.Database.avatar, users.getAvatar());
+
+                    databaseReference.child(Const.Database.user).child(users.getName()).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Utility.Notice.snack(view, Const.Success.created);
+                            } else {
+                                Utility.Notice.snack(view, Const.Error.network);
+                            }
+                        }
+                    });
+                } else {
+                    Utility.Notice.snack(view, Const.Error.existed);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void updateUser(Users users) {
-        if (database.checkUser(users.getName())) {
-            database.updateUser(users);
-        }
+        databaseReference.child(Const.Database.user).child(users.getName()).setValue(users);
     }
 
     public void updatePassword(Users users, View view) {
-        if (!database.checkUser(users.getName())) {
-            Utility.Notice.snack(view, Const.Error.notexisted);
-        } else if (database.checkUserAndPhone(users.getPhone(), users.getName())) {
-            database.updateUserPassword(users);
-            LoginActivity.starter(view.getContext());
-        } else {
-            Utility.Notice.snack(view, Const.Error.wrongPhone);
-        }
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(Const.Database.user).child(users.getName()).exists()) {
+                    Utility.Notice.snack(view, Const.Success.update);
+                    databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
+                } else {
+                    Utility.Notice.snack(view, Const.Error.notexisted);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
+//    public void getUser(Callback callback) {
+//        Cursor cursor = database.getUser();
+//        Users users;
+//        List<Users> list = new ArrayList<>();
+//        while (cursor.moveToNext()) {
+//            String name = cursor.getString(0);
+//            String password = cursor.getString(1);
+//            String address = cursor.getString(2);
+//            String email = cursor.getString(3);
+//            String phone = cursor.getString(4);
+//            String gender = cursor.getString(5);
+//            String avatar = cursor.getString(6);
+//            users = new Users(name, password, address, email, phone, gender, avatar);
+//            list.add(users);
+//        }
+//
+//        callback.getUser(list);
+//        cursor.moveToFirst();
+//        cursor.close();
+//    }
+
+//    public void updateUser(Users users) {
+//        if (database.checkUser(users.getName())) {
+//            database.updateUser(users);
+//        }
+//    }
+//
+//    public void updatePassword(Users users, View view) {
+//        if (!database.checkUser(users.getName())) {
+//            Utility.Notice.snack(view, Const.Error.notexisted);
+//        } else if (database.checkUserAndPhone(users.getPhone(), users.getName())) {
+//            database.updateUserPassword(users);
+//            LoginActivity.starter(view.getContext());
+//        } else {
+//            Utility.Notice.snack(view, Const.Error.wrongPhone);
+//        }
+//    }
 
     public void getNote(Callback callback) {
         Cursor cursor = database.getNote();
@@ -117,13 +211,13 @@ public class Repository {
         }
     }
 
-    public void addUser(Users users, View view){
-        if (!database.checkUser(users.getName())){
-            database.addUser(users);
-        } else {
-            Utility.Notice.snack(view, Const.Error.existed);
-        }
-    }
+//    public void addUser(Users users, View view){
+//        if (!database.checkUser(users.getName())){
+//            database.addUser(users);
+//        } else {
+//            Utility.Notice.snack(view, Const.Error.existed);
+//        }
+//    }
 
     public void addNote(Notes notes) {
         database.addNote(notes);

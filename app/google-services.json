@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "724106837860",
+    "firebase_url": "https://test-b2d47-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "test-b2d47",
+    "storage_bucket": "test-b2d47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724106837860:android:dbcc4ecc6b06cd04360471",
+        "android_client_info": {
+          "package_name": "com.example.infinityenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724106837860-vn1h1mnha0l8s303as5bg4lso8khlukg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgNoD_dpsVdikAmafYXpE2b2yH4zZ30Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724106837860-vn1h1mnha0l8s303as5bg4lso8khlukg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

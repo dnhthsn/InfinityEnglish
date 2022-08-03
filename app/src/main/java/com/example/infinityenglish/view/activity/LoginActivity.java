@@ -69,4 +69,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        StartActivity.starter(LoginActivity.this);
+        super.onBackPressed();
+    }
 }
