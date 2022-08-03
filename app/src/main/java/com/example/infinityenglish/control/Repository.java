@@ -301,6 +301,14 @@ public class Repository {
         Utility.Notice.snack(view, Const.Success.deleted);
     }
 
+    public void deleteOnlineNote(Users users, Integer id, View view) {
+        databaseReference.child(Const.Database.user)
+                .child(users.getName())
+                .child(Const.Database.notes)
+                .child(String.valueOf(id)).removeValue();
+        Utility.Notice.snack(view, Const.Success.deleted);
+    }
+
     public void deleteNotePermanently(View view, Integer id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 

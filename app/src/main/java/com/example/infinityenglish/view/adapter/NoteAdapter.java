@@ -8,17 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.databinding.ItemNotesBinding;
 import com.example.infinityenglish.models.Notes;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.NoteActivity;
 import com.example.infinityenglish.view.activity.SearchActivity;
 import com.example.infinityenglish.view.activity.UpdateNoteActivity;
 import com.example.infinityenglish.view.activity.WriteNoteActivity;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.util.List;
 
@@ -38,17 +42,29 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoteAdapter.NoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull NoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Repository repository = new Repository(holder.binding.getRoot().getContext());
+        UserViewModel userViewModel = new ViewModelProvider((ViewModelStoreOwner) holder.binding.getRoot().getContext()).get(UserViewModel.class);
+        userViewModel.init(holder.binding.getRoot().getContext());
+        boolean state = userViewModel.getStateLogin();
+        Users users = userViewModel.getCurrentUser();
+
         holder.binding.titleNote.setText(notes.get(position).getTitle());
         holder.binding.contentNote.setText(notes.get(position).getContent());
         holder.binding.deleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot());
-                repository.addDeletedNote(notes.get(position));
-                notes.remove(position);
-                notifyDataSetChanged();
+                if (state){
+                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot());
+                    repository.addDeletedNote(notes.get(position));
+                    notes.remove(position);
+                    notifyDataSetChanged();
+                } else {
+                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot());
+                    repository.addDeletedNote(notes.get(position));
+                    notes.remove(position);
+                    notifyDataSetChanged();
+                }
             }
         });
 
@@ -67,6 +83,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public int getItemCount() {
+        if (notes == null){
+            return 0;
+        }
         return notes.size();
     }
 
