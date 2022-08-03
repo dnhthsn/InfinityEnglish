@@ -11,6 +11,7 @@ import android.os.Handler;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWelcomeBinding;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -28,10 +29,13 @@ public class WelcomeActivity extends AppCompatActivity {
         userViewModel.init(this);
 
         boolean state = userViewModel.getStateLogin();
+        Users users = userViewModel.getCurrentUser();
+        String name = users.getName();
+        String password = users.getPassword();
 
         if (state){
             new Handler().postDelayed(() -> {
-                MainActivity.starter(WelcomeActivity.this);
+                userViewModel.checkUser(name, password, binding.root);
             }, 8000);
         } else {
             new Handler().postDelayed(() -> {
