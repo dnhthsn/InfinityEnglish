@@ -2,6 +2,7 @@ package com.example.infinityenglish.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
@@ -10,9 +11,11 @@ import android.os.Handler;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWelcomeBinding;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 public class WelcomeActivity extends AppCompatActivity {
     private ActivityWelcomeBinding binding;
+    private UserViewModel userViewModel;
 
     @SuppressLint("HandlerLeak")
     @Override
@@ -21,9 +24,19 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
 
-        new Handler().postDelayed(() -> {
-            StartActivity.starter(WelcomeActivity.this);
-        }, 8000);
+        boolean state = userViewModel.getStateLogin();
+
+        if (state){
+            new Handler().postDelayed(() -> {
+                MainActivity.starter(WelcomeActivity.this);
+            }, 8000);
+        } else {
+            new Handler().postDelayed(() -> {
+                StartActivity.starter(WelcomeActivity.this);
+            }, 8000);
+        }
     }
 }

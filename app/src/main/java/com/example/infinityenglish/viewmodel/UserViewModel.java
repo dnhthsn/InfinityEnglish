@@ -43,6 +43,15 @@ public class UserViewModel extends ViewModel {
         return message;
     }
 
+    public void setStateLogin(boolean stateLogin){
+        sharedPreference.setStateLogin(stateLogin);
+    }
+
+    public boolean getStateLogin(){
+        boolean stateLogin = sharedPreference.getStateLogin();
+        return stateLogin;
+    }
+
     public void addUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
         if (TextUtils.isEmpty(name)) {
             Utility.Notice.snack(view, Const.Error.name);
@@ -140,6 +149,10 @@ public class UserViewModel extends ViewModel {
 
     public void removeUser(){
         sharedPreference.removeUser();
+    }
+
+    public void removeStateLogin(){
+        sharedPreference.removeStateLogin();
     }
 
     public void removeCurrentUser(){

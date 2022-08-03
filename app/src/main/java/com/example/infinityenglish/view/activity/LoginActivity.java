@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
+import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
+import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private UserViewModel userViewModel;
+    private NoteViewModel noteViewModel;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -38,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.init(this);
 
+        noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
+        noteViewModel.init(this);
+
         binding.forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.clickLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userViewModel.setStateLogin(true);
                 String name = binding.inputName.getText().toString();
                 String password = binding.inputPassword.getText().toString();
 

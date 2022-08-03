@@ -10,6 +10,10 @@ public interface Const {
         String phone = "phone";
         String address = "address";
         String gender = "gender";
+        String id = "id";
+        String title = "title";
+        String content = "content";
+        String notes = "notes";
     }
 
     interface Sender {
@@ -18,20 +22,13 @@ public interface Const {
         String phone = "phone";
         String gender = "gender";
         String address = "address";
-        String videoName = "videoName";
-        String videoImageUrl = "videoImageUrl";
-        String videoUrl = "videoUrl";
-        String newsTitle = "newsTitle";
-        String newsImage = "newsImage";
-        String contentUrl = "contentUrl";
-        String url = "url";
         String SHARED_PREFERENCES = "dataLogin";
         String users = "users";
         String word = "word";
-        String bookmarkState = "state";
         String noteId = "id";
         String noteTitle = "title";
         String noteContent = "content";
+        String loginState = "loginState";
     }
 
     interface Error {
@@ -48,12 +45,12 @@ public interface Const {
         String notmatch = "Not match with password";
         String noData = "No data found...";
         String network = "Network problem...";
+        String login = "You have to login to backup data !!!";
     }
 
     interface Success {
         String created = "Created success fully";
         String update = "Profile info update successfully";
-        String login = "Logged in Successfully";
         String deleted = "Delete successfully";
     }
 }

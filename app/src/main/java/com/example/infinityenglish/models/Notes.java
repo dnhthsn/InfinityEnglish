@@ -4,6 +4,9 @@ public class Notes {
     private Integer id;
     private String title, content;
 
+    public Notes() {
+    }
+
     public Notes(String title, String content) {
         this.title = title;
         this.content = content;

@@ -112,6 +112,45 @@ public class Repository {
         });
     }
 
+    public void syncNote(List<Notes> notes, Users users, View view) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (Notes note : notes) {
+                    if (!snapshot.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(note.getId())).exists()) {
+                        HashMap<String, Object> userdataMap = new HashMap<>();
+                        userdataMap.put(Const.Database.id, note.getId());
+                        userdataMap.put(Const.Database.title, note.getTitle());
+                        userdataMap.put(Const.Database.content, note.getContent());
+
+                        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(note.getId())).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Utility.Notice.snack(view, Const.Success.created);
+                                } else {
+                                    Utility.Notice.snack(view, Const.Error.network);
+                                }
+                            }
+                        });
+                    } else {
+                        updateSyncNote(note, users);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void updateSyncNote(Notes notes, Users users){
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(notes.getId())).setValue(notes);
+    }
+
     public void updateUser(Users users) {
         databaseReference.child(Const.Database.user).child(users.getName()).setValue(users);
     }
@@ -187,6 +226,27 @@ public class Repository {
         callback.getNotes(list);
         cursor.moveToFirst();
         cursor.close();
+    }
+
+    public void getOnlineNote(Users users, Callback callback) {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Notes> list = new ArrayList<>();
+                Notes notes;
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    notes = data.getValue(Notes.class);
+                    list.add(notes);
+                }
+                callback.getNotes(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).addValueEventListener(postListener);
     }
 
     public void getDeletedNote(Callback callback) {

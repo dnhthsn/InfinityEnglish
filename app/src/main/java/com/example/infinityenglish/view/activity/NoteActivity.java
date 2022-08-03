@@ -15,17 +15,21 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
+import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.databinding.ActivityNoteBinding;
 import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.view.adapter.NoteAdapter;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
     private ActivityNoteBinding binding;
     private NoteViewModel noteViewModel;
+    private UserViewModel userViewModel;
 
     private NoteAdapter noteAdapter;
 
@@ -45,8 +49,10 @@ public class NoteActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-
         noteViewModel.init(this);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +63,33 @@ public class NoteActivity extends AppCompatActivity {
 
         noteAdapter = new NoteAdapter();
 
-        noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(List<Notes> notes) {
-                noteAdapter.setNotes(notes);
-                noteAdapter.notifyDataSetChanged();
-            }
-        });
+        boolean state = userViewModel.getStateLogin();
+
+        Users users = userViewModel.getCurrentUser();
+
+        if (state){
+            noteViewModel.getOnlineNotes(users).observe(NoteActivity.this, new Observer<List<Notes>>() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onChanged(List<Notes> notes) {
+                    if (notes != null) {
+                        noteAdapter.setNotes(notes);
+                        noteAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        } else {
+            noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onChanged(List<Notes> notes) {
+                    if (notes != null) {
+                        noteAdapter.setNotes(notes);
+                        noteAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         binding.noteList.setLayoutManager(layoutManager);
