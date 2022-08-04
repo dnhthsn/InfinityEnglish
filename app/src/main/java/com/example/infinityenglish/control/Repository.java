@@ -17,6 +17,7 @@ import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
+import com.example.infinityenglish.view.activity.ForgetPasswordActivity;
 import com.example.infinityenglish.view.activity.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,16 +91,19 @@ public class Repository {
                     userdataMap.put(Const.Database.gender, users.getGender());
                     userdataMap.put(Const.Database.avatar, users.getAvatar());
 
-                    databaseReference.child(Const.Database.user).child(users.getName()).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Utility.Notice.snack(view, Const.Success.created);
-                            } else {
-                                Utility.Notice.snack(view, Const.Error.network);
-                            }
-                        }
-                    });
+                    databaseReference.child(Const.Database.user)
+                            .child(users.getName())
+                            .updateChildren(userdataMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Utility.Notice.snack(view, Const.Success.created);
+                                    } else {
+                                        Utility.Notice.snack(view, Const.Error.network);
+                                    }
+                                }
+                            });
                 } else {
                     Utility.Notice.snack(view, Const.Error.existed);
                 }
@@ -117,22 +121,31 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (Notes note : notes) {
-                    if (!snapshot.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(note.getId())).exists()) {
+                    if (!snapshot.child(Const.Database.user)
+                            .child(users.getName())
+                            .child(Const.Database.notes)
+                            .child(String.valueOf(note.getId()))
+                            .exists()) {
                         HashMap<String, Object> userdataMap = new HashMap<>();
                         userdataMap.put(Const.Database.id, note.getId());
                         userdataMap.put(Const.Database.title, note.getTitle());
                         userdataMap.put(Const.Database.content, note.getContent());
 
-                        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(note.getId())).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Utility.Notice.snack(view, Const.Success.created);
-                                } else {
-                                    Utility.Notice.snack(view, Const.Error.network);
-                                }
-                            }
-                        });
+                        databaseReference.child(Const.Database.user)
+                                .child(users.getName())
+                                .child(Const.Database.notes)
+                                .child(String.valueOf(note.getId()))
+                                .updateChildren(userdataMap)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Utility.Notice.snack(view, Const.Success.created);
+                                        } else {
+                                            Utility.Notice.snack(view, Const.Error.network);
+                                        }
+                                    }
+                                });
                     } else {
                         updateSyncNote(note, users);
                     }
@@ -147,8 +160,12 @@ public class Repository {
         });
     }
 
-    public void updateSyncNote(Notes notes, Users users){
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(notes.getId())).setValue(notes);
+    public void updateSyncNote(Notes notes, Users users) {
+        databaseReference.child(Const.Database.user)
+                .child(users.getName())
+                .child(Const.Database.notes)
+                .child(String.valueOf(notes.getId()))
+                .setValue(notes);
     }
 
     public void updateUser(Users users) {
@@ -160,8 +177,20 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(Const.Database.user).child(users.getName()).exists()) {
-                    Utility.Notice.snack(view, Const.Success.update);
-                    databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
+                    if (snapshot.child(Const.Database.user)
+                            .child(users.getName())
+                            .child(Const.Database.phone)
+                            .getValue()
+                            .equals(users.getPhone())) {
+                        Utility.Notice.snack(view, Const.Success.update);
+                        databaseReference.child(Const.Database.user)
+                                .child(users.getName())
+                                .child(Const.Database.password)
+                                .setValue(users.getPassword());
+                        LoginActivity.starter(view.getContext());
+                    } else {
+                        Utility.Notice.snack(view, Const.Error.wrongPhone);
+                    }
                 } else {
                     Utility.Notice.snack(view, Const.Error.notexisted);
                 }
@@ -169,48 +198,9 @@ public class Repository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
-
-//    public void getUser(Callback callback) {
-//        Cursor cursor = database.getUser();
-//        Users users;
-//        List<Users> list = new ArrayList<>();
-//        while (cursor.moveToNext()) {
-//            String name = cursor.getString(0);
-//            String password = cursor.getString(1);
-//            String address = cursor.getString(2);
-//            String email = cursor.getString(3);
-//            String phone = cursor.getString(4);
-//            String gender = cursor.getString(5);
-//            String avatar = cursor.getString(6);
-//            users = new Users(name, password, address, email, phone, gender, avatar);
-//            list.add(users);
-//        }
-//
-//        callback.getUser(list);
-//        cursor.moveToFirst();
-//        cursor.close();
-//    }
-
-//    public void updateUser(Users users) {
-//        if (database.checkUser(users.getName())) {
-//            database.updateUser(users);
-//        }
-//    }
-//
-//    public void updatePassword(Users users, View view) {
-//        if (!database.checkUser(users.getName())) {
-//            Utility.Notice.snack(view, Const.Error.notexisted);
-//        } else if (database.checkUserAndPhone(users.getPhone(), users.getName())) {
-//            database.updateUserPassword(users);
-//            LoginActivity.starter(view.getContext());
-//        } else {
-//            Utility.Notice.snack(view, Const.Error.wrongPhone);
-//        }
-//    }
 
     public void getNote(Callback callback) {
         Cursor cursor = database.getNote();
@@ -246,7 +236,10 @@ public class Repository {
 
             }
         };
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).addValueEventListener(postListener);
+        databaseReference.child(Const.Database.user)
+                .child(users.getName())
+                .child(Const.Database.notes)
+                .addValueEventListener(postListener);
     }
 
     public void getDeletedNote(Callback callback) {
@@ -270,14 +263,6 @@ public class Repository {
             database.addHistory(histories);
         }
     }
-
-//    public void addUser(Users users, View view){
-//        if (!database.checkUser(users.getName())){
-//            database.addUser(users);
-//        } else {
-//            Utility.Notice.snack(view, Const.Error.existed);
-//        }
-//    }
 
     public void addNote(Notes notes) {
         database.addNote(notes);
@@ -323,7 +308,6 @@ public class Repository {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 database.deleteNotePermanently(id);
-                //Utility.Notice.snack(view, Const.Success.deleted);
             }
         });
 

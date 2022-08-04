@@ -12,12 +12,15 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityUpdateNoteBinding;
 import com.example.infinityenglish.databinding.ActivityWriteNoteBinding;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 public class UpdateNoteActivity extends AppCompatActivity {
     private ActivityUpdateNoteBinding binding;
     private NoteViewModel noteViewModel;
+    private UserViewModel userViewModel;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, UpdateNoteActivity.class);
@@ -33,6 +36,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         noteViewModel.init(this);
 
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
+
         String title = getIntent().getStringExtra(Const.Sender.noteTitle);
         String content = getIntent().getStringExtra(Const.Sender.noteContent);
 
@@ -42,13 +48,23 @@ public class UpdateNoteActivity extends AppCompatActivity {
         binding.updateNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int id = getIntent().getIntExtra(Const.Sender.noteId, 0);
-                String noteTitle = binding.inputNoteTitle.getText().toString();
-                String noteContent = binding.inputNoteContent.getText().toString();
-                noteViewModel.updateNote(id, noteTitle, noteContent, view);
-
-                NoteActivity.starter(UpdateNoteActivity.this);
-                finish();
+                boolean state = userViewModel.getStateLogin();
+                Users users = userViewModel.getCurrentUser();
+                if (state) {
+                    int id = getIntent().getIntExtra(Const.Sender.noteId, 0);
+                    String noteTitle = binding.inputNoteTitle.getText().toString();
+                    String noteContent = binding.inputNoteContent.getText().toString();
+                    noteViewModel.updateOnlineNote(id, noteTitle, noteContent, view, users);
+                    NoteActivity.starter(UpdateNoteActivity.this);
+                    finish();
+                } else {
+                    int id = getIntent().getIntExtra(Const.Sender.noteId, 0);
+                    String noteTitle = binding.inputNoteTitle.getText().toString();
+                    String noteContent = binding.inputNoteContent.getText().toString();
+                    noteViewModel.updateNote(id, noteTitle, noteContent, view);
+                    NoteActivity.starter(UpdateNoteActivity.this);
+                    finish();
+                }
             }
         });
 

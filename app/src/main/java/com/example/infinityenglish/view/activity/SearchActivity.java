@@ -81,13 +81,6 @@ public class SearchActivity extends AppCompatActivity implements RequestManager.
                 finish();
             }
         });
-
-        binding.bookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BookmarkActivity.starter(SearchActivity.this);
-            }
-        });
     }
 
     private void showData(APIResponse apiResponse) {

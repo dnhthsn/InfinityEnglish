@@ -2,17 +2,22 @@ package com.example.infinityenglish.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityProfileBinding;
+import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 public class ProfileActivity extends AppCompatActivity {
     private ActivityProfileBinding binding;
+    private UserViewModel userViewModel;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, ProfileActivity.class);
@@ -25,6 +30,23 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
+
+        Users users = userViewModel.getCurrentUser();
+        String uri;
+        if (users != null){
+            uri = users.getAvatar();
+            String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
+            binding.avatar.setImageURI(Uri.parse(imageUri));
+            binding.userName.setText(users.getName());
+            binding.email.setText(users.getEmail());
+            binding.phoneNumber.setText(users.getPhone());
+            binding.password.setText(users.getPassword());
+            binding.gender.setText(users.getGender());
+            binding.address.setText(users.getAddress());
+        }
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,8 @@ public class WelcomeActivity extends AppCompatActivity {
     private ActivityWelcomeBinding binding;
     private UserViewModel userViewModel;
 
+    private String name, password;
+
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         boolean state = userViewModel.getStateLogin();
         Users users = userViewModel.getCurrentUser();
-        String name = users.getName();
-        String password = users.getPassword();
+
+        if(users != null){
+            name = users.getName();
+            password = users.getPassword();
+        }
 
         if (state){
             new Handler().postDelayed(() -> {

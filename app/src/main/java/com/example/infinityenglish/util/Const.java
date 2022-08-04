@@ -32,11 +32,11 @@ public interface Const {
     }
 
     interface Error {
-        String name = "Please write your name...";
-        String password = "Please write your password...";
+        String name = "Your name has to be at least 3 characters...";
+        String password = "Your password have to be at least 8 characters...";
         String phone = "Please write your phone...";
         String address = "Please write your address...";
-        String email = "Please write your email...";
+        String email = "Please write your email exactly...";
         String information = "Wrong information";
         String avatar = "Please choose your avatar...";
         String wrongPhone = "You have input wrong phone number...";

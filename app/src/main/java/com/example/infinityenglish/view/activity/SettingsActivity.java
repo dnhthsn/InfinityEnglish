@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
             uri = users.getAvatar();
             String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
             binding.userAvatar.setImageURI(Uri.parse(imageUri));
+            binding.userName.setText(users.getName());
         }
 
         binding.backup.setOnClickListener(new View.OnClickListener() {

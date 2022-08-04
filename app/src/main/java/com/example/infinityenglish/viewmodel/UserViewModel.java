@@ -24,13 +24,15 @@ import com.example.infinityenglish.view.activity.SignUpActivity;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserViewModel extends ViewModel {
     private Repository repository;
     private SharedPreference sharedPreference;
     private String message;
 
-    public void init(Context context){
+    public void init(Context context) {
         this.repository = new Repository(context);
         sharedPreference = new SharedPreference(context);
     }
@@ -43,29 +45,33 @@ public class UserViewModel extends ViewModel {
         return message;
     }
 
-    public void setStateLogin(boolean stateLogin){
+    public void setStateLogin(boolean stateLogin) {
         sharedPreference.setStateLogin(stateLogin);
     }
 
-    public boolean getStateLogin(){
+    public boolean getStateLogin() {
         boolean stateLogin = sharedPreference.getStateLogin();
         return stateLogin;
     }
 
     public void addUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
-        if (TextUtils.isEmpty(name)) {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (TextUtils.isEmpty(name) || name.length() < 3) {
             Utility.Notice.snack(view, Const.Error.name);
         } else if (TextUtils.isEmpty(phone)) {
             Utility.Notice.snack(view, Const.Error.phone);
-        } else if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password) || password.length() < 8) {
             Utility.Notice.snack(view, Const.Error.password);
         } else if (TextUtils.isEmpty(address)) {
             Utility.Notice.snack(view, Const.Error.address);
-        } else if (TextUtils.isEmpty(email)) {
+        } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
             Utility.Notice.snack(view, Const.Error.email);
         } else if (avatar == "null") {
             Utility.Notice.snack(view, Const.Error.avatar);
-        }else {
+        } else {
             Users users = new Users(name, password, address, email, phone, gender, avatar);
             LoginActivity.starter(view.getContext());
             repository.addUser(users, view);
@@ -73,16 +79,22 @@ public class UserViewModel extends ViewModel {
     }
 
     public void updateUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
-        if (TextUtils.isEmpty(name)) {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+
+        if (TextUtils.isEmpty(name) || name.length() < 3) {
             Utility.Notice.snack(view, Const.Error.name);
         } else if (TextUtils.isEmpty(phone)) {
             Utility.Notice.snack(view, Const.Error.phone);
-        } else if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password) || password.length() < 8) {
             Utility.Notice.snack(view, Const.Error.password);
         } else if (TextUtils.isEmpty(address)) {
             Utility.Notice.snack(view, Const.Error.address);
-        } else if (TextUtils.isEmpty(email)) {
+        } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
             Utility.Notice.snack(view, Const.Error.email);
+        } else if (avatar == "null") {
+            Utility.Notice.snack(view, Const.Error.avatar);
         } else {
             Users users = new Users(name, password, address, email, phone, gender, avatar);
             repository.updateUser(users);
@@ -91,38 +103,25 @@ public class UserViewModel extends ViewModel {
         }
     }
 
-    public void updatePassword(String name, String password, String phone, View view, Context context) {
-        if (TextUtils.isEmpty(name)) {
+    public void updatePassword(String name, String password, String repassword, String phone, View view) {
+        if (TextUtils.isEmpty(name) || name.length() < 3) {
             Utility.Notice.snack(view, Const.Error.name);
-        } else if (TextUtils.isEmpty(password)) {
+        } else if (TextUtils.isEmpty(password) || password.length() < 8) {
             Utility.Notice.snack(view, Const.Error.password);
+        } else if (!password.equals(repassword)) {
+            Utility.Notice.snack(view, Const.Error.notmatch);
         } else {
-            MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.timo);
-            mediaPlayer.start();
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setView(LayoutInflater.from(context).inflate(R.layout.dialog_update, null));
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_update, null));
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    mediaPlayer.stop();
-                    try {
-                        mediaPlayer.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             });
 
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    mediaPlayer.stop();
-                    try {
-                        mediaPlayer.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     Users users = new Users();
                     users.setName(name);
                     users.setPassword(password);
@@ -138,24 +137,24 @@ public class UserViewModel extends ViewModel {
         }
     }
 
-    public Users getCurrentUser(){
+    public Users getCurrentUser() {
         Users users = sharedPreference.getCurrentUser();
         return users;
     }
 
-    public void saveUserAfterLogout(String name, String password){
+    public void saveUserAfterLogout(String name, String password) {
         sharedPreference.saveUser(name, password);
     }
 
-    public void removeUser(){
+    public void removeUser() {
         sharedPreference.removeUser();
     }
 
-    public void removeStateLogin(){
+    public void removeStateLogin() {
         sharedPreference.removeStateLogin();
     }
 
-    public void removeCurrentUser(){
+    public void removeCurrentUser() {
         sharedPreference.removeCurrentUser();
     }
 

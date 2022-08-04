@@ -9,14 +9,177 @@
         android:background="@color/colorPrimary2"
         tools:context=".view.activity.SignUpActivity">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/dancing_script"
+                    android:text="Infinity English"
+                    android:textColor="@color/white"
+                    android:textSize="40dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/signup" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="80dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear1"
+                        android:layout_width="350dp"
+                        android:layout_height="500dp"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/input_avatar"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/avatar" />
+
+                        <EditText
+                            android:id="@+id/input_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/round_corner_white"
+                            android:drawableLeft="@drawable/ic_baseline_person_24"
+                            android:hint="user name" />
+
+                        <EditText
+                            android:id="@+id/input_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/round_corner_white"
+                            android:drawableLeft="@drawable/ic_baseline_password_24"
+                            android:hint="password" />
+
+                        <EditText
+                            android:id="@+id/input_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/round_corner_white"
+                            android:drawableLeft="@drawable/ic_baseline_email_24"
+                            android:hint="email" />
+
+                        <EditText
+                            android:id="@+id/input_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/round_corner_white"
+                            android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                            android:hint="phone number" />
+
+                        <EditText
+                            android:id="@+id/input_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/round_corner_white"
+                            android:drawableLeft="@drawable/ic_baseline_maps_home_work_24"
+                            android:hint="address" />
+
+                        <RadioGroup
+                            android:id="@+id/gender_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/gender_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/round_corner_white"
+                                android:buttonTint="@color/colorPrimary"
+                                android:checked="true"
+                                android:drawableLeft="@drawable/ic_baseline_male_24"
+                                android:text="Male"
+                                android:textStyle="bold" />
+
+                            <RadioButton
+                                android:id="@+id/gender_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:background="@drawable/round_corner_white"
+                                android:buttonTint="@color/colorPrimary"
+                                android:drawableLeft="@drawable/ic_baseline_female_24"
+                                android:text="Female"
+                                android:textStyle="bold" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/click_sign_up"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="150dp"
+                        android:background="@drawable/round_corner_white"
+                        android:drawableLeft="@drawable/ic_baseline_person_add_dark_24"
+                        android:text="Sign Up"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/linear1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/linear1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/back"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/round_corner_left"
+            android:background="@drawable/round_corner_left_bottom"
             android:backgroundTint="@color/white"
             android:padding="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
             <ImageView
@@ -25,148 +188,6 @@
                 android:background="@drawable/ic_baseline_login_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/dancing_script"
-            android:text="Infinity English"
-            android:textColor="@color/white"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linear_login"
-            android:layout_width="350dp"
-            android:layout_height="400dp"
-            android:background="@drawable/round_corner_white"
-            android:orientation="vertical"
-            android:padding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/title_login"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Sign Up"
-                        android:textColor="@color/colorPrimary2"
-                        android:textSize="30dp"
-                        android:textStyle="bold" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/input_avatar"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/avatar" />
-
-                    <EditText
-                        android:id="@+id/input_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_person_24"
-                        android:hint="user name" />
-
-                    <EditText
-                        android:id="@+id/input_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_password_24"
-                        android:hint="password" />
-
-                    <EditText
-                        android:id="@+id/input_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_email_24"
-                        android:hint="email" />
-
-                    <EditText
-                        android:id="@+id/input_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_phone_android_24"
-                        android:hint="phone number" />
-
-                    <EditText
-                        android:id="@+id/input_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:drawableLeft="@drawable/ic_baseline_maps_home_work_24"
-                        android:hint="address" />
-
-                    <RadioGroup
-                        android:id="@+id/gender_group"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/gender_male"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:buttonTint="@color/colorPrimary"
-                            android:checked="true"
-                            android:drawableLeft="@drawable/ic_baseline_male_24"
-                            android:text="Male"
-                            android:textStyle="bold" />
-
-                        <RadioButton
-                            android:id="@+id/gender_female"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:buttonTint="@color/colorPrimary"
-                            android:drawableLeft="@drawable/ic_baseline_female_24"
-                            android:text="Female"
-                            android:textStyle="bold" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-            </ScrollView>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/click_sign_up"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="150dp"
-            android:background="@drawable/round_corner_white"
-            android:drawableLeft="@drawable/ic_baseline_person_add_dark_24"
-            android:text="Sign Up"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="@id/linear_login"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_login" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
