@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.activity.ChangeInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.ProfileActivity"
             android:exported="false" />
         <activity

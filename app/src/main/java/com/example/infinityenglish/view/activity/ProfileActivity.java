@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
             binding.userName.setText(users.getName());
             binding.email.setText(users.getEmail());
             binding.phoneNumber.setText(users.getPhone());
-            binding.password.setText(users.getPassword());
+            binding.password.setText("********");
             binding.gender.setText(users.getGender());
             binding.address.setText(users.getAddress());
         }
@@ -52,6 +52,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        binding.clickEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangeInformationActivity.starter(ProfileActivity.this);
             }
         });
     }

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">InfinityEnglish</string>
+    <string name="change_info">Fill all the information to change your profile</string>
+    <string name="forget_title1">Did some one forget their password ?</string>
+    <string name="forget_title2">Don\'t worry about that, just enter the information below and change your password</string>
 </resources>

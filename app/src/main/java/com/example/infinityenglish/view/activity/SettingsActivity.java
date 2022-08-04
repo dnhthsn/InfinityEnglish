@@ -70,6 +70,13 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         binding.profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

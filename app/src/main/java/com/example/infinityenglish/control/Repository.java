@@ -169,7 +169,12 @@ public class Repository {
     }
 
     public void updateUser(Users users) {
-        databaseReference.child(Const.Database.user).child(users.getName()).setValue(users);
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.email).setValue(users.getEmail());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.phone).setValue(users.getPhone());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.address).setValue(users.getAddress());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.avatar).setValue(users.getAvatar());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.gender).setValue(users.getGender());
     }
 
     public void updatePassword(Users users, View view) {
