@@ -55,8 +55,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public void addUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
-        String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(Const.Regex.emailRegex);
         Matcher matcher = pattern.matcher(email);
 
         if (TextUtils.isEmpty(name) || name.length() < 3) {
@@ -79,8 +78,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public void updateUser(String name, String password, String address, String email, String phone, String gender, String avatar, View view) {
-        String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern = Pattern.compile(Const.Regex.emailRegex);
         Matcher matcher = pattern.matcher(email);
 
         if (TextUtils.isEmpty(name) || name.length() < 3) {

@@ -48,6 +48,10 @@ public interface Const {
         String login = "You have to login to backup data !!!";
     }
 
+    interface Regex {
+        String emailRegex = "^(.+)@(.+)$";
+    }
+
     interface Success {
         String created = "Created success fully";
         String update = "Profile info update successfully";
