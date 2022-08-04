@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/menu"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="100dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/input_text"
+                android:layout_width="250dp"
+                android:layout_height="230dp"
+                android:layout_marginTop="30dp"
+                android:gravity="top|left"
+                android:hint="Enter Text"
+                android:inputType="textMultiLine"
+                android:lines="25"
+                android:maxWidth="5.0dip"
+                android:minWidth="10.0dip"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/click_speak"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_corner_button"
+                android:text="Speak"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/click_clear"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_corner_button"
+                android:text="Clear"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/click_back"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_corner_button"
+                android:text="Back"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

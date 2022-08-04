@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         Users users = userViewModel.getCurrentUser();
         String uri;
-        if (users != null){
+        if (users != null) {
             uri = users.getAvatar();
-            String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
+            String imageUri = uri == null ? String.valueOf(R.drawable.avatar) : uri;
             binding.userAvatar.setImageURI(Uri.parse(imageUri));
             binding.userName.setText("Hi, " + users.getName() + " !");
         }
@@ -74,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 QuizActivity.starter(MainActivity.this);
+            }
+        });
+
+        binding.speak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PracticeSpeakingActivity.starter(MainActivity.this);
             }
         });
     }
