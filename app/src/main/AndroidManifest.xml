@@ -20,6 +20,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".view.activity.PronunciationListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.PronunciationActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.PracticeSpeakingActivity"
             android:exported="false" />
         <activity

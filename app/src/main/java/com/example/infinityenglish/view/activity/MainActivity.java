@@ -83,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 PracticeSpeakingActivity.starter(MainActivity.this);
             }
         });
+
+        binding.pronunciationGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PronunciationListActivity.starter(MainActivity.this);
+            }
+        });
     }
 
     @Override

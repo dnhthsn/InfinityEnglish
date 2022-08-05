@@ -29,6 +29,8 @@
         <entry key="app/src/main/res/layout/activity_note.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_practice_speaking.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_pronunciation.xml" value="0.18704710144927536" />
+        <entry key="app/src/main/res/layout/activity_pronunciation_list.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/activity_random.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.25" />
@@ -49,6 +51,7 @@
         <entry key="app/src/main/res/layout/item_definitions.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_deleted_notes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_histories.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_lessons.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res/layout/item_meanings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_notes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_phonetics.xml" value="0.25" />
