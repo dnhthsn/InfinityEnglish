@@ -7,13 +7,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPronunciationBinding;
+import com.example.infinityenglish.util.Const;
 
 public class PronunciationActivity extends AppCompatActivity {
     private ActivityPronunciationBinding binding;
@@ -32,41 +30,49 @@ public class PronunciationActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
 
-        binding.web1.getSettings().setJavaScriptEnabled(true);
+        binding.webLesson.getSettings().setJavaScriptEnabled(true);
+
+        binding.webLesson.getSettings().setAllowFileAccess(true);
 
         int result = Integer.parseInt(b.getString("pme1"));
 
         if (result == 1) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson1));
+            binding.webLesson.loadUrl(Const.webUrl.lesson1);
         } else if (result == 2) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson2));
+            binding.webLesson.loadUrl(Const.webUrl.lesson2);
         } else if (result == 3) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson3));
+            binding.webLesson.loadUrl(Const.webUrl.lesson3);
         } else if (result == 4) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson4));
+            binding.webLesson.loadUrl(Const.webUrl.lesson4);
         } else if (result == 5) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson5));
+            binding.webLesson.loadUrl(Const.webUrl.lesson5);
         } else if (result == 6) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson6));
+            binding.webLesson.loadUrl(Const.webUrl.lesson6);
         } else if (result == 7) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson7));
+            binding.webLesson.loadUrl(Const.webUrl.lesson7);
         } else if (result == 8) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson8));
+            binding.webLesson.loadUrl(Const.webUrl.lesson8);
         } else if (result == 9) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson9));
+            binding.webLesson.loadUrl(Const.webUrl.lesson9);
         } else if (result == 10) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson10));
+            binding.webLesson.loadUrl(Const.webUrl.lesson10);
         } else if (result == 11) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson11));
+            binding.webLesson.loadUrl(Const.webUrl.lesson11);
         } else if (result == 12) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson12));
+            binding.webLesson.loadUrl(Const.webUrl.lesson12);
         } else if (result == 13) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson13));
+            binding.webLesson.loadUrl(Const.webUrl.lesson13);
         } else if (result == 14) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson14));
+            binding.webLesson.loadUrl(Const.webUrl.lesson14);
         } else if (result == 15) {
-            binding.web1.loadUrl(String.valueOf(R.string.lesson15));
+            binding.webLesson.loadUrl(Const.webUrl.lesson15);
         }
 
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

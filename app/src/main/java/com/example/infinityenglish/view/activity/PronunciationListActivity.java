@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPronunciationListBinding;
@@ -37,5 +38,12 @@ public class PronunciationListActivity extends AppCompatActivity {
         String[] lessons = getResources().getStringArray(R.array.lessons);
         lessonsAdapter.setLessons(Arrays.asList(lessons));
         binding.lessonList.setAdapter(lessonsAdapter);
+
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

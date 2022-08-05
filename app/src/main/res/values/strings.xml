@@ -4,7 +4,7 @@
     <string name="forget_title1">Did some one forget their password ?</string>
     <string name="forget_title2">Don\'t worry about that, just enter the information below and change your password</string>
 
-    <string name="lesson1">src/main/assets/Lesson1.html</string>
+    <string name="lesson1">file:///android_asset/Lesson1.html</string>
     <string name="lesson2">file:///android_asset/Lesson2.html</string>
     <string name="lesson3">file:///android_asset/Lesson3.html</string>
     <string name="lesson4">file:///android_asset/Lesson4.html</string>
