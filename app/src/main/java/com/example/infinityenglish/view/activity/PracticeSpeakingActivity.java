@@ -13,10 +13,11 @@ import android.widget.ImageButton;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPracticeSpeakingBinding;
+import com.example.infinityenglish.view.base.BaseActivity;
 
 import java.util.Locale;
 
-public class PracticeSpeakingActivity extends AppCompatActivity {
+public class PracticeSpeakingActivity extends BaseActivity {
     private ActivityPracticeSpeakingBinding binding;
 
     private float pitch = -1;

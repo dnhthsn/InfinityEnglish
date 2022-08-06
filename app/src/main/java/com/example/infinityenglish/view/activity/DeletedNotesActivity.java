@@ -16,11 +16,12 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityDeletedNotesBinding;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.view.adapter.DeletedNotesAdapter;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 
 import java.util.List;
 
-public class DeletedNotesActivity extends AppCompatActivity {
+public class DeletedNotesActivity extends BaseActivity {
     private ActivityDeletedNotesBinding binding;
     private NoteViewModel noteViewModel;
 

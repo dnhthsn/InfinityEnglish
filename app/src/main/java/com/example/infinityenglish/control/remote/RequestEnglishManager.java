@@ -1,7 +1,5 @@
 package com.example.infinityenglish.control.remote;
 
-import android.content.Context;
-
 import com.example.infinityenglish.models.APIResponse;
 
 import java.util.List;
@@ -14,10 +12,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public class RequestManager {
+public class RequestEnglishManager {
     private Retrofit retrofit;
 
-    public RequestManager() {
+    public RequestEnglishManager() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.dictionaryapi.dev/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())

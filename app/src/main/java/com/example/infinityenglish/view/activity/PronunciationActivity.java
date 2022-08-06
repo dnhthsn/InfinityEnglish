@@ -12,8 +12,9 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPronunciationBinding;
 import com.example.infinityenglish.util.Const;
+import com.example.infinityenglish.view.base.BaseActivity;
 
-public class PronunciationActivity extends AppCompatActivity {
+public class PronunciationActivity extends BaseActivity {
     private ActivityPronunciationBinding binding;
 
     public static void starter(Context context) {

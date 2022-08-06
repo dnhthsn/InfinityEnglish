@@ -1,7 +1,5 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,21 +9,31 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.remote.RequestEnglishManager;
-import com.example.infinityenglish.databinding.ActivitySearchBinding;
+import com.example.infinityenglish.control.remote.RequestRandomManager;
+import com.example.infinityenglish.databinding.ActivityRandomBinding;
 import com.example.infinityenglish.models.APIResponse;
+import com.example.infinityenglish.models.ListWords;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.adapter.MeaningAdapter;
 import com.example.infinityenglish.view.adapter.PhoneticAdapter;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.WordViewModel;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-public class SearchActivity extends BaseActivity implements RequestEnglishManager.OnFetchDataListener {
-    private ActivitySearchBinding binding;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class RandomActivity extends BaseActivity implements RequestRandomManager.OnFetchRandomDataListener, RequestEnglishManager.OnFetchDataListener {
+    private ActivityRandomBinding binding;
     private WordViewModel wordViewModel;
 
     private ProgressDialog progressDialog;
@@ -34,17 +42,16 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     private MeaningAdapter meaningAdapter;
 
     public static void starter(Context context) {
-        Intent intent = new Intent(context, SearchActivity.class);
+        Intent intent = new Intent(context, RandomActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_random);
 
-        binding = DataBindingUtil.setContentView(SearchActivity.this, R.layout.activity_search);
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_random);
         wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
         wordViewModel.init(this);
 
@@ -53,34 +60,8 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
         progressDialog.setTitle("Loading...");
         progressDialog.show();
 
-        String word = getIntent().getStringExtra(Const.Sender.word);
-        String word1 = word==null ? "hello":word;
+        wordViewModel.getRandomWord(RandomActivity.this, "");
 
-        wordViewModel.getWordMeanings(SearchActivity.this, word1);
-
-        binding.inputSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                progressDialog.setTitle("Fetching response for: " + query);
-                progressDialog.show();
-
-                wordViewModel.getWordMeanings(SearchActivity.this, query);
-                wordViewModel.addWordSearched(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        binding.clickBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
     private void showData(APIResponse apiResponse) {
@@ -102,6 +83,24 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     }
 
     @Override
+    public void onFetchRandomData(Object listWords, String message) {
+        progressDialog.dismiss();
+        if (listWords == null){
+            Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
+            return;
+        }
+
+        String word = listWords.toString();
+        word = word.replaceAll("[\"\\[\\]]", "");
+        wordViewModel.getWordMeanings(RandomActivity.this, word);
+    }
+
+    @Override
+    public void onRandomError(String message) {
+        progressDialog.dismiss();
+    }
+
+    @Override
     public void onFetchData(APIResponse apiResponse, String message) {
         progressDialog.dismiss();
         if (apiResponse == null){
@@ -114,6 +113,6 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     @Override
     public void onError(String message) {
         progressDialog.dismiss();
-        Utility.Notice.snack(binding.searchLayout, message);
+        Utility.Notice.snack(binding.randomLayout, message);
     }
 }

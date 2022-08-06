@@ -13,9 +13,10 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityMainBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private UserViewModel userViewModel;
 
@@ -70,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.quiz.setOnClickListener(new View.OnClickListener() {
+        binding.random.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuizActivity.starter(MainActivity.this);
+                RandomActivity.starter(MainActivity.this);
             }
         });
 

@@ -21,12 +21,13 @@ import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.view.adapter.NoteAdapter;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.util.List;
 
-public class NoteActivity extends AppCompatActivity {
+public class NoteActivity extends BaseActivity {
     private ActivityNoteBinding binding;
     private NoteViewModel noteViewModel;
     private UserViewModel userViewModel;

@@ -18,12 +18,13 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityHistoryBinding;
 import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.view.adapter.HistoryAdapter;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.WordViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends BaseActivity {
     private ActivityHistoryBinding binding;
     private HistoryAdapter historyAdapter;
     private WordViewModel wordViewModel;

@@ -14,10 +14,11 @@ import com.example.infinityenglish.databinding.ActivityUpdateNoteBinding;
 import com.example.infinityenglish.databinding.ActivityWriteNoteBinding;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
-public class UpdateNoteActivity extends AppCompatActivity {
+public class UpdateNoteActivity extends BaseActivity {
     private ActivityUpdateNoteBinding binding;
     private NoteViewModel noteViewModel;
     private UserViewModel userViewModel;

@@ -33,24 +33,29 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_avatar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/avatar"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/click_back" />
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:text="Have a nice day !!!"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/user_avatar" />
+            app:layout_constraintBottom_toBottomOf="@id/user_avatar"
+            app:layout_constraintLeft_toRightOf="@id/user_avatar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/user_avatar" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -93,19 +98,20 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/click_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/round_corner_button"
-                    android:text="Log out"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
         </ScrollView>
+
+        <Button
+            android:id="@+id/click_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/round_corner_button"
+            android:text="Log out"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

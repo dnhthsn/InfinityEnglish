@@ -14,12 +14,13 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private ActivityLoginBinding binding;
     private UserViewModel userViewModel;
     private NoteViewModel noteViewModel;

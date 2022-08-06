@@ -11,9 +11,10 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityStartBinding;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends BaseActivity {
     private ActivityStartBinding binding;
     private UserViewModel userViewModel;
 

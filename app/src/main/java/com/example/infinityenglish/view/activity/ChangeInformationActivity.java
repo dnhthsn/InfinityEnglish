@@ -25,11 +25,14 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityChangeInformationBinding;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Utility;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-public class ChangeInformationActivity extends AppCompatActivity {
+import java.util.concurrent.ExecutorService;
+
+public class ChangeInformationActivity extends BaseActivity {
     private ActivityChangeInformationBinding binding;
     private UserViewModel userViewModel;
 

@@ -12,9 +12,10 @@ import android.os.Handler;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWelcomeBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
     private ActivityWelcomeBinding binding;
     private UserViewModel userViewModel;
 

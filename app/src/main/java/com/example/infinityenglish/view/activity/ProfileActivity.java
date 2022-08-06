@@ -13,9 +13,10 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityProfileBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
     private ActivityProfileBinding binding;
     private UserViewModel userViewModel;
 

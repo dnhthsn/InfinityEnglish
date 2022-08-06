@@ -25,15 +25,7 @@ public class APIResponse {
         return phonetics;
     }
 
-    public void setPhonetics(List<Phonetics> phonetics) {
-        this.phonetics = phonetics;
-    }
-
     public List<Meanings> getMeanings() {
         return meanings;
-    }
-
-    public void setMeanings(List<Meanings> meanings) {
-        this.meanings = meanings;
     }
 }

@@ -13,10 +13,11 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPronunciationListBinding;
 import com.example.infinityenglish.view.adapter.LessonsAdapter;
+import com.example.infinityenglish.view.base.BaseActivity;
 
 import java.util.Arrays;
 
-public class PronunciationListActivity extends AppCompatActivity {
+public class PronunciationListActivity extends BaseActivity {
     private ActivityPronunciationListBinding binding;
     private LessonsAdapter lessonsAdapter;
 

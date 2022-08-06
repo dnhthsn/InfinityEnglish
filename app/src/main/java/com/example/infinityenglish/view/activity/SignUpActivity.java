@@ -24,13 +24,14 @@ import android.widget.RadioButton;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivitySignUpBinding;
 import com.example.infinityenglish.util.Utility;
+import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.security.acl.Permission;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
     private ActivitySignUpBinding binding;
     private UserViewModel userViewModel;
 

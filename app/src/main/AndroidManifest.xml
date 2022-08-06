@@ -50,7 +50,7 @@
             android:name=".view.activity.StartActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.QuizActivity"
+            android:name=".view.activity.RandomActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.HistoryActivity"
