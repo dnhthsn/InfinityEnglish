@@ -18,14 +18,15 @@
 
             <ImageView
                 android:id="@+id/click_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_baseline_arrow_back_24" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_arrow_back_24"
+                android:backgroundTint="@color/black" />
 
             <ImageView
                 android:id="@+id/click_edit"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_baseline_edit_24" />
 

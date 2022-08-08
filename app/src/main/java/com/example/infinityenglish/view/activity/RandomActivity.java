@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.remote.RequestEnglishManager;
@@ -62,6 +63,13 @@ public class RandomActivity extends BaseActivity implements RequestRandomManager
 
         wordViewModel.getRandomWord(RandomActivity.this, "");
 
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
     private void showData(APIResponse apiResponse) {
@@ -85,13 +93,13 @@ public class RandomActivity extends BaseActivity implements RequestRandomManager
     @Override
     public void onFetchRandomData(Object listWords, String message) {
         progressDialog.dismiss();
-        if (listWords == null){
+        if (listWords == null) {
             Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
             return;
         }
 
         String word = listWords.toString();
-        word = word.replaceAll("[\"\\[\\]]", "");
+        word = word.replaceAll(Const.Regex.randomWord, "");
         wordViewModel.getWordMeanings(RandomActivity.this, word);
     }
 
@@ -103,7 +111,7 @@ public class RandomActivity extends BaseActivity implements RequestRandomManager
     @Override
     public void onFetchData(APIResponse apiResponse, String message) {
         progressDialog.dismiss();
-        if (apiResponse == null){
+        if (apiResponse == null) {
             Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
             return;
         }

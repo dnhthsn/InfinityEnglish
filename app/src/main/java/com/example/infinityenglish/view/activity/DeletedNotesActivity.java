@@ -61,5 +61,12 @@ public class DeletedNotesActivity extends BaseActivity {
                 deletedNotesAdapter.notifyDataSetChanged();
             }
         });
+
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

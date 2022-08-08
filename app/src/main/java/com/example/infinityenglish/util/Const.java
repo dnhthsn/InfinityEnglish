@@ -50,6 +50,7 @@ public interface Const {
 
     interface Regex {
         String emailRegex = "^(.+)@(.+)$";
+        String randomWord = "[\"\\[\\]]";
     }
 
     interface Success {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity">
@@ -50,165 +51,180 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:id="@+id/selections"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/round_corner"
-                        android:orientation="vertical"
-                        android:padding="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <RelativeLayout
+                        android:id="@+id/search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/note"
                         app:layout_constraintTop_toBottomOf="@id/user_avatar">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/search_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/search" />
+
+                        <TextView
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/search_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Search"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/search_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/search" />
+                    </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/search"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/search_gif"
-                                android:text="Search"
-                                android:textSize="30dp" />
+                    <RelativeLayout
+                        android:id="@+id/note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
+                        app:layout_constraintLeft_toRightOf="@id/search"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/search">
 
-                        </RelativeLayout>
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/note_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/notebook" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/note_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Notes"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/note_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/notebook" />
+                    </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/note"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/note_gif"
-                                android:text="Notes"
-                                android:textSize="30dp" />
+                    <RelativeLayout
+                        android:id="@+id/history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/random"
+                        app:layout_constraintTop_toBottomOf="@id/search">
 
-                        </RelativeLayout>
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/history_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/history" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/history_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="History"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/history_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/history" />
+                    </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/history"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/history_gif"
-                                android:text="History"
-                                android:textSize="30dp" />
+                    <RelativeLayout
+                        android:id="@+id/random"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
+                        app:layout_constraintLeft_toRightOf="@id/history"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note">
 
-                        </RelativeLayout>
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/random_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/random" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/random_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Random"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/random_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/random" />
+                    </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/random"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/random_gif"
-                                android:text="Random"
-                                android:textSize="30dp" />
+                    <RelativeLayout
+                        android:id="@+id/speak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/pronunciation_guide"
+                        app:layout_constraintTop_toBottomOf="@id/history">
 
-                        </RelativeLayout>
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/speak_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/microphone" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/speak_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Practice"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/speak_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/microphone" />
+                    </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/speak"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/speak_gif"
-                                android:text="Practice speaking"
-                                android:textSize="30dp" />
+                    <RelativeLayout
+                        android:id="@+id/pronunciation_guide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/round_corner_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/speak"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/random">
 
-                        </RelativeLayout>
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/pronunciation_gif"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@drawable/document" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/round_corner_white">
+                            android:layout_below="@id/pronunciation_gif"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:text="Pronunciation"
+                            android:textSize="23dp" />
 
-                            <pl.droidsonroids.gif.GifImageView
-                                android:id="@+id/pronunciation_gif"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_alignParentStart="true"
-                                android:src="@drawable/document" />
-
-                            <TextView
-                                android:id="@+id/pronunciation_guide"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_toEndOf="@id/pronunciation_gif"
-                                android:text="Pronunciation Guide"
-                                android:textSize="30dp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/user_avatar"
@@ -218,7 +234,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:src="@drawable/avatar"
-                        app:layout_constraintBottom_toTopOf="@id/selections"
+                        app:layout_constraintBottom_toTopOf="@id/search"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
