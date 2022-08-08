@@ -47,6 +47,7 @@
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_delete_note.xml" value="0.16530797101449277" />
         <entry key="app/src/main/res/layout/dialog_delete_permanent.xml" value="0.16530797101449277" />
+        <entry key="app/src/main/res/layout/dialog_edit_information.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_logout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_update.xml" value="0.25" />
