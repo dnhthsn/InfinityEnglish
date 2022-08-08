@@ -17,9 +17,9 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:gravity="center"
-                android:text="Are you sure you want to logout ?"
+                android:text="@string/logout_question"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -35,7 +35,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="Logout"
-                android:textColor="@color/red"
+                android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
