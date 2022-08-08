@@ -19,6 +19,8 @@
     <string name="lesson13">file:///android_asset/Lesson13.html</string>
     <string name="lesson14">file:///android_asset/Lesson14.html</string>
     <string name="lesson15">file:///android_asset/Lesson15.html</string>
+    <string name="login_notice">Without account, you will lost your data when you delete application</string>
+    <string name="login_question">Are you sure you want to login without account ?</string>
 
     <string-array name="lessons">
         <item>Lesson 1: English Word Pronunciation</item>

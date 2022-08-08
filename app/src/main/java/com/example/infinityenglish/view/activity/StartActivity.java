@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityStartBinding;
+import com.example.infinityenglish.databinding.DialogLoginBinding;
+import com.example.infinityenglish.databinding.DialogLogoutBinding;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
@@ -42,8 +48,31 @@ public class StartActivity extends BaseActivity {
         binding.loginWithoutAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userViewModel.removeCurrentUser();
-                MainActivity.starter(StartActivity.this);
+                Dialog dialog = new Dialog(StartActivity.this);
+                dialog.setContentView(R.layout.dialog_login);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setGravity(Gravity.CENTER);
+
+                DialogLoginBinding binding = DataBindingUtil.inflate(LayoutInflater.from(StartActivity.this), R.layout.dialog_login, null, false);
+                dialog.setContentView(binding.getRoot());
+
+                binding.clickYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        userViewModel.removeCurrentUser();
+                        MainActivity.starter(StartActivity.this);
+                    }
+                });
+
+                binding.clickNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+
+                dialog.show();
             }
         });
     }

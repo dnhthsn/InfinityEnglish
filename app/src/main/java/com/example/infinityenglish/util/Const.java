@@ -46,6 +46,7 @@ public interface Const {
         String noData = "No data found...";
         String network = "Network problem...";
         String login = "You have to login to backup data !!!";
+        String profileClick = "You have to login to see your profile";
     }
 
     interface Regex {

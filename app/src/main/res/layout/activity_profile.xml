@@ -55,7 +55,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
                 android:padding="10dp"
-                android:text="abcd"
+                android:text="user"
                 android:textSize="30dp" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:drawableLeft="@drawable/ic_baseline_phone_android_24"
                 android:padding="10dp"
-                android:text="0946658175"
+                android:text="phone"
                 android:textSize="20dp" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_marginTop="30dp"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:padding="10dp"
-                android:text="dinhthaison@gmail.com"
+                android:text="mail"
                 android:textSize="20dp" />
 
             <TextView

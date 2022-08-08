@@ -92,7 +92,11 @@ public class SettingsActivity extends BaseActivity {
         binding.profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProfileActivity.starter(SettingsActivity.this);
+                if (users == null){
+                    Utility.Notice.snack(view, Const.Error.profileClick);
+                } else {
+                    ProfileActivity.starter(SettingsActivity.this);
+                }
             }
         });
 
