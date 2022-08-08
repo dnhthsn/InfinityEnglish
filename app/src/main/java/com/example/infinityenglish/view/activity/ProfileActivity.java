@@ -68,7 +68,8 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Dialog dialog = new Dialog(ProfileActivity.this);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_nocolor);
+                dialog.setContentView(R.layout.dialog_edit_information);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setGravity(Gravity.CENTER);
 
@@ -84,7 +85,7 @@ public class ProfileActivity extends BaseActivity {
                             if (users.getPassword().equals(pass)) {
                                 ChangeInformationActivity.starter(ProfileActivity.this);
                             } else {
-                                Utility.Notice.snack(binding.profile, Const.Error.information);
+                                Utility.Notice.snack(view, Const.Error.information);
                             }
                         }
                     }
