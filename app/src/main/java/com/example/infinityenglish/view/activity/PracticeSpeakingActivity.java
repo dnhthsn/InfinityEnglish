@@ -44,9 +44,9 @@ public class PracticeSpeakingActivity extends BaseActivity {
                 });
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                MainActivity.starter(PracticeSpeakingActivity.this);
                 finish();
             }
-
         });
 
         binding.clickClear.setOnClickListener(new View.OnClickListener() {

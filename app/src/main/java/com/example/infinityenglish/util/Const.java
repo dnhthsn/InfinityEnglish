@@ -49,6 +49,7 @@ public interface Const {
         String network = "Network problem...";
         String login = "You have to login to backup data !!!";
         String profileClick = "You have to login to see your profile";
+        String audio = "Can't play this audio";
     }
 
     interface Regex {

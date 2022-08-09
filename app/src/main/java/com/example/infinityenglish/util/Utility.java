@@ -29,7 +29,7 @@ public class Utility {
     }
 
     public static class Player {
-        public static void playAudio(String url){
+        public static void playAudio(String url, View view) {
             MediaPlayer mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
@@ -38,7 +38,7 @@ public class Utility {
                 mediaPlayer.start();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Utility.Notice.snack(view, Const.Error.audio);
             }
         }
     }

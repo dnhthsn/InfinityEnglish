@@ -40,7 +40,7 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
             @Override
             public void onClick(View view) {
                 String audioUrl = phonetics.get(position).getAudio();
-                Utility.Player.playAudio(audioUrl);
+                Utility.Player.playAudio(audioUrl, holder.binding.getRoot());
             }
         });
     }
