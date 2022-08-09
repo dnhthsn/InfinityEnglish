@@ -1,21 +1,10 @@
 package com.example.infinityenglish.util;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
+
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.databinding.DataBindingUtil;
-
-import com.example.infinityenglish.R;
-import com.example.infinityenglish.databinding.DialogLogoutBinding;
-import com.example.infinityenglish.view.activity.SettingsActivity;
-import com.example.infinityenglish.view.activity.StartActivity;
-import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
