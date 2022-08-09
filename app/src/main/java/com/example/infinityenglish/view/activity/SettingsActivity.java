@@ -1,6 +1,5 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,7 +27,6 @@ import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.util.List;
-import java.util.Set;
 
 public class SettingsActivity extends BaseActivity {
     private ActivitySettingsBinding binding;
@@ -105,32 +103,38 @@ public class SettingsActivity extends BaseActivity {
         binding.clickLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(SettingsActivity.this);
-                dialog.setContentView(R.layout.dialog_logout);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_nocolor);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setGravity(Gravity.BOTTOM);
+                if (binding.clickLogout.getText().equals("Exit")){
+                    StartActivity.starter(SettingsActivity.this);
+                    userViewModel.removeStateLogin();
+                    SettingsActivity.finishActivity(SettingsActivity.this);
+                } else {
+                    Dialog dialog = new Dialog(SettingsActivity.this);
+                    dialog.setContentView(R.layout.dialog_logout);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setGravity(Gravity.CENTER);
 
-                DialogLogoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(SettingsActivity.this), R.layout. dialog_logout, null, false);
-                dialog.setContentView(binding.getRoot());
+                    DialogLogoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(SettingsActivity.this), R.layout. dialog_logout, null, false);
+                    dialog.setContentView(binding.getRoot());
 
-                binding.clickLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        StartActivity.starter(SettingsActivity.this);
-                        userViewModel.removeStateLogin();
-                        SettingsActivity.finishActivity(SettingsActivity.this);
-                    }
-                });
+                    binding.clickLogout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            StartActivity.starter(SettingsActivity.this);
+                            userViewModel.removeStateLogin();
+                            dialog.dismiss();
+                            SettingsActivity.finishActivity(SettingsActivity.this);
+                        }
+                    });
 
-                binding.clickCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
-                    }
-                });
+                    binding.clickCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.cancel();
+                        }
+                    });
 
-                dialog.show();
+                    dialog.show();
+                }
             }
         });
     }

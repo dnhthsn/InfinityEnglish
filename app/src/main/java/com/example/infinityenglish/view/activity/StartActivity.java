@@ -50,7 +50,6 @@ public class StartActivity extends BaseActivity {
             public void onClick(View view) {
                 Dialog dialog = new Dialog(StartActivity.this);
                 dialog.setContentView(R.layout.dialog_login);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setGravity(Gravity.CENTER);
 
@@ -62,6 +61,7 @@ public class StartActivity extends BaseActivity {
                     public void onClick(View view) {
                         userViewModel.removeCurrentUser();
                         MainActivity.starter(StartActivity.this);
+                        dialog.dismiss();
                     }
                 });
 
