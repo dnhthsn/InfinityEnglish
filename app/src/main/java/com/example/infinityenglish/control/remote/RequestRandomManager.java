@@ -21,7 +21,7 @@ public class RequestRandomManager {
                 .build();
     }
 
-    public void getRandomWord(OnFetchRandomDataListener listener, String word) {
+    public void getRandomWord(OnFetchRandomDataListener listener) {
         CallRandomWord callRandomWord = retrofit.create(CallRandomWord.class);
         Call<Object> call = callRandomWord.callWords();
 

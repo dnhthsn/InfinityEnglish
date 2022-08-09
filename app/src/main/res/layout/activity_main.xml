@@ -11,26 +11,19 @@
         <LinearLayout
             android:id="@+id/title_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_corner_white"
-            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary2"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/logo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/logo" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:fontFamily="@font/dancing_script"
                 android:text="Infinity English"
-                android:textColor="@color/colorPrimary2"
+                android:textColor="@color/white"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
@@ -52,42 +45,15 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/round_corner_white"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/note"
-                        app:layout_constraintTop_toBottomOf="@id/user_avatar">
-
-                        <pl.droidsonroids.gif.GifImageView
-                            android:id="@+id/search_gif"
-                            android:layout_width="150dp"
-                            android:layout_height="100dp"
-                            android:layout_alignParentStart="true"
-                            android:src="@drawable/search" />
-
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/search_gif"
-                            android:layout_centerHorizontal="true"
-                            android:gravity="center"
-                            android:text="Search"
-                            android:textSize="23dp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
                         android:id="@+id/note"
                         android:layout_width="wrap_content"
                         android:layout_height="150dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/round_corner_white"
-                        app:layout_constraintLeft_toRightOf="@id/search"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/search">
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/history"
+                        app:layout_constraintTop_toBottomOf="@id/user_avatar">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/note_gif"
@@ -113,9 +79,9 @@
                         android:layout_height="150dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/round_corner_white"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/random"
-                        app:layout_constraintTop_toBottomOf="@id/search">
+                        app:layout_constraintLeft_toRightOf="@id/note"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_avatar">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/history_gif"
@@ -136,50 +102,20 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/random"
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/round_corner_white"
-                        app:layout_constraintLeft_toRightOf="@id/history"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/note">
-
-                        <pl.droidsonroids.gif.GifImageView
-                            android:id="@+id/random_gif"
-                            android:layout_width="150dp"
-                            android:layout_height="100dp"
-                            android:layout_alignParentStart="true"
-                            android:src="@drawable/random" />
-
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/random_gif"
-                            android:layout_centerHorizontal="true"
-                            android:gravity="center"
-                            android:text="Random"
-                            android:textSize="23dp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
                         android:id="@+id/speak"
                         android:layout_width="wrap_content"
                         android:layout_height="150dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/round_corner_white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/pronunciation_guide"
-                        app:layout_constraintTop_toBottomOf="@id/history">
+                        app:layout_constraintLeft_toRightOf="@id/pronunciation_guide"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/speak_gif"
                             android:layout_width="150dp"
                             android:layout_height="100dp"
-                            android:layout_alignParentStart="true"
                             android:src="@drawable/microphone" />
 
                         <TextView
@@ -201,9 +137,9 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/round_corner_white"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/speak"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/random">
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/speak"
+                        app:layout_constraintTop_toBottomOf="@id/history">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/pronunciation_gif"
@@ -223,6 +159,34 @@
 
                     </RelativeLayout>
 
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/input_search"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/round_corner_white"
+                        android:focusableInTouchMode="true"
+                        app:iconifiedByDefault="false"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/random"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:queryHint="Input word..." />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/random"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/round_corner_white"
+                        android:src="@drawable/shuffle"
+                        app:layout_constraintBottom_toBottomOf="@id/input_search"
+                        app:layout_constraintLeft_toRightOf="@id/input_search"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/input_search" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/user_avatar"
                         android:layout_width="100dp"
@@ -231,9 +195,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:src="@drawable/avatar"
-                        app:layout_constraintBottom_toTopOf="@id/search"
+                        app:layout_constraintBottom_toTopOf="@id/note"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/input_search" />
 
                     <TextView
                         android:id="@+id/user_name"

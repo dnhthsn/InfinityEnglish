@@ -1,7 +1,5 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,8 +31,9 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     private PhoneticAdapter phoneticAdapter;
     private MeaningAdapter meaningAdapter;
 
-    public static void starter(Context context) {
+    public static void starter(Context context, Bundle bundle) {
         Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
@@ -54,37 +53,30 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
         progressDialog.show();
 
         String word = getIntent().getStringExtra(Const.Sender.word);
-        String word1 = word==null ? "hello":word;
+        String query = getIntent().getStringExtra(Const.Sender.searchQuery);
+        String random = getIntent().getStringExtra(Const.Sender.randomWord);
 
+        String word2 = query == null ? random : query;
+        String word1 = word == null ? word2 : word;
+
+        binding.word.setText(word1);
         wordViewModel.getWordMeanings(SearchActivity.this, word1);
 
-        binding.inputSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                progressDialog.setTitle("Fetching response for: " + query);
-                progressDialog.show();
-
-                wordViewModel.getWordMeanings(SearchActivity.this, query);
-                wordViewModel.addWordSearched(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+        if (query != null) {
+            wordViewModel.addWordSearched(query);
+        }
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.starter(SearchActivity.this);
                 finish();
             }
         });
     }
 
     private void showData(APIResponse apiResponse) {
-        binding.word.setText("Word: " + apiResponse.getWord());
+        binding.word.setText(apiResponse.getWord());
 
         binding.phoneticsList.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
@@ -104,11 +96,12 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     @Override
     public void onFetchData(APIResponse apiResponse, String message) {
         progressDialog.dismiss();
-        if (apiResponse == null){
-            Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
+        if (apiResponse == null) {
+            Utility.Notice.snack(binding.searchLayout, Const.Error.noData);
             return;
+        } else {
+            showData(apiResponse);
         }
-        showData(apiResponse);
     }
 
     @Override

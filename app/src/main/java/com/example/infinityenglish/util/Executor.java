@@ -8,7 +8,7 @@ public class Executor {
 
     public static synchronized ExecutorService getInstance(){
         if (executorService == null){
-            executorService = Executors.newFixedThreadPool(20);
+            executorService = Executors.newFixedThreadPool(5);
         } else {
             return executorService;
         }

@@ -63,6 +63,8 @@ public class SettingsActivity extends BaseActivity {
             String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
             binding.userAvatar.setImageURI(Uri.parse(imageUri));
             binding.userName.setText(users.getName());
+        } else {
+            binding.clickLogout.setText("Exit");
         }
 
         binding.backup.setOnClickListener(new View.OnClickListener() {

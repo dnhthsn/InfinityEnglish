@@ -59,7 +59,7 @@ public class WordViewModel extends ViewModel {
         return histories;
     }
 
-    public void getRandomWord(OnFetchRandomDataListener listener, String word) {
-        requestRandomManager.getRandomWord(listener, word);
+    public void getRandomWord(OnFetchRandomDataListener listener) {
+        requestRandomManager.getRandomWord(listener);
     }
 }

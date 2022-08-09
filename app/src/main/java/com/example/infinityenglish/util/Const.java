@@ -29,6 +29,8 @@ public interface Const {
         String noteTitle = "title";
         String noteContent = "content";
         String loginState = "loginState";
+        String searchQuery = "query";
+        String randomWord = "randomWord";
     }
 
     interface Error {

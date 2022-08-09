@@ -1,6 +1,7 @@
 package com.example.infinityenglish.control.remote;
 
 import com.example.infinityenglish.models.APIResponse;
+import com.example.infinityenglish.util.Utility;
 
 import java.util.List;
 
@@ -31,14 +32,15 @@ public class RequestEnglishManager {
                 @Override
                 public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
                     if (!response.isSuccessful()){
-                        return;
+                        listener.onError("No data for this word " + word);
+                    } else {
+                        listener.onFetchData(response.body().get(0), response.message());
                     }
-                    listener.onFetchData(response.body().get(0), response.message());
                 }
 
                 @Override
                 public void onFailure(Call<List<APIResponse>> call, Throwable t) {
-                    listener.onError("Request Failed");
+                    listener.onError("Request failed !!!");
                 }
             });
         } catch (Exception e){
