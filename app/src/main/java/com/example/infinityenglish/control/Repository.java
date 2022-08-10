@@ -273,10 +273,6 @@ public class Repository {
         database.addNote(notes);
     }
 
-    public void addDeletedNote(Notes notes) {
-        database.addDeletedNote(notes);
-    }
-
     public void updateNote(Notes notes) {
         database.updateNote(notes);
     }
@@ -287,16 +283,52 @@ public class Repository {
     }
 
     public void deleteNote(Integer id, View view) {
-        database.deleteNote(id);
-        Utility.Notice.snack(view, Const.Success.deleted);
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                database.deleteNote(id);
+                Utility.Notice.snack(view, Const.Success.deleted);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+        dialog.show();
     }
 
     public void deleteOnlineNote(Users users, Integer id, View view) {
-        databaseReference.child(Const.Database.user)
-                .child(users.getName())
-                .child(Const.Database.notes)
-                .child(String.valueOf(id)).removeValue();
-        Utility.Notice.snack(view, Const.Success.deleted);
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                databaseReference.child(Const.Database.user)
+                        .child(users.getName())
+                        .child(Const.Database.notes)
+                        .child(String.valueOf(id)).removeValue();
+                Utility.Notice.snack(view, Const.Success.deleted);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+        dialog.show();
     }
 
     public void deleteNotePermanently(View view, Integer id) {

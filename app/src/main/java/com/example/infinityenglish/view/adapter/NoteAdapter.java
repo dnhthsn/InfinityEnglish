@@ -57,13 +57,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             @Override
             public void onClick(View view) {
                 if (state){
-                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot());
-                    repository.addDeletedNote(notes.get(position));
+                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
                     notes.remove(position);
                     notifyDataSetChanged();
                 } else {
-                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot());
-                    repository.addDeletedNote(notes.get(position));
+                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
                     notes.remove(position);
                     notifyDataSetChanged();
                 }
