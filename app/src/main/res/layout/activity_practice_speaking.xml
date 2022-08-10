@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/menu"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="100dp" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <EditText
-                android:id="@+id/input_text"
-                android:layout_width="250dp"
-                android:layout_height="230dp"
-                android:layout_marginTop="30dp"
-                android:gravity="top|left"
-                android:hint="Enter Text"
-                android:inputType="textMultiLine"
-                android:lines="25"
-                android:maxWidth="5.0dip"
-                android:minWidth="10.0dip"
-                android:scrollbars="vertical"
-                android:scrollHorizontally="false"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="20dp" />
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="top|left"
+            android:hint="Enter Text"
+            android:inputType="textMultiLine"
+            android:lines="25"
+            android:maxWidth="5.0dip"
+            android:minWidth="10.0dip"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/click_speak"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/click_speak"
@@ -52,7 +36,10 @@
             android:background="@drawable/round_corner_button"
             android:drawableLeft="@drawable/ic_baseline_volume_up_24"
             android:text="Speak"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/click_clear"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_text" />
 
         <Button
             android:id="@+id/click_clear"
@@ -62,7 +49,9 @@
             android:background="@drawable/round_corner_button"
             android:drawableLeft="@drawable/ic_baseline_clear_24"
             android:text="Clear"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/click_back"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <Button
             android:id="@+id/click_back"
@@ -72,7 +61,9 @@
             android:background="@drawable/round_corner_button"
             android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
             android:text="Back"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
