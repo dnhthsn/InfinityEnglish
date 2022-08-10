@@ -48,9 +48,10 @@
                         android:id="@+id/note"
                         android:layout_width="wrap_content"
                         android:layout_height="150dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/round_corner_white"
+                        app:layout_constraintBottom_toTopOf="@id/pronunciation_guide"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/history"
                         app:layout_constraintTop_toBottomOf="@id/user_avatar">
@@ -79,6 +80,7 @@
                         android:layout_height="150dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/round_corner_white"
+                        app:layout_constraintBottom_toTopOf="@id/speak"
                         app:layout_constraintLeft_toRightOf="@id/note"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/user_avatar">
@@ -108,6 +110,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/round_corner_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/pronunciation_guide"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/note">
@@ -170,6 +173,7 @@
                         android:background="@drawable/round_corner_white"
                         android:focusableInTouchMode="true"
                         app:iconifiedByDefault="false"
+                        app:layout_constraintBottom_toTopOf="@id/user_avatar"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/random"
                         app:layout_constraintTop_toTopOf="parent"
@@ -197,6 +201,7 @@
                         android:src="@drawable/avatar"
                         app:layout_constraintBottom_toTopOf="@id/note"
                         app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/user_name"
                         app:layout_constraintTop_toBottomOf="@id/input_search" />
 
                     <TextView
