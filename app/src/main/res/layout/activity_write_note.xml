@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.WriteNoteActivity">
@@ -23,7 +23,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/ic_baseline_arrow_back_24"
-                android:backgroundTint="@color/black" />
+                android:backgroundTint="@color/white" />
 
             <ImageView
                 android:id="@+id/add_note"
@@ -31,8 +31,8 @@
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:backgroundTint="@color/black"
-                android:src="@drawable/ic_baseline_check_24" />
+                android:background="@drawable/ic_baseline_check_24"
+                android:backgroundTint="@color/white" />
 
         </RelativeLayout>
 
@@ -42,6 +42,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:hint="Title"
+            android:maxLength="50"
+            android:singleLine="true"
             android:textSize="30dp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/title" />
@@ -53,8 +55,12 @@
             android:backgroundTint="@color/white"
             android:gravity="start"
             android:hint="Note something..."
+            android:maxLength="500"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_note_title" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_note_title"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

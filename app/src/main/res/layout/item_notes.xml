@@ -1,43 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipe_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/round_corner_white">
+        app:dragEdge="right"
+        app:mode="same_level">
 
-        <TextView
-            android:id="@+id/title_note"
+        <RelativeLayout
+            android:id="@+id/delete_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Learn speaking"
-            android:textColor="@color/colorPrimary2"
-            android:textSize="25dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="100dp">
 
-        <TextView
-            android:id="@+id/content_note"
+            <TextView
+                android:id="@+id/delete_note"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/click_edit"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/delete_note"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Edit"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/note_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Learn how to speak"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@id/title_note" />
+            android:layout_margin="5dp"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/delete_note"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/ic_baseline_cancel_24"
-            app:layout_constraintBottom_toTopOf="@id/content_note"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/title_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Learn speaking"
+                android:textColor="@color/colorPrimary2"
+                android:textSize="25dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/content_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Learn how to speak"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
 </layout>

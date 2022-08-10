@@ -72,6 +72,7 @@ public class UpdateNoteActivity extends BaseActivity {
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NoteActivity.starter(UpdateNoteActivity.this);
                 finish();
             }
         });

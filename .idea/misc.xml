@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/activity_note.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_practice_speaking.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_pronunciation.xml" value="0.18704710144927536" />
+        <entry key="app/src/main/res/layout/activity_pronunciation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_pronunciation_list.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/activity_random.xml" value="0.25" />
@@ -46,7 +46,7 @@
         <entry key="app/src/main/res/layout/dialog_backup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_delete_note.xml" value="0.16530797101449277" />
-        <entry key="app/src/main/res/layout/dialog_delete_permanent.xml" value="0.16530797101449277" />
+        <entry key="app/src/main/res/layout/dialog_delete_permanent.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_edit_information.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_logout.xml" value="0.25" />

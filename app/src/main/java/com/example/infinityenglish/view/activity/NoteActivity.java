@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,9 +94,12 @@ public class NoteActivity extends BaseActivity {
             });
         }
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.noteList.setLayoutManager(layoutManager);
         binding.noteList.setAdapter(noteAdapter);
+
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        binding.noteList.addItemDecoration(itemDecoration);
 
         binding.writeNote.setOnClickListener(new View.OnClickListener() {
             @Override

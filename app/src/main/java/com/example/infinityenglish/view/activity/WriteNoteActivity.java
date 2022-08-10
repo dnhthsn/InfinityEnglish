@@ -34,6 +34,7 @@ public class WriteNoteActivity extends BaseActivity {
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NoteActivity.starter(WriteNoteActivity.this);
                 finish();
             }
         });
