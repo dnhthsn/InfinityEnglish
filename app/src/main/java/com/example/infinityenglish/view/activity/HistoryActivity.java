@@ -70,6 +70,7 @@ public class HistoryActivity extends BaseActivity {
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.starter(HistoryActivity.this);
                 finish();
             }
         });
