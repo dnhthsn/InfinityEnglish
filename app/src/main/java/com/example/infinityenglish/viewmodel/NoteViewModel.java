@@ -12,14 +12,10 @@ import androidx.lifecycle.ViewModel;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.control.rest.Callback;
-import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
-import com.example.infinityenglish.view.adapter.DeletedNotesAdapter;
-import com.example.infinityenglish.view.adapter.HistoryAdapter;
-import com.example.infinityenglish.view.adapter.NoteAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +33,6 @@ public class NoteViewModel extends ViewModel {
     public void addNote(String title, String content) {
         Notes notes = new Notes(title, content);
         repository.addNote(notes);
-    }
-
-    public void deleteAllNote(View view, DeletedNotesAdapter deletedNotesAdapter) {
-        deletedNotesAdapter.setNotes(new ArrayList<>());
-        repository.deleteAllNote(view);
     }
 
     public void backupNote(List<Notes> notes, Users users, View view) {

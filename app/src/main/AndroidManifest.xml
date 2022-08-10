@@ -41,9 +41,6 @@
             android:name=".view.activity.UpdateNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.DeletedNotesActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activity.WriteNoteActivity"
             android:exported="false" />
         <activity

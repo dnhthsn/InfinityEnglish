@@ -108,12 +108,5 @@ public class NoteActivity extends BaseActivity {
                 finish();
             }
         });
-
-        binding.recycleBin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DeletedNotesActivity.starter(NoteActivity.this);
-            }
-        });
     }
 }
