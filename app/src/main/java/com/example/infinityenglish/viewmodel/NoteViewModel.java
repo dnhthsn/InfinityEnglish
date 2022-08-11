@@ -23,8 +23,6 @@ import java.util.List;
 public class NoteViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<List<Notes>> notes = new MutableLiveData<>();
-    private MutableLiveData<List<Notes>> deletedNotes = new MutableLiveData<>();
-    private boolean state;
 
     public void init(Context context) {
         this.repository = new Repository(context);
@@ -77,17 +75,6 @@ public class NoteViewModel extends ViewModel {
             }
         });
         return notes;
-    }
-
-    public MutableLiveData<List<Notes>> getDeletedNotes() {
-        repository.getDeletedNote(new Callback() {
-            @Override
-            public void getDeletedNotes(List<Notes> list) {
-                super.getDeletedNotes(list);
-                deletedNotes.setValue(list);
-            }
-        });
-        return deletedNotes;
     }
 
     public void updateNote(int id, String title, String content, View view) {

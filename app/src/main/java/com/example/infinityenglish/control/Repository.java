@@ -247,22 +247,6 @@ public class Repository {
                 .addValueEventListener(postListener);
     }
 
-    public void getDeletedNote(Callback callback) {
-        Cursor cursor = database.getDeletedNote();
-        Notes notes;
-        List<Notes> list = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            Integer id = cursor.getInt(0);
-            String title = cursor.getString(1);
-            String content = cursor.getString(2);
-            notes = new Notes(id, title, content);
-            list.add(notes);
-        }
-        callback.getDeletedNotes(list);
-        cursor.moveToFirst();
-        cursor.close();
-    }
-
     public void addHistory(Histories histories) {
         if (!database.checkHistory(histories.getWordInput())) {
             database.addHistory(histories);
@@ -331,29 +315,6 @@ public class Repository {
         dialog.show();
     }
 
-    public void deleteNotePermanently(View view, Integer id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                database.deleteNotePermanently(id);
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-        dialog.show();
-
-    }
-
     public void deleteAllHistory(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
@@ -368,29 +329,6 @@ public class Repository {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 database.deleteAllHistory();
-                Utility.Notice.snack(view, Const.Success.deleted);
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-        dialog.show();
-    }
-
-    public void deleteAllNote(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                database.deleteAllNote();
                 Utility.Notice.snack(view, Const.Success.deleted);
             }
         });
