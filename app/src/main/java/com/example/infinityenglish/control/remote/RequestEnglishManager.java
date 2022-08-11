@@ -1,5 +1,7 @@
 package com.example.infinityenglish.control.remote;
 
+import androidx.annotation.NonNull;
+
 import com.example.infinityenglish.models.APIResponse;
 import com.example.infinityenglish.util.Utility;
 
@@ -30,7 +32,7 @@ public class RequestEnglishManager {
         try{
             call.enqueue(new Callback<List<APIResponse>>() {
                 @Override
-                public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
+                public void onResponse(@NonNull Call<List<APIResponse>> call, @NonNull Response<List<APIResponse>> response) {
                     if (!response.isSuccessful()){
                         listener.onError("No data for this word " + word);
                     } else {
@@ -39,7 +41,7 @@ public class RequestEnglishManager {
                 }
 
                 @Override
-                public void onFailure(Call<List<APIResponse>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<APIResponse>> call, Throwable t) {
                     listener.onError("Request failed !!!");
                 }
             });

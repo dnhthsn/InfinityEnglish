@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
 
     public class PhoneticViewHolder extends RecyclerView.ViewHolder {
         private ItemPhoneticsBinding binding;
+
         public PhoneticViewHolder(ItemPhoneticsBinding binding) {
             super(binding.getRoot());
 
