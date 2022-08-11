@@ -35,15 +35,7 @@ public class Definitions {
         return synonyms;
     }
 
-    public void setSynonyms(List<String> synonyms) {
-        this.synonyms = synonyms;
-    }
-
     public List<String> getAntonyms() {
         return antonyms;
-    }
-
-    public void setAntonyms(List<String> antonyms) {
-        this.antonyms = antonyms;
     }
 }

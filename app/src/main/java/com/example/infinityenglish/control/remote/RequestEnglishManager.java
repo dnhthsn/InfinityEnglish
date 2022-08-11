@@ -1,5 +1,7 @@
 package com.example.infinityenglish.control.remote;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
 import com.example.infinityenglish.models.APIResponse;
@@ -25,15 +27,15 @@ public class RequestEnglishManager {
                 .build();
     }
 
-    public void getWordMeanings(OnFetchDataListener listener, String word){
+    public void getWordMeanings(OnFetchDataListener listener, String word) {
         CallDictionary callDictionary = retrofit.create(CallDictionary.class);
         Call<List<APIResponse>> call = callDictionary.callMeanings(word);
 
-        try{
+        try {
             call.enqueue(new Callback<List<APIResponse>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<APIResponse>> call, @NonNull Response<List<APIResponse>> response) {
-                    if (!response.isSuccessful()){
+                    if (!response.isSuccessful()) {
                         listener.onError("No data for this word " + word);
                     } else {
                         listener.onFetchData(response.body().get(0), response.message());
@@ -45,20 +47,21 @@ public class RequestEnglishManager {
                     listener.onError("Request failed !!!");
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface CallDictionary{
+    public interface CallDictionary {
         @GET("entries/en/{word}")
-        Call<List<APIResponse>> callMeanings (
+        Call<List<APIResponse>> callMeanings(
                 @Path("word") String word
         );
     }
 
-    public interface OnFetchDataListener{
+    public interface OnFetchDataListener {
         void onFetchData(APIResponse apiResponse, String message);
+
         void onError(String message);
     }
 }

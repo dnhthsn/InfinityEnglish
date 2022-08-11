@@ -36,19 +36,24 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
 
     @Override
     public void onBindViewHolder(@NonNull PhoneticViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.binding.phonetic.setText(phonetics.get(position).getText());
-        holder.binding.playAudio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String audioUrl = phonetics.get(position).getAudio();
-                Utility.Player.playAudio(audioUrl, holder.binding.getRoot());
-            }
-        });
+        if (!TextUtils.isEmpty(phonetics.get(position).getText())){
+            holder.binding.phonetic.setText(phonetics.get(position).getText());
+            holder.binding.playAudio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String audioUrl = phonetics.get(position).getAudio();
+                    Utility.Player.playAudio(audioUrl, holder.binding.getRoot());
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return phonetics.size();
+        if (phonetics != null){
+            return phonetics.size();
+        }
+        return 0;
     }
 
     public class PhoneticViewHolder extends RecyclerView.ViewHolder {

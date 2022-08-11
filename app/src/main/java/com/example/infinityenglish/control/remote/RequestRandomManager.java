@@ -1,9 +1,5 @@
 package com.example.infinityenglish.control.remote;
 
-import com.example.infinityenglish.models.ListWords;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
