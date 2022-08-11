@@ -33,6 +33,8 @@ public class PracticeSpeakingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_speaking);
 
+        overridePendingTransition(R.anim.animation_intent_enter, R.anim.animation_intent_exit);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_practice_speaking);
 
         ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
