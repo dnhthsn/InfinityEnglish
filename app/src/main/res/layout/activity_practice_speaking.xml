@@ -17,6 +17,7 @@
             android:lines="25"
             android:maxWidth="5.0dip"
             android:minWidth="10.0dip"
+            android:padding="5dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:textColor="@color/white"
