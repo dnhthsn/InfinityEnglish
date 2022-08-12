@@ -34,6 +34,7 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
         return new PhoneticViewHolder(binding);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull PhoneticViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (!TextUtils.isEmpty(phonetics.get(position).getText())){
@@ -45,6 +46,10 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
                     Utility.Player.playAudio(audioUrl, holder.binding.getRoot());
                 }
             });
+        } else {
+            holder.binding.playAudio.getLayoutParams().height = 0;
+            holder.binding.phonetic.getLayoutParams().height = 0;
+            holder.binding.phoneticsLayout.getLayoutParams().height = 0;
         }
     }
 
