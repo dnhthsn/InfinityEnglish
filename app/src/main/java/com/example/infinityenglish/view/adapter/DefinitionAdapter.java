@@ -1,5 +1,6 @@
 package com.example.infinityenglish.view.adapter;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,20 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
         StringBuilder synonym = new StringBuilder();
         StringBuilder antonym = new StringBuilder();
 
-        synonym.append(definitions.get(position).getSynonyms());
-        antonym.append(definitions.get(position).getAntonyms());
+        if (definitions.get(position).getSynonyms().isEmpty()){
+            synonym.append("No synonyms for this");
+        } else {
+            synonym.append(definitions.get(position).getSynonyms());
+        }
+
+        if (definitions.get(position).getAntonyms().isEmpty()){
+            antonym.append("No antonyms for this");
+        } else {
+            antonym.append(definitions.get(position).getAntonyms());
+        }
 
         holder.binding.synonyms.setText(synonym);
+
         holder.binding.antonyms.setText(antonym);
 
         holder.binding.synonyms.setSelected(true);
@@ -51,6 +62,7 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
 
     public class DefinitionViewHolder extends RecyclerView.ViewHolder {
         private ItemDefinitionsBinding binding;
+
         public DefinitionViewHolder(ItemDefinitionsBinding binding) {
             super(binding.getRoot());
 
