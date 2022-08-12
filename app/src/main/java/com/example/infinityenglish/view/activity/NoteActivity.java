@@ -21,6 +21,7 @@ import com.example.infinityenglish.databinding.ActivityNoteBinding;
 import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.adapter.NoteAdapter;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
@@ -34,6 +35,7 @@ public class NoteActivity extends BaseActivity {
     private UserViewModel userViewModel;
 
     private NoteAdapter noteAdapter;
+    private long count;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, NoteActivity.class);
@@ -78,6 +80,7 @@ public class NoteActivity extends BaseActivity {
                 @Override
                 public void onChanged(List<Notes> notes) {
                     if (notes != null) {
+                        count = notes.size();
                         noteAdapter.setNotes(notes);
                         noteAdapter.notifyDataSetChanged();
                     }
@@ -89,6 +92,7 @@ public class NoteActivity extends BaseActivity {
                 @Override
                 public void onChanged(List<Notes> notes) {
                     if (notes != null) {
+                        count = notes.size();
                         noteAdapter.setNotes(notes);
                         noteAdapter.notifyDataSetChanged();
                     }
@@ -106,8 +110,12 @@ public class NoteActivity extends BaseActivity {
         binding.writeNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WriteNoteActivity.starter(NoteActivity.this);
-                finish();
+                if (count > 49){
+                    Utility.Notice.snack(view, "Max count");
+                } else {
+                    WriteNoteActivity.starter(NoteActivity.this);
+                    finish();
+                }
             }
         });
     }

@@ -223,6 +223,10 @@ public class Repository {
         cursor.close();
     }
 
+    public long getNotesCount(){
+        return database.getNotesCount();
+    }
+
     public void getOnlineNote(Users users, Callback callback) {
         ValueEventListener postListener = new ValueEventListener() {
             @Override

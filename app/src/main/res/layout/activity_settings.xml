@@ -11,12 +11,12 @@
 
         <LinearLayout
             android:id="@+id/title"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/colorPrimary2"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/click_back"
@@ -73,14 +73,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_corner_white"
+                    android:background="@drawable/custom_textview"
                     android:orientation="vertical">
 
                     <TextView
@@ -89,15 +89,22 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_baseline_info_24"
                         android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                        android:drawablePadding="10dp"
                         android:padding="10dp"
                         android:text="Profile"
                         android:textSize="20dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black" />
 
                     <TextView
                         android:id="@+id/backup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_baseline_backup_24"
+                        android:drawableStart="@drawable/ic_baseline_backup_24"
+                        android:drawablePadding="10dp"
                         android:padding="10dp"
                         android:text="Backup"
                         android:textSize="20dp" />

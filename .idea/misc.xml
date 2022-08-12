@@ -62,6 +62,7 @@
         <entry key="app/src/main/res/layout/item_notes.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_phonetics.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_random_words.xml" value="0.18206521739130435" />
+        <entry key="app/src/main/res/layout/item_title_notes.xml" value="0.16621376811594202" />
       </map>
     </option>
   </component>
