@@ -1,9 +1,6 @@
 package com.example.infinityenglish.view.adapter;
 
 import android.annotation.SuppressLint;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +9,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ItemPhoneticsBinding;
 import com.example.infinityenglish.models.Phonetics;
 import com.example.infinityenglish.util.Utility;
 
-import java.io.IOException;
 import java.util.List;
 
 public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.PhoneticViewHolder> {

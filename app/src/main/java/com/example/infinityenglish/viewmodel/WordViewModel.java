@@ -18,7 +18,6 @@ import com.example.infinityenglish.view.adapter.HistoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class WordViewModel extends ViewModel {
     private RequestEnglishManager requestEnglishManager;

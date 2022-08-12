@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.databinding.ItemNotesBinding;
-import com.example.infinityenglish.databinding.ItemTitleNotesBinding;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
@@ -26,9 +25,6 @@ import com.example.infinityenglish.viewmodel.UserViewModel;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
-
     private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private List<Notes> notes;
 
@@ -96,29 +92,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         return notes.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0) {
-            return TYPE_HEADER;
-        } else {
-            return TYPE_ITEM;
-        }
-    }
-
     public class NoteViewHolder extends RecyclerView.ViewHolder {
         private ItemNotesBinding binding;
 
         public NoteViewHolder(ItemNotesBinding binding) {
-            super(binding.getRoot());
-
-            this.binding = binding;
-        }
-    }
-
-    public class NoteTitleViewHolder extends RecyclerView.ViewHolder {
-        private ItemTitleNotesBinding binding;
-
-        public NoteTitleViewHolder(ItemTitleNotesBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;

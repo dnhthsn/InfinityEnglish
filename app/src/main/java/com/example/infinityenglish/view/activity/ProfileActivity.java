@@ -1,6 +1,5 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityProfileBinding;
 import com.example.infinityenglish.databinding.DialogEditInformationBinding;
-import com.example.infinityenglish.databinding.DialogLogoutBinding;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;

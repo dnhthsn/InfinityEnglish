@@ -1,15 +1,12 @@
 package com.example.infinityenglish.view.adapter;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityenglish.databinding.ItemDefinitionsBinding;
-import com.example.infinityenglish.databinding.ItemPhoneticsBinding;
 import com.example.infinityenglish.models.Definitions;
 
 import java.util.List;

@@ -1,11 +1,8 @@
 package com.example.infinityenglish.control.remote;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 
 import com.example.infinityenglish.models.APIResponse;
-import com.example.infinityenglish.util.Utility;
 
 import java.util.List;
 

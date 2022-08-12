@@ -1,6 +1,5 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,9 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
-import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.databinding.ActivityNoteBinding;
-import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Utility;

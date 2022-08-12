@@ -1,24 +1,18 @@
 package com.example.infinityenglish.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.infinityenglish.R;
-import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
-
-import java.io.IOException;
 
 public class LoginActivity extends BaseActivity {
     private ActivityLoginBinding binding;

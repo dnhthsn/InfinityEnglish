@@ -35,7 +35,6 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.LessonsV
         holder.binding.lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s = String.valueOf(position+1);
                 Bundle bundle = new Bundle();
                 bundle.putString("pme1", String.valueOf(position+1));
 

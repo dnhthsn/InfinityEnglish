@@ -10,8 +10,4 @@ public class Histories {
     public String getWordInput() {
         return wordInput;
     }
-
-    public void setWordInput(String wordInput) {
-        this.wordInput = wordInput;
-    }
 }
