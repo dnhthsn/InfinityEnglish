@@ -30,8 +30,6 @@ public class PronunciationListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pronunciation_list);
 
-        overridePendingTransition(R.anim.animation_intent_enter, R.anim.animation_intent_exit);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pronunciation_list);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

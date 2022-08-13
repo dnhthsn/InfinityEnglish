@@ -48,8 +48,6 @@ public class NoteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-        overridePendingTransition(R.anim.animation_intent_enter, R.anim.animation_intent_exit);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         noteViewModel.init(this);
