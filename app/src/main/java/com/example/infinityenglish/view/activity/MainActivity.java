@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.infinityenglish.R;
@@ -21,12 +22,11 @@ import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.example.infinityenglish.viewmodel.WordViewModel;
 
-public class MainActivity extends BaseActivity implements RequestRandomManager.OnFetchRandomDataListener {
+public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private UserViewModel userViewModel;
     private WordViewModel wordViewModel;
 
-    private ProgressDialog progressDialog;
     private Bundle bundle;
 
     public static void starter(Context context) {
@@ -39,16 +39,12 @@ public class MainActivity extends BaseActivity implements RequestRandomManager.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        overridePendingTransition(R.anim.animation_intent_enter, R.anim.animation_intent_exit);
-
         binding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.init(this);
 
         wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
         wordViewModel.init(this);
-
-        progressDialog = new ProgressDialog(this);
 
         bundle = new Bundle();
 
@@ -99,8 +95,6 @@ public class MainActivity extends BaseActivity implements RequestRandomManager.O
             }
         });
 
-        wordViewModel.getRandomWord(MainActivity.this);
-
         binding.random.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,31 +118,5 @@ public class MainActivity extends BaseActivity implements RequestRandomManager.O
                 return false;
             }
         });
-    }
-
-    private void showData(Object listWords) {
-        String word = listWords.toString();
-        word = word.replaceAll(Const.Regex.randomWord, "");
-        bundle.putString(Const.Sender.randomWord, word);
-    }
-
-    @Override
-    public void onFetchRandomData(Object listWords, String message) {
-        progressDialog.dismiss();
-        if (listWords == null) {
-            Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
-            return;
-        }
-
-        showData(listWords);
-    }
-
-    @Override
-    public void onRandomError(String message) {
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 }

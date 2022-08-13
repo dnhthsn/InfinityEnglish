@@ -61,4 +61,13 @@ public class WordViewModel extends ViewModel {
     public void getRandomWord(OnFetchRandomDataListener listener) {
         requestRandomManager.getRandomWord(listener);
     }
+
+    public void saveWord(String word){
+        sharedPreference.saveWord(word);
+    }
+
+    public String getSavedWord(){
+        String word = sharedPreference.getWord();
+        return word;
+    }
 }

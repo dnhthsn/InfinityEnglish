@@ -25,6 +25,16 @@ public class SharedPreference {
         editor.commit();
     }
 
+    public void saveWord(String word){
+        editor.putString(Const.Sender.word, word);
+        editor.commit();
+    }
+
+    public String getWord(){
+        String word = sharedPreferences.getString(Const.Sender.word, "");
+        return word;
+    }
+
     public void saveCurrentUser(Users users){
         String user = gson.toJson(users);
         editor.putString(Const.Sender.users, user);

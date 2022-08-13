@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.remote.RequestEnglishManager;
+import com.example.infinityenglish.control.remote.RequestRandomManager;
 import com.example.infinityenglish.databinding.ActivitySearchBinding;
 import com.example.infinityenglish.models.APIResponse;
 import com.example.infinityenglish.util.Const;
@@ -22,7 +23,7 @@ import com.example.infinityenglish.view.adapter.PhoneticAdapter;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.WordViewModel;
 
-public class SearchActivity extends BaseActivity implements RequestEnglishManager.OnFetchDataListener {
+public class SearchActivity extends BaseActivity implements RequestEnglishManager.OnFetchDataListener, RequestRandomManager.OnFetchRandomDataListener {
     private ActivitySearchBinding binding;
     private WordViewModel wordViewModel;
 
@@ -54,13 +55,14 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
 
         String word = getIntent().getStringExtra(Const.Sender.word);
         String query = getIntent().getStringExtra(Const.Sender.searchQuery);
-        String random = getIntent().getStringExtra(Const.Sender.randomWord);
+        String random = wordViewModel.getSavedWord();
 
         String word2 = query == null ? random : query;
         String word1 = word == null ? word2 : word;
 
         binding.word.setText(word1);
         wordViewModel.getWordMeanings(SearchActivity.this, word1);
+        wordViewModel.getRandomWord(SearchActivity.this);
 
         if (query != null) {
             wordViewModel.addWordSearched(query);
@@ -108,5 +110,27 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
     public void onError(String message) {
         progressDialog.dismiss();
         Utility.Notice.snack(binding.searchLayout, message);
+    }
+
+    private void showDataRandom(Object listWords) {
+        String word = listWords.toString();
+        word = word.replaceAll(Const.Regex.randomWord, "");
+        wordViewModel.saveWord(word);
+    }
+
+    @Override
+    public void onFetchRandomData(Object listWords, String message) {
+        progressDialog.dismiss();
+        if (listWords == null) {
+            Utility.Notice.snack(getCurrentFocus(), Const.Error.noData);
+            return;
+        }
+
+        showDataRandom(listWords);
+    }
+
+    @Override
+    public void onRandomError(String message) {
+        progressDialog.dismiss();
     }
 }
