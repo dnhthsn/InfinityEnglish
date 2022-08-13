@@ -36,8 +36,6 @@ public class HistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        overridePendingTransition(R.anim.animation_intent_enter, R.anim.animation_intent_exit);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_history);
         wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
         wordViewModel.init(this);
