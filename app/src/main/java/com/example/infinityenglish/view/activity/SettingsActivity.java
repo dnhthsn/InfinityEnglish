@@ -103,7 +103,7 @@ public class SettingsActivity extends BaseActivity {
         binding.clickLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.clickLogout.getText().equals("Exit")){
+                if (binding.clickLogout.getText().equals("Back to Login")){
                     StartActivity.starter(SettingsActivity.this);
                     userViewModel.removeStateLogin();
                     SettingsActivity.finishActivity(SettingsActivity.this);
