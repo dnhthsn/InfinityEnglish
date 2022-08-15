@@ -81,6 +81,7 @@ public class ProfileActivity extends BaseActivity {
                         if (users != null) {
                             String pass = binding1.inputPassword.getText().toString();
                             if (users.getPassword().equals(pass)) {
+                                dialog.dismiss();
                                 ChangeInformationActivity.starter(ProfileActivity.this);
                             } else {
                                 Utility.Notice.snack(view, Const.Error.information);
