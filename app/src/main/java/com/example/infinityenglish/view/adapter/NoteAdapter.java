@@ -2,6 +2,8 @@ package com.example.infinityenglish.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chauthai.swipereveallayout.ViewBinderHelper;
+import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.databinding.ItemNotesBinding;
 import com.example.infinityenglish.models.Notes;
@@ -60,13 +63,49 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             @Override
             public void onClick(View view) {
                 if (state) {
-                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
-                    notes.remove(position);
-                    notifyDataSetChanged();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                    builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                            notes.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+                    dialog.show();
                 } else {
-                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
-                    notes.remove(position);
-                    notifyDataSetChanged();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                    builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                            notes.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+                    dialog.show();
                 }
             }
         });
