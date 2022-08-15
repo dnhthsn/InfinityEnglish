@@ -62,7 +62,7 @@ public class SettingsActivity extends BaseActivity {
             binding.userAvatar.setImageURI(Uri.parse(imageUri));
             binding.userName.setText(users.getName());
         } else {
-            binding.clickLogout.setText("Exit");
+            binding.clickLogout.setText("Back to Login");
         }
 
         binding.backup.setOnClickListener(new View.OnClickListener() {
