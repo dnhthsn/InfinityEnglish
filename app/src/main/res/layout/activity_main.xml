@@ -8,26 +8,35 @@
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/title_group"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/colorPrimary2"
-            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/dancing_script"
                 android:text="Infinity English"
                 android:textColor="@color/white"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/avatar" />
+
+        </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -54,7 +63,7 @@
                         app:layout_constraintBottom_toTopOf="@id/pronunciation_guide"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/history"
-                        app:layout_constraintTop_toBottomOf="@id/user_avatar">
+                        app:layout_constraintTop_toBottomOf="@id/input_search">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/note_gif"
@@ -83,7 +92,7 @@
                         app:layout_constraintBottom_toTopOf="@id/speak"
                         app:layout_constraintLeft_toRightOf="@id/note"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/user_avatar">
+                        app:layout_constraintTop_toBottomOf="@id/input_search">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/history_gif"
@@ -173,7 +182,7 @@
                         android:background="@drawable/round_corner_white"
                         android:focusableInTouchMode="true"
                         app:iconifiedByDefault="false"
-                        app:layout_constraintBottom_toTopOf="@id/user_avatar"
+                        app:layout_constraintBottom_toTopOf="@id/note"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/random"
                         app:layout_constraintTop_toTopOf="parent"
@@ -190,34 +199,6 @@
                         app:layout_constraintLeft_toRightOf="@id/input_search"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@id/input_search" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/user_avatar"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/avatar"
-                        app:layout_constraintBottom_toTopOf="@id/note"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/user_name"
-                        app:layout_constraintTop_toBottomOf="@id/input_search" />
-
-                    <TextView
-                        android:id="@+id/user_name"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="Hello !!!"
-                        android:textColor="@color/colorPrimary2"
-                        android:textSize="30dp"
-                        android:textStyle="bold|italic"
-                        app:layout_constraintBottom_toBottomOf="@id/user_avatar"
-                        app:layout_constraintLeft_toRightOf="@id/user_avatar"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/user_avatar" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

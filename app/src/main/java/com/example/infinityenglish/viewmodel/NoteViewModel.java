@@ -17,6 +17,7 @@ import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteViewModel extends ViewModel {
@@ -30,6 +31,10 @@ public class NoteViewModel extends ViewModel {
     public void addNote(String title, String content) {
         Notes notes = new Notes(title, content);
         repository.addNote(notes);
+    }
+
+    public void addOnlineNote(List<Notes> notes, Users users, View view) {
+        repository.syncNote(notes, users, view);
     }
 
     public void backupNote(List<Notes> notes, Users users, View view) {

@@ -58,7 +58,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         holder.binding.titleNote.setText(notes.get(position).getTitle());
         holder.binding.contentNote.setText(notes.get(position).getContent());
 
-        holder.binding.deleteLayout.setOnClickListener(new View.OnClickListener() {
+        holder.binding.deleteNote.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {

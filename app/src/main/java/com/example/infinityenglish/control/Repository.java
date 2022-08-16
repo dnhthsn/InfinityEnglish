@@ -261,6 +261,43 @@ public class Repository {
         database.addNote(notes);
     }
 
+    public void addOnlineNote(Notes notes, Users users, View view) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(notes.getId())).exists()) {
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put(Const.Database.id, notes.getId());
+                    userdataMap.put(Const.Database.title, notes.getTitle());
+                    userdataMap.put(Const.Database.content, notes.getContent());
+
+                    databaseReference.child(Const.Database.user)
+                            .child(users.getName())
+                            .child(Const.Database.notes)
+                            .child(String.valueOf(notes.getId()))
+                            .updateChildren(userdataMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Utility.Notice.snack(view, Const.Success.created);
+                                    } else {
+                                        Utility.Notice.snack(view, Const.Error.network);
+                                    }
+                                }
+                            });
+                } else {
+                    Utility.Notice.snack(view, Const.Error.existed);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void updateNote(Notes notes) {
         database.updateNote(notes);
     }

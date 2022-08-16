@@ -54,7 +54,6 @@ public class MainActivity extends BaseActivity {
             uri = users.getAvatar();
             String imageUri = uri == null ? String.valueOf(R.drawable.avatar) : uri;
             binding.userAvatar.setImageURI(Uri.parse(imageUri));
-            binding.userName.setText("Hi, " + users.getName() + " !");
         }
 
         binding.inputSearch.setFocusable(false);
