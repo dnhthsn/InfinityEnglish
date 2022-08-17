@@ -69,6 +69,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/avatar"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="user"
                 android:textSize="30dp" />
@@ -81,6 +82,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/avatar"
                 android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="phone"
                 android:textSize="20dp" />
@@ -92,6 +94,7 @@
                 android:layout_below="@id/phone_number"
                 android:layout_marginTop="30dp"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="mail"
                 android:textSize="20dp" />
@@ -102,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/email"
                 android:drawableLeft="@drawable/gender"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="Male"
                 android:textSize="20dp" />
@@ -112,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gender"
                 android:drawableLeft="@drawable/ic_baseline_maps_home_work_24"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="Ha Noi"
                 android:textSize="20dp" />
@@ -122,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/address"
                 android:drawableLeft="@drawable/ic_baseline_password_24"
+                android:drawablePadding="10dp"
                 android:padding="10dp"
                 android:text="*****"
                 android:textSize="20dp" />

@@ -101,6 +101,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_person_24"
+                            android:drawablePadding="10dp"
                             android:editable="false"
                             android:hint="user name"
                             android:textStyle="italic|bold" />
@@ -114,6 +115,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_password_24"
+                            android:drawablePadding="10dp"
                             android:hint="password" />
 
                         <EditText
@@ -125,6 +127,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_email_24"
+                            android:drawablePadding="10dp"
                             android:hint="email" />
 
                         <EditText
@@ -136,6 +139,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                            android:drawablePadding="10dp"
                             android:hint="phone number" />
 
                         <EditText
@@ -147,6 +151,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_maps_home_work_24"
+                            android:drawablePadding="10dp"
                             android:hint="address" />
 
                         <RadioGroup

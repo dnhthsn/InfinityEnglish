@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFEB3B</color>
     <color name="grey">#7C7C78</color>
-    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimary">#F8B44F</color>
     <color name="colorPrimary2">#FF9800</color>
     <color name="itemNavigationColor">#3F51B5</color>
     <color name="shadow">#7CBFBBBB</color>
@@ -18,4 +18,6 @@
     <color name="blue">#2196F3</color>
     <color name="blur">#BFF0F4F6</color>
     <color name="red">#EF1808</color>
+    <color name="light_grey">#DFDBDB</color>
+    <color name="green">#9BED3B</color>
 </resources>
