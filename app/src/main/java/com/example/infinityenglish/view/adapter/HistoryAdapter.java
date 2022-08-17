@@ -61,6 +61,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private ItemHistoriesBinding binding;
+
         public HistoryViewHolder(ItemHistoriesBinding binding) {
             super(binding.getRoot());
 

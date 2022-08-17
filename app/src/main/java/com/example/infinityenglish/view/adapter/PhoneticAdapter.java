@@ -32,7 +32,7 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull PhoneticViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (!TextUtils.isEmpty(phonetics.get(position).getText())){
+        if (!TextUtils.isEmpty(phonetics.get(position).getText())) {
             holder.binding.phonetic.setText(phonetics.get(position).getText());
             holder.binding.playAudio.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -50,7 +50,7 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
 
     @Override
     public int getItemCount() {
-        if (phonetics != null){
+        if (phonetics != null) {
             return phonetics.size();
         }
         return 0;

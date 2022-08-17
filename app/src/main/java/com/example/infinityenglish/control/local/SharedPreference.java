@@ -25,30 +25,30 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void saveWord(String word){
+    public void saveWord(String word) {
         editor.putString(Const.Sender.word, word);
         editor.commit();
     }
 
-    public String getWord(){
+    public String getWord() {
         String word = sharedPreferences.getString(Const.Sender.word, "");
         return word;
     }
 
-    public void saveCurrentUser(Users users){
+    public void saveCurrentUser(Users users) {
         String user = gson.toJson(users);
         editor.putString(Const.Sender.users, user);
         editor.commit();
     }
 
-    public void removeCurrentUser(){
+    public void removeCurrentUser() {
         editor.remove(Const.Sender.users);
         editor.commit();
     }
 
-    public Users getCurrentUser(){
+    public Users getCurrentUser() {
         String getUser = sharedPreferences.getString(Const.Sender.users, "");
-        return gson.fromJson(getUser,Users.class);
+        return gson.fromJson(getUser, Users.class);
     }
 
     public void removeUser() {
@@ -57,24 +57,24 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void getUser(Users users){
+    public void getUser(Users users) {
         String name = sharedPreferences.getString(Const.Sender.name, "");
         String password = sharedPreferences.getString(Const.Sender.password, "");
         users.setName(name);
         users.setPassword(password);
     }
 
-    public void setStateLogin(boolean stateLogin){
+    public void setStateLogin(boolean stateLogin) {
         editor.putBoolean(Const.Sender.loginState, true);
         editor.commit();
     }
 
-    public boolean getStateLogin(){
+    public boolean getStateLogin() {
         boolean stateLogin = sharedPreferences.getBoolean(Const.Sender.loginState, false);
         return stateLogin;
     }
 
-    public void removeStateLogin(){
+    public void removeStateLogin() {
         editor.remove(Const.Sender.loginState);
         editor.commit();
     }

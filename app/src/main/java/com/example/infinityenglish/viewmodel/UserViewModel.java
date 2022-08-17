@@ -155,7 +155,7 @@ public class UserViewModel extends ViewModel {
         sharedPreference.removeCurrentUser();
     }
 
-    public void getUserAvatar(Users users, View view, CircleImageView circleImageView){
+    public void getUserAvatar(Users users, View view, CircleImageView circleImageView) {
         repository.getUserAvatar(users, view, new Callback() {
             @Override
             public void getAvatar(Bitmap bitmap) {

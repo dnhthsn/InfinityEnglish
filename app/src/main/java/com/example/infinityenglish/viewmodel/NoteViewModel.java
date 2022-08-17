@@ -95,7 +95,7 @@ public class NoteViewModel extends ViewModel {
         Utility.Notice.snack(view, Const.Success.update);
     }
 
-    public void updateOnlineNote(int id, String title, String content, View view, Users users){
+    public void updateOnlineNote(int id, String title, String content, View view, Users users) {
         Notes notes = new Notes(id, title, content);
         repository.updateSyncNote(notes, users);
     }

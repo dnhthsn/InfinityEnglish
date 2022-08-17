@@ -42,7 +42,6 @@ public class SignUpActivity extends BaseActivity {
 
     private Uri imageUri;
 
-
     public static void starter(Context context) {
         Intent intent = new Intent(context, SignUpActivity.class);
         context.startActivity(intent);

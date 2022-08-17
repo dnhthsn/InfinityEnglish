@@ -43,6 +43,7 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
 
     public class MeaningViewHolder extends RecyclerView.ViewHolder {
         private ItemMeaningsBinding binding;
+
         public MeaningViewHolder(ItemMeaningsBinding binding) {
             super(binding.getRoot());
 

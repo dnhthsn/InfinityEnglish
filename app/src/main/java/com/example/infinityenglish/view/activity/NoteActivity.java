@@ -39,7 +39,7 @@ public class NoteActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void finishActivity(Activity activity){
+    public static void finishActivity(Activity activity) {
         activity.finish();
     }
 
@@ -69,7 +69,7 @@ public class NoteActivity extends BaseActivity {
 
         Users users = userViewModel.getCurrentUser();
 
-        if (state){
+        if (state) {
             noteViewModel.getOnlineNotes(users).observe(NoteActivity.this, new Observer<List<Notes>>() {
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
@@ -105,7 +105,7 @@ public class NoteActivity extends BaseActivity {
         binding.writeNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (count > 49){
+                if (count > 49) {
                     Utility.Notice.snack(view, "Max count");
                 } else {
                     WriteNoteActivity.starter(NoteActivity.this);

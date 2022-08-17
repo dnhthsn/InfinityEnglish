@@ -32,13 +32,13 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
         StringBuilder synonym = new StringBuilder();
         StringBuilder antonym = new StringBuilder();
 
-        if (definitions.get(position).getSynonyms().isEmpty()){
+        if (definitions.get(position).getSynonyms().isEmpty()) {
             synonym.append("No synonyms for this");
         } else {
             synonym.append(definitions.get(position).getSynonyms());
         }
 
-        if (definitions.get(position).getAntonyms().isEmpty()){
+        if (definitions.get(position).getAntonyms().isEmpty()) {
             antonym.append("No antonyms for this");
         } else {
             antonym.append(definitions.get(position).getAntonyms());

@@ -26,23 +26,23 @@ public class WordViewModel extends ViewModel {
     private MutableLiveData<List<Histories>> histories = new MutableLiveData<>();
     private SharedPreference sharedPreference;
 
-    public void init(Context context){
+    public void init(Context context) {
         requestEnglishManager = new RequestEnglishManager();
         requestRandomManager = new RequestRandomManager();
         repository = new Repository(context);
         sharedPreference = new SharedPreference(context);
     }
 
-    public void getWordMeanings(OnFetchDataListener listener, String query){
+    public void getWordMeanings(OnFetchDataListener listener, String query) {
         requestEnglishManager.getWordMeanings(listener, query);
     }
 
-    public void addWordSearched(String query){
+    public void addWordSearched(String query) {
         Histories histories = new Histories(query);
         repository.addHistory(histories);
     }
 
-    public void deleteAllHistory(View view, HistoryAdapter historyAdapter){
+    public void deleteAllHistory(View view, HistoryAdapter historyAdapter) {
         historyAdapter.setHistories(new ArrayList<>());
         repository.deleteAllHistory(view);
     }
@@ -62,11 +62,11 @@ public class WordViewModel extends ViewModel {
         requestRandomManager.getRandomWord(listener);
     }
 
-    public void saveWord(String word){
+    public void saveWord(String word) {
         sharedPreference.saveWord(word);
     }
 
-    public String getSavedWord(){
+    public String getSavedWord() {
         String word = sharedPreference.getWord();
         return word;
     }

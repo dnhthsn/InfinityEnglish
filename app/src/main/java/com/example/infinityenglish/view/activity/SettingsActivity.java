@@ -38,7 +38,7 @@ public class SettingsActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void finishActivity(Activity activity){
+    public static void finishActivity(Activity activity) {
         activity.finish();
     }
 
@@ -56,7 +56,7 @@ public class SettingsActivity extends BaseActivity {
 
         Users users = userViewModel.getCurrentUser();
         String uri;
-        if (users != null){
+        if (users != null) {
             userViewModel.getUserAvatar(users, binding.settings, binding.userAvatar);
         } else {
             binding.clickLogout.setText("Back to Login");
@@ -66,7 +66,7 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 boolean state = userViewModel.getStateLogin();
-                if (state){
+                if (state) {
                     noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
                         @Override
                         public void onChanged(List<Notes> notes) {
@@ -89,7 +89,7 @@ public class SettingsActivity extends BaseActivity {
         binding.profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (users == null){
+                if (users == null) {
                     Utility.Notice.snack(view, Const.Error.profileClick);
                 } else {
                     ProfileActivity.starter(SettingsActivity.this);
@@ -100,7 +100,7 @@ public class SettingsActivity extends BaseActivity {
         binding.clickLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.clickLogout.getText().equals("Back to Login")){
+                if (binding.clickLogout.getText().equals("Back to Login")) {
                     StartActivity.starter(SettingsActivity.this);
                     userViewModel.removeStateLogin();
                     SettingsActivity.finishActivity(SettingsActivity.this);
@@ -110,7 +110,7 @@ public class SettingsActivity extends BaseActivity {
                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     dialog.getWindow().setGravity(Gravity.CENTER);
 
-                    DialogLogoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(SettingsActivity.this), R.layout. dialog_logout, null, false);
+                    DialogLogoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(SettingsActivity.this), R.layout.dialog_logout, null, false);
                     dialog.setContentView(binding.getRoot());
 
                     binding.clickLogout.setOnClickListener(new View.OnClickListener() {

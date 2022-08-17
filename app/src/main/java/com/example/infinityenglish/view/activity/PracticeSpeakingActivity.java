@@ -33,12 +33,12 @@ public class PracticeSpeakingActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_practice_speaking);
 
         ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-                    public void onInit(int status) {
-                        if (status != TextToSpeech.ERROR) {
-                            ttobj.setLanguage(Locale.US);
-                        }
-                    }
-                });
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    ttobj.setLanguage(Locale.US);
+                }
+            }
+        });
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.starter(PracticeSpeakingActivity.this);

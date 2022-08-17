@@ -32,12 +32,12 @@ public class WelcomeActivity extends BaseActivity {
         boolean state = userViewModel.getStateLogin();
         Users users = userViewModel.getCurrentUser();
 
-        if(users != null){
+        if (users != null) {
             name = users.getName();
             password = users.getPassword();
         }
 
-        if (state){
+        if (state) {
             new Handler().postDelayed(() -> {
                 userViewModel.checkUser(name, password, binding.root);
             }, 8000);

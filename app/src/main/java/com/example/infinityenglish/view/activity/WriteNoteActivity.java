@@ -59,7 +59,7 @@ public class WriteNoteActivity extends BaseActivity {
                 String title = binding.inputNoteTitle.getText().toString();
                 String content = binding.inputNoteContent.getText().toString();
 
-                if (state){
+                if (state) {
                     noteViewModel.addOnlineNote(title, content, users, view);
                 } else {
                     noteViewModel.addNote(title, content);

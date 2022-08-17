@@ -36,7 +36,7 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.LessonsV
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("pme1", String.valueOf(position+1));
+                bundle.putString("pme1", String.valueOf(position + 1));
 
                 Intent intent = new Intent(holder.binding.getRoot().getContext(), PronunciationActivity.class);
                 intent.putExtras(bundle);
@@ -52,6 +52,7 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.LessonsV
 
     public class LessonsViewHolder extends RecyclerView.ViewHolder {
         private ItemLessonsBinding binding;
+
         public LessonsViewHolder(ItemLessonsBinding binding) {
             super(binding.getRoot());
 
