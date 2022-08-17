@@ -59,9 +59,10 @@ public class SearchActivity extends BaseActivity implements RequestEnglishManage
 
         String word2 = query == null ? random : query;
         String word1 = word == null ? word2 : word;
+        String result = word1 == null ? "Hello" : word1;
 
-        binding.word.setText(word1);
-        wordViewModel.getWordMeanings(SearchActivity.this, word1);
+        binding.word.setText(result);
+        wordViewModel.getWordMeanings(SearchActivity.this, result);
         wordViewModel.getRandomWord(SearchActivity.this);
 
         if (query != null) {
