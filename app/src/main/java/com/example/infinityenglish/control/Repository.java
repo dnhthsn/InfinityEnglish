@@ -17,7 +17,6 @@ import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
-import com.example.infinityenglish.view.activity.ForgetPasswordActivity;
 import com.example.infinityenglish.view.activity.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -209,10 +208,6 @@ public class Repository {
         cursor.close();
     }
 
-    public long getNotesCount() {
-        return database.getNotesCount();
-    }
-
     public void getOnlineNote(Users users, Callback callback) {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -239,43 +234,6 @@ public class Repository {
 
     public void addNote(Notes notes) {
         database.addNote(notes);
-    }
-
-    public void addOnlineNote(Notes notes, Users users, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.child(Const.Database.user).child(users.getName()).child(Const.Database.notes).child(String.valueOf(notes.getId())).exists()) {
-                    HashMap<String, Object> userdataMap = new HashMap<>();
-                    userdataMap.put(Const.Database.id, notes.getId());
-                    userdataMap.put(Const.Database.title, notes.getTitle());
-                    userdataMap.put(Const.Database.content, notes.getContent());
-
-                    databaseReference.child(Const.Database.user)
-                            .child(users.getName())
-                            .child(Const.Database.notes)
-                            .child(String.valueOf(notes.getId()))
-                            .updateChildren(userdataMap)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Utility.Notice.snack(view, Const.Success.created);
-                                    } else {
-                                        Utility.Notice.snack(view, Const.Error.network);
-                                    }
-                                }
-                            });
-                } else {
-                    Utility.Notice.snack(view, Const.Error.existed);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     public void updateNote(Notes notes) {
