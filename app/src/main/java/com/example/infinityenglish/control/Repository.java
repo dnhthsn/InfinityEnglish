@@ -42,20 +42,6 @@ public class Repository {
         this.databaseReference = db.getReference();
     }
 
-    public void getHistory(Callback callback) {
-        Cursor cursor = database.getHistory();
-        Histories histories;
-        List<Histories> list = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String word = cursor.getString(0);
-            histories = new Histories(word);
-            list.add(histories);
-        }
-        callback.getHistory(list);
-        cursor.moveToFirst();
-        cursor.close();
-    }
-
     public void getUser(Callback callback) {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -116,6 +102,45 @@ public class Repository {
         });
     }
 
+    public void updateUser(Users users) {
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.email).setValue(users.getEmail());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.phone).setValue(users.getPhone());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.address).setValue(users.getAddress());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.avatar).setValue(users.getAvatar());
+        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.gender).setValue(users.getGender());
+    }
+
+    public void updatePassword(Users users, View view) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(Const.Database.user).child(users.getName()).exists()) {
+                    if (snapshot.child(Const.Database.user)
+                            .child(users.getName())
+                            .child(Const.Database.phone)
+                            .getValue()
+                            .equals(users.getPhone())) {
+                        Utility.Notice.snack(view, Const.Success.update);
+                        databaseReference.child(Const.Database.user)
+                                .child(users.getName())
+                                .child(Const.Database.password)
+                                .setValue(users.getPassword());
+                        LoginActivity.starter(view.getContext());
+                    } else {
+                        Utility.Notice.snack(view, Const.Error.wrongPhone);
+                    }
+                } else {
+                    Utility.Notice.snack(view, Const.Error.notexisted);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
     public void syncNote(List<Notes> notes, Users users, View view) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -168,45 +193,6 @@ public class Repository {
                 .setValue(notes);
     }
 
-    public void updateUser(Users users) {
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.email).setValue(users.getEmail());
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.phone).setValue(users.getPhone());
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.address).setValue(users.getAddress());
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.avatar).setValue(users.getAvatar());
-        databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.gender).setValue(users.getGender());
-    }
-
-    public void updatePassword(Users users, View view) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(Const.Database.user).child(users.getName()).exists()) {
-                    if (snapshot.child(Const.Database.user)
-                            .child(users.getName())
-                            .child(Const.Database.phone)
-                            .getValue()
-                            .equals(users.getPhone())) {
-                        Utility.Notice.snack(view, Const.Success.update);
-                        databaseReference.child(Const.Database.user)
-                                .child(users.getName())
-                                .child(Const.Database.password)
-                                .setValue(users.getPassword());
-                        LoginActivity.starter(view.getContext());
-                    } else {
-                        Utility.Notice.snack(view, Const.Error.wrongPhone);
-                    }
-                } else {
-                    Utility.Notice.snack(view, Const.Error.notexisted);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
     public void getNote(Callback callback) {
         Cursor cursor = database.getNote();
         Notes notes;
@@ -223,7 +209,7 @@ public class Repository {
         cursor.close();
     }
 
-    public long getNotesCount(){
+    public long getNotesCount() {
         return database.getNotesCount();
     }
 
@@ -249,12 +235,6 @@ public class Repository {
                 .child(users.getName())
                 .child(Const.Database.notes)
                 .addValueEventListener(postListener);
-    }
-
-    public void addHistory(Histories histories) {
-        if (!database.checkHistory(histories.getWordInput())) {
-            database.addHistory(histories);
-        }
     }
 
     public void addNote(Notes notes) {
@@ -302,11 +282,6 @@ public class Repository {
         database.updateNote(notes);
     }
 
-    public void deleteWordHistory(String word, View view) {
-        database.deleteHistory(word);
-        Utility.Notice.snack(view, Const.Success.deleted);
-    }
-
     public void deleteNote(Integer id, View view) {
         database.deleteNote(id);
         Utility.Notice.snack(view, Const.Success.deleted);
@@ -317,6 +292,31 @@ public class Repository {
                 .child(users.getName())
                 .child(Const.Database.notes)
                 .child(String.valueOf(id)).removeValue();
+        Utility.Notice.snack(view, Const.Success.deleted);
+    }
+
+    public void addHistory(Histories histories) {
+        if (!database.checkHistory(histories.getWordInput())) {
+            database.addHistory(histories);
+        }
+    }
+
+    public void getHistory(Callback callback) {
+        Cursor cursor = database.getHistory();
+        Histories histories;
+        List<Histories> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String word = cursor.getString(0);
+            histories = new Histories(word);
+            list.add(histories);
+        }
+        callback.getHistory(list);
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
+    public void deleteWordHistory(String word, View view) {
+        database.deleteHistory(word);
         Utility.Notice.snack(view, Const.Success.deleted);
     }
 

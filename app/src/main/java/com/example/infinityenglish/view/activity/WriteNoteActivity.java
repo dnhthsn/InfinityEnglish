@@ -43,6 +43,7 @@ public class WriteNoteActivity extends BaseActivity {
         userViewModel.init(this);
 
         Users users = userViewModel.getCurrentUser();
+        boolean state = userViewModel.getStateLogin();
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +58,12 @@ public class WriteNoteActivity extends BaseActivity {
             public void onClick(View view) {
                 String title = binding.inputNoteTitle.getText().toString();
                 String content = binding.inputNoteContent.getText().toString();
-                noteViewModel.addNote(title, content);
+
+                if (state){
+                    noteViewModel.addOnlineNote(title, content, users, view);
+                } else {
+                    noteViewModel.addNote(title, content);
+                }
 
                 NoteActivity.starter(WriteNoteActivity.this);
                 finish();

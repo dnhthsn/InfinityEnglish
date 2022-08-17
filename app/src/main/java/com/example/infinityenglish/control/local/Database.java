@@ -132,6 +132,11 @@ public class Database extends SQLiteOpenHelper {
         return res;
     }
 
+    public void deleteAllNote() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NOTE);
+    }
+
     public void deleteAllHistory() {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DELETE FROM " + TABLE_HISTORY);

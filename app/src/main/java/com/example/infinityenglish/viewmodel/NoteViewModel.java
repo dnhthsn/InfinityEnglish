@@ -33,8 +33,16 @@ public class NoteViewModel extends ViewModel {
         repository.addNote(notes);
     }
 
-    public void addOnlineNote(List<Notes> notes, Users users, View view) {
-        repository.syncNote(notes, users, view);
+    public void addOnlineNote(String title, String content, Users users, View view) {
+        Notes notes = new Notes(title, content);
+        repository.addNote(notes);
+        repository.getNote(new Callback() {
+            @Override
+            public void getNotes(List<Notes> list) {
+                super.getNotes(list);
+                repository.syncNote(list, users, view);
+            }
+        });
     }
 
     public void backupNote(List<Notes> notes, Users users, View view) {

@@ -29,4 +29,8 @@ public class Notes {
     public String getContent() {
         return content;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
