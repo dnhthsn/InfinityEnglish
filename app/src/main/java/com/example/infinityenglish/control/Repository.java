@@ -301,6 +301,7 @@ public class Repository {
     }
 
     public void deleteOnlineNote(Users users, Integer id, View view) {
+        database.deleteNote(id);
         databaseReference.child(Const.Database.user)
                 .child(users.getName())
                 .child(Const.Database.notes)

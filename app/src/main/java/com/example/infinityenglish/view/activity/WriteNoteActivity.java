@@ -61,12 +61,11 @@ public class WriteNoteActivity extends BaseActivity {
 
                 if (state) {
                     noteViewModel.addOnlineNote(title, content, users, view);
+                    NoteActivity.starter(WriteNoteActivity.this);
                 } else {
                     noteViewModel.addNote(title, content);
+                    NoteActivity.starter(WriteNoteActivity.this);
                 }
-
-                NoteActivity.starter(WriteNoteActivity.this);
-                finish();
             }
         });
     }
