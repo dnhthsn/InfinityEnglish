@@ -141,11 +141,4 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DELETE FROM " + TABLE_HISTORY);
     }
-
-    public long getNotesCount() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        long count = DatabaseUtils.queryNumEntries(db, TABLE_NOTE);
-        db.close();
-        return count;
-    }
 }

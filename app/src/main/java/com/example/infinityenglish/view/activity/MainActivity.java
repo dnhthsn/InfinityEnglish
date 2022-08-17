@@ -22,6 +22,8 @@ import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.example.infinityenglish.viewmodel.WordViewModel;
 
+import java.io.IOException;
+
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private UserViewModel userViewModel;
