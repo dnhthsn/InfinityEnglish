@@ -14,6 +14,8 @@ public interface Const {
         String title = "title";
         String content = "content";
         String notes = "notes";
+        String databaseLink = "https://test-b2d47-default-rtdb.asia-southeast1.firebasedatabase.app/";
+        String storageLink = "gs://test-b2d47.appspot.com";
     }
 
     interface Sender {
@@ -59,25 +61,12 @@ public interface Const {
 
     interface Success {
         String created = "Created success fully";
+        String uploaded = "Image uploaded";
         String update = "Profile info update successfully";
         String deleted = "Delete successfully";
     }
 
     interface webUrl {
-        String lesson1 = "file:///android_asset/Lesson1.html";
-        String lesson2 = "file:///android_asset/Lesson2.html";
-        String lesson3 = "file:///android_asset/Lesson3.html";
-        String lesson4 = "file:///android_asset/Lesson4.html";
-        String lesson5 = "file:///android_asset/Lesson5.html";
-        String lesson6 = "file:///android_asset/Lesson6.html";
-        String lesson7 = "file:///android_asset/Lesson7.html";
-        String lesson8 = "file:///android_asset/Lesson8.html";
-        String lesson9 = "file:///android_asset/Lesson9.html";
-        String lesson10 = "file:///android_asset/Lesson10.html";
-        String lesson11 = "file:///android_asset/Lesson11.html";
-        String lesson12 = "file:///android_asset/Lesson12.html";
-        String lesson13 = "file:///android_asset/Lesson13.html";
-        String lesson14 = "file:///android_asset/Lesson14.html";
-        String lesson15 = "file:///android_asset/Lesson15.html";
+        String lesson = "file:///android_asset/Lesson%d.html";
     }
 }

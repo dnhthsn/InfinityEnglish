@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -19,13 +22,21 @@ import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,32 +45,14 @@ public class Repository {
     private Database database;
     private FirebaseDatabase db;
     private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+    private FirebaseStorage firebaseStorage;
 
     public Repository(Context context) {
         this.database = new Database(context);
-        this.db = FirebaseDatabase.getInstance("https://test-b2d47-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        this.db = FirebaseDatabase.getInstance(Const.Database.databaseLink);
         this.databaseReference = db.getReference();
-    }
-
-    public void getUser(Callback callback) {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Users> list = new ArrayList<>();
-                Users users;
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    users = data.getValue(Users.class);
-                    list.add(users);
-                }
-                callback.getUser(list);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child(Const.Database.user).addValueEventListener(postListener);
+        this.firebaseStorage = FirebaseStorage.getInstance(Const.Database.storageLink);
     }
 
     public void addUser(Users users, View view) {
@@ -75,6 +68,21 @@ public class Repository {
                     userdataMap.put(Const.Database.phone, users.getPhone());
                     userdataMap.put(Const.Database.gender, users.getGender());
                     userdataMap.put(Const.Database.avatar, users.getAvatar());
+
+                    storageReference = firebaseStorage.getReference("images/" + users.getName());
+
+                    storageReference.putFile(Uri.parse(users.getAvatar()))
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Utility.Notice.snack(view, Const.Success.uploaded);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
 
                     databaseReference.child(Const.Database.user)
                             .child(users.getName())
@@ -101,6 +109,50 @@ public class Repository {
         });
     }
 
+    public void getUser(Callback callback) {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Users> list = new ArrayList<>();
+                Users users;
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    users = data.getValue(Users.class);
+                    list.add(users);
+                }
+                callback.getUser(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.child(Const.Database.user).addValueEventListener(postListener);
+    }
+
+    public void getUserAvatar(Users users, View view, Callback callback) {
+        storageReference = firebaseStorage.getReference("images/" + users.getName());
+
+        try {
+            File localeFile = File.createTempFile("avatar", "jpeg");
+            storageReference.getFile(localeFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(localeFile.getAbsolutePath());
+                            callback.getAvatar(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Utility.Notice.snack(view, Const.Error.notexisted);
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void updateUser(Users users) {
         databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.password).setValue(users.getPassword());
         databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.email).setValue(users.getEmail());
@@ -108,6 +160,9 @@ public class Repository {
         databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.address).setValue(users.getAddress());
         databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.avatar).setValue(users.getAvatar());
         databaseReference.child(Const.Database.user).child(users.getName()).child(Const.Database.gender).setValue(users.getGender());
+        storageReference = firebaseStorage.getReference("images/" + users.getName());
+
+        storageReference.putFile(Uri.parse(users.getAvatar()));
     }
 
     public void updatePassword(Users users, View view) {

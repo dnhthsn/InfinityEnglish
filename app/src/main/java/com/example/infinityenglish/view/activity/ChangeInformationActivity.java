@@ -58,11 +58,8 @@ public class ChangeInformationActivity extends BaseActivity {
         userViewModel.init(this);
 
         Users users = userViewModel.getCurrentUser();
-        String uri;
         if (users != null) {
-            uri = users.getAvatar();
-            String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
-            binding.inputAvatar.setImageURI(Uri.parse(imageUri));
+            userViewModel.getUserAvatar(users, binding.changeProfileLayout, binding.inputAvatar);
             binding.inputName.setText(users.getName());
             binding.inputPassword.setText(users.getPassword());
             binding.inputPhone.setText(users.getPhone());

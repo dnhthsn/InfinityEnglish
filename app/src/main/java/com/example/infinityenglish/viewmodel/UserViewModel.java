@@ -3,6 +3,7 @@ package com.example.infinityenglish.viewmodel;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.infinityenglish.view.activity.MainActivity;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserViewModel extends ViewModel {
     private Repository repository;
@@ -150,6 +153,17 @@ public class UserViewModel extends ViewModel {
 
     public void removeCurrentUser() {
         sharedPreference.removeCurrentUser();
+    }
+
+    public void getUserAvatar(Users users, View view, CircleImageView circleImageView){
+        repository.getUserAvatar(users, view, new Callback() {
+            @Override
+            public void getAvatar(Bitmap bitmap) {
+                super.getAvatar(bitmap);
+
+                circleImageView.setImageBitmap(bitmap);
+            }
+        });
     }
 
     public void checkUser(String name, String password, View view) {

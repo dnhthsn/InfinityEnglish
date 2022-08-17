@@ -42,11 +42,8 @@ public class ProfileActivity extends BaseActivity {
         userViewModel.init(this);
 
         Users users = userViewModel.getCurrentUser();
-        String uri;
         if (users != null) {
-            uri = users.getAvatar();
-            String imageUri = uri == null ? String.valueOf(R.drawable.avatar) : uri;
-            binding.avatar.setImageURI(Uri.parse(imageUri));
+            userViewModel.getUserAvatar(users, binding.profile, binding.avatar);
             binding.userName.setText(users.getName());
             binding.email.setText(users.getEmail());
             binding.phoneNumber.setText(users.getPhone());

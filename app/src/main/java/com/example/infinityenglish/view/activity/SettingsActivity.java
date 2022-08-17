@@ -57,10 +57,7 @@ public class SettingsActivity extends BaseActivity {
         Users users = userViewModel.getCurrentUser();
         String uri;
         if (users != null){
-            uri = users.getAvatar();
-            String imageUri = uri==null ? String.valueOf(R.drawable.avatar) :uri;
-            binding.userAvatar.setImageURI(Uri.parse(imageUri));
-            binding.userName.setText(users.getName());
+            userViewModel.getUserAvatar(users, binding.settings, binding.userAvatar);
         } else {
             binding.clickLogout.setText("Back to Login");
         }

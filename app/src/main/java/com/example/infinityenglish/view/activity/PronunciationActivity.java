@@ -36,37 +36,7 @@ public class PronunciationActivity extends BaseActivity {
 
         int result = Integer.parseInt(b.getString("pme1"));
 
-        if (result == 1) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson1);
-        } else if (result == 2) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson2);
-        } else if (result == 3) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson3);
-        } else if (result == 4) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson4);
-        } else if (result == 5) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson5);
-        } else if (result == 6) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson6);
-        } else if (result == 7) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson7);
-        } else if (result == 8) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson8);
-        } else if (result == 9) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson9);
-        } else if (result == 10) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson10);
-        } else if (result == 11) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson11);
-        } else if (result == 12) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson12);
-        } else if (result == 13) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson13);
-        } else if (result == 14) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson14);
-        } else if (result == 15) {
-            binding.webLesson.loadUrl(Const.webUrl.lesson15);
-        }
+        binding.webLesson.loadUrl(String.format(Const.webUrl.lesson, result));
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override

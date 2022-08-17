@@ -49,13 +49,9 @@ public class MainActivity extends BaseActivity {
         wordViewModel.init(this);
 
         bundle = new Bundle();
-
         Users users = userViewModel.getCurrentUser();
-        String uri;
         if (users != null) {
-            uri = users.getAvatar();
-            String imageUri = uri == null ? String.valueOf(R.drawable.avatar) : uri;
-            binding.userAvatar.setImageURI(Uri.parse(imageUri));
+            userViewModel.getUserAvatar(users, binding.mainLayout, binding.userAvatar);
         }
 
         binding.inputSearch.setFocusable(false);
