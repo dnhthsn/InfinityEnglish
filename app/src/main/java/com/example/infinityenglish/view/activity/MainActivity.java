@@ -43,10 +43,10 @@ public class MainActivity extends BaseActivity {
 
         binding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.init(this);
+        userViewModel.init(MainActivity.this);
 
         wordViewModel = new ViewModelProvider(this).get(WordViewModel.class);
-        wordViewModel.init(this);
+        wordViewModel.init(MainActivity.this);
 
         bundle = new Bundle();
         Users users = userViewModel.getCurrentUser();

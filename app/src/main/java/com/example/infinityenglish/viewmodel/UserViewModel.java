@@ -3,6 +3,7 @@ package com.example.infinityenglish.viewmodel;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -172,6 +173,7 @@ public class UserViewModel extends ViewModel {
         } else if (TextUtils.isEmpty(password)) {
             Utility.Notice.snack(view, Const.Error.password);
         } else {
+
             repository.getUser(new Callback() {
                 @Override
                 public void getUser(List<Users> list) {
@@ -179,7 +181,6 @@ public class UserViewModel extends ViewModel {
                     for (Users user : list) {
                         if (user.getName().equals(name) && user.getPassword().equals(password)) {
                             sharedPreference.saveCurrentUser(user);
-                            MainActivity.starter(view.getContext());
                             setMessage("");
                             break;
                         } else {

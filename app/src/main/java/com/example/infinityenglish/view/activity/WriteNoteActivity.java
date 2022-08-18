@@ -37,10 +37,10 @@ public class WriteNoteActivity extends BaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_write_note);
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        noteViewModel.init(this);
+        noteViewModel.init(WriteNoteActivity.this);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.init(this);
+        userViewModel.init(WriteNoteActivity.this);
 
         Users users = userViewModel.getCurrentUser();
         boolean state = userViewModel.getStateLogin();
@@ -48,7 +48,7 @@ public class WriteNoteActivity extends BaseActivity {
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NoteActivity.starter(WriteNoteActivity.this);
+//                NoteActivity.starter(WriteNoteActivity.this);
                 finish();
             }
         });
@@ -61,10 +61,12 @@ public class WriteNoteActivity extends BaseActivity {
 
                 if (state) {
                     noteViewModel.addOnlineNote(title, content, users, view);
-                    NoteActivity.starter(WriteNoteActivity.this);
+                    finish();
+//                    NoteActivity.starter(WriteNoteActivity.this);
                 } else {
                     noteViewModel.addNote(title, content);
-                    NoteActivity.starter(WriteNoteActivity.this);
+                    finish();
+//                    NoteActivity.starter(WriteNoteActivity.this);
                 }
             }
         });

@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.infinityenglish.R;
@@ -39,10 +40,6 @@ public class NoteActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void finishActivity(Activity activity) {
-        activity.finish();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +47,14 @@ public class NoteActivity extends BaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        noteViewModel.init(this);
+        noteViewModel.init(NoteActivity.this);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.init(this);
+        userViewModel.init(NoteActivity.this);
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.starter(NoteActivity.this);
                 finish();
             }
         });
@@ -109,7 +105,6 @@ public class NoteActivity extends BaseActivity {
                     Utility.Notice.snack(view, "Max count");
                 } else {
                     WriteNoteActivity.starter(NoteActivity.this);
-                    finish();
                 }
             }
         });

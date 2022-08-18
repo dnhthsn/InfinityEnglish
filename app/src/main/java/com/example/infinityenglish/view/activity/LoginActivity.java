@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -66,7 +67,11 @@ public class LoginActivity extends BaseActivity {
                     userViewModel.removeUser();
                 }
 
-                userViewModel.checkUser(name, password, view);
+                userViewModel.checkUser(name, password, binding.loginLayout);
+                Users users1 = userViewModel.getCurrentUser();
+                if (users1 != null){
+                    MainActivity.starter(LoginActivity.this);
+                }
                 binding.wrongInfo.setText(userViewModel.getMessage());
             }
         });
