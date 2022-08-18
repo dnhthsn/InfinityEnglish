@@ -4,21 +4,6 @@
     <string name="forget_title1">Did some one forget their password ?</string>
     <string name="forget_title2">Don\'t worry about that, just enter the information below and change your password</string>
 
-    <string name="lesson1">file:///android_asset/Lesson1.html</string>
-    <string name="lesson2">file:///android_asset/Lesson2.html</string>
-    <string name="lesson3">file:///android_asset/Lesson3.html</string>
-    <string name="lesson4">file:///android_asset/Lesson4.html</string>
-    <string name="lesson5">file:///android_asset/Lesson5.html</string>
-    <string name="lesson6">file:///android_asset/Lesson6.html</string>
-    <string name="lesson7">file:///android_asset/Lesson7.html</string>
-    <string name="lesson8">file:///android_asset/Lesson8.html</string>
-    <string name="lesson9">file:///android_asset/Lesson9.html</string>
-    <string name="lesson10">file:///android_asset/Lesson10.html</string>
-    <string name="lesson11">file:///android_asset/Lesson11.html</string>
-    <string name="lesson12">file:///android_asset/Lesson12.html</string>
-    <string name="lesson13">file:///android_asset/Lesson13.html</string>
-    <string name="lesson14">file:///android_asset/Lesson14.html</string>
-    <string name="lesson15">file:///android_asset/Lesson15.html</string>
     <string name="login_notice">Without account, you will lost your data when you delete application</string>
     <string name="login_question">Are you sure you want to login without account ?</string>
     <string name="logout_question">Are you sure you want to logout ?</string>
