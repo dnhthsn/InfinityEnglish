@@ -48,7 +48,6 @@ public class WriteNoteActivity extends BaseActivity {
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NoteActivity.starter(WriteNoteActivity.this);
                 finish();
             }
         });
@@ -62,11 +61,9 @@ public class WriteNoteActivity extends BaseActivity {
                 if (state) {
                     noteViewModel.addOnlineNote(title, content, users, view);
                     finish();
-//                    NoteActivity.starter(WriteNoteActivity.this);
                 } else {
                     noteViewModel.addNote(title, content);
                     finish();
-//                    NoteActivity.starter(WriteNoteActivity.this);
                 }
             }
         });

@@ -13,7 +13,7 @@ public class SharedPreference {
     private Gson gson;
 
     public SharedPreference(Context context) {
-        this.sharedPreferences = context.getSharedPreferences(Const.Sender.SHARED_PREFERENCES,
+        this.sharedPreferences = context.getSharedPreferences(Const.Sender.sharePreferences,
                 Context.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
         this.gson = new Gson();

@@ -55,8 +55,9 @@ public class SettingsActivity extends BaseActivity {
         noteViewModel.init(this);
 
         Users users = userViewModel.getCurrentUser();
-        String uri;
+
         if (users != null) {
+            binding.userName.setText(users.getName());
             userViewModel.getUserAvatar(users, binding.settings, binding.userAvatar);
         } else {
             binding.clickLogout.setText("Back to Login");

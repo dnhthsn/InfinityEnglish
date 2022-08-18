@@ -3,7 +3,6 @@ package com.example.infinityenglish.viewmodel;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.LoginActivity;
-import com.example.infinityenglish.view.activity.MainActivity;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -68,8 +66,6 @@ public class UserViewModel extends ViewModel {
             Utility.Notice.snack(view, Const.Error.address);
         } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
             Utility.Notice.snack(view, Const.Error.email);
-        } else if (avatar == "null") {
-            Utility.Notice.snack(view, Const.Error.avatar);
         } else {
             Users users = new Users(name, password, address, email, phone, gender, avatar);
             LoginActivity.starter(view.getContext());
@@ -91,8 +87,6 @@ public class UserViewModel extends ViewModel {
             Utility.Notice.snack(view, Const.Error.address);
         } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
             Utility.Notice.snack(view, Const.Error.email);
-        } else if (avatar == "null") {
-            Utility.Notice.snack(view, Const.Error.avatar);
         } else {
             Users users = new Users(name, password, address, email, phone, gender, avatar);
             repository.updateUser(users);
@@ -107,7 +101,7 @@ public class UserViewModel extends ViewModel {
         } else if (TextUtils.isEmpty(password) || password.length() < 8) {
             Utility.Notice.snack(view, Const.Error.password);
         } else if (!password.equals(repassword)) {
-            Utility.Notice.snack(view, Const.Error.notmatch);
+            Utility.Notice.snack(view, Const.Error.notMatch);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_update, null));

@@ -1,18 +1,14 @@
 package com.example.infinityenglish.control;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.local.Database;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.models.Histories;
@@ -145,7 +141,7 @@ public class Repository {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Utility.Notice.snack(view, Const.Error.notexisted);
+                            Utility.Notice.snack(view, Const.Error.notExisted);
                         }
                     });
         } catch (IOException e) {
@@ -185,7 +181,7 @@ public class Repository {
                         Utility.Notice.snack(view, Const.Error.wrongPhone);
                     }
                 } else {
-                    Utility.Notice.snack(view, Const.Error.notexisted);
+                    Utility.Notice.snack(view, Const.Error.notExisted);
                 }
             }
 

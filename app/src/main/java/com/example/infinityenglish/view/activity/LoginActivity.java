@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity {
 
                 userViewModel.checkUser(name, password, binding.loginLayout);
                 Users users1 = userViewModel.getCurrentUser();
-                if (users1 != null){
+                if (users1 != null) {
                     MainActivity.starter(LoginActivity.this);
                 }
                 binding.wrongInfo.setText(userViewModel.getMessage());

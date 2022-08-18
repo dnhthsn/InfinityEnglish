@@ -24,7 +24,7 @@ public interface Const {
         String phone = "phone";
         String gender = "gender";
         String address = "address";
-        String SHARED_PREFERENCES = "dataLogin";
+        String sharePreferences = "dataLogin";
         String users = "users";
         String word = "word";
         String noteId = "id";
@@ -45,8 +45,8 @@ public interface Const {
         String avatar = "Please choose your avatar...";
         String wrongPhone = "You have input wrong phone number...";
         String existed = "existed";
-        String notexisted = "Not existed";
-        String notmatch = "Not match with password";
+        String notExisted = "Not existed";
+        String notMatch = "Not match with password";
         String noData = "No data found...";
         String network = "Network problem...";
         String login = "You have to login to backup data !!!";
