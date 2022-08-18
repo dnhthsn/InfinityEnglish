@@ -1,11 +1,15 @@
 package com.example.infinityenglish.viewmodel;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.control.local.SharedPreference;
 import com.example.infinityenglish.control.remote.RequestEnglishManager;

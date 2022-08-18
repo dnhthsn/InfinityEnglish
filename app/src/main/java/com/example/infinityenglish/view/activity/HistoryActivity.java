@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.infinityenglish.R;
@@ -59,8 +62,26 @@ public class HistoryActivity extends BaseActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
-                wordViewModel.deleteAllHistory(view, historyAdapter);
-                historyAdapter.notifyDataSetChanged();
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+
+                builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete, null));
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        wordViewModel.deleteAllHistory(view, historyAdapter);
+                        historyAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+                dialog.show();
             }
         });
 

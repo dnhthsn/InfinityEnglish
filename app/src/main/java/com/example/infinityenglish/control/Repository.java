@@ -335,25 +335,7 @@ public class Repository {
     }
 
     public void deleteAllHistory(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete, null));
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                database.deleteAllHistory();
-                Utility.Notice.snack(view, Const.Success.deleted);
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-        dialog.show();
+        database.deleteAllHistory();
+        Utility.Notice.snack(view, Const.Success.deleted);
     }
 }

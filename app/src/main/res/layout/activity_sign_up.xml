@@ -70,6 +70,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_person_24"
+                            android:drawablePadding="10dp"
                             android:hint="user name" />
 
                         <EditText
@@ -81,6 +82,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_password_24"
+                            android:drawablePadding="10dp"
                             android:hint="password" />
 
                         <EditText
@@ -92,6 +94,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_email_24"
+                            android:drawablePadding="10dp"
                             android:hint="email" />
 
                         <EditText
@@ -103,6 +106,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                            android:drawablePadding="10dp"
                             android:hint="phone number" />
 
                         <EditText
@@ -114,6 +118,7 @@
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/round_corner_white"
                             android:drawableLeft="@drawable/ic_baseline_maps_home_work_24"
+                            android:drawablePadding="10dp"
                             android:hint="address" />
 
                         <RadioGroup
@@ -133,6 +138,7 @@
                                 android:buttonTint="@color/colorPrimary"
                                 android:checked="true"
                                 android:drawableLeft="@drawable/ic_baseline_male_24"
+                                android:drawablePadding="10dp"
                                 android:text="Male"
                                 android:textStyle="bold" />
 
@@ -144,6 +150,7 @@
                                 android:background="@drawable/round_corner_white"
                                 android:buttonTint="@color/colorPrimary"
                                 android:drawableLeft="@drawable/ic_baseline_female_24"
+                                android:drawablePadding="10dp"
                                 android:text="Female"
                                 android:textStyle="bold" />
 
@@ -179,8 +186,8 @@
             android:background="@drawable/round_corner_left_bottom"
             android:backgroundTint="@color/white"
             android:padding="25dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"

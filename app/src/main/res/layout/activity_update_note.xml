@@ -40,7 +40,6 @@
             android:id="@+id/input_note_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:hint="Title"
             android:padding="5dp"
             android:textSize="30dp"
