@@ -20,7 +20,7 @@ public class PracticeSpeakingActivity extends BaseActivity {
 
     private float pitch = -1;
     private float speechRate = -1;
-    private TextToSpeech ttobj;
+    private TextToSpeech textToSpeech;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, PracticeSpeakingActivity.class);
@@ -33,10 +33,10 @@ public class PracticeSpeakingActivity extends BaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_practice_speaking);
 
-        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
-                    ttobj.setLanguage(Locale.US);
+                    textToSpeech.setLanguage(Locale.US);
                 }
             }
         });
@@ -58,24 +58,24 @@ public class PracticeSpeakingActivity extends BaseActivity {
         binding.clickClear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 binding.inputText.setText("");
-                ttobj.stop();
+                textToSpeech.stop();
             }
         });
 
         binding.clickSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ttobj.setPitch(pitch);
-                ttobj.setSpeechRate(speechRate);
+                textToSpeech.setPitch(pitch);
+                textToSpeech.setSpeechRate(speechRate);
                 String toSpeak = binding.inputText.getText().toString();
-                ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }
 
     public void onPause() {
-        if (ttobj != null) {
-            ttobj.stop();
+        if (textToSpeech != null) {
+            textToSpeech.stop();
         }
         super.onPause();
     }

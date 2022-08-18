@@ -38,9 +38,9 @@ public class ForgetPasswordActivity extends BaseActivity {
                 String name = binding.inputName.getText().toString();
                 String password = binding.inputPassword.getText().toString();
                 String phone = binding.inputPhone.getText().toString();
-                String repassword = binding.inputRepassword.getText().toString();
+                String rePassword = binding.inputRepassword.getText().toString();
 
-                userViewModel.updatePassword(name, password, repassword, phone, view);
+                userViewModel.updatePassword(name, password, rePassword, phone, view);
             }
         });
 

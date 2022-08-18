@@ -1,10 +1,8 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +10,6 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWriteNoteBinding;
-import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;

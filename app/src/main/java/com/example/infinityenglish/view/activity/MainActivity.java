@@ -4,16 +4,12 @@ import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.example.infinityenglish.R;
-import com.example.infinityenglish.control.remote.RequestRandomManager;
 import com.example.infinityenglish.databinding.ActivityMainBinding;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
@@ -21,8 +17,6 @@ import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 import com.example.infinityenglish.viewmodel.WordViewModel;
-
-import java.io.IOException;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;

@@ -17,7 +17,6 @@ import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NoteViewModel extends ViewModel {
