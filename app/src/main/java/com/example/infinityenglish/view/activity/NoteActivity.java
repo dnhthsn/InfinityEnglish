@@ -41,7 +41,7 @@ public class NoteActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void finishActivity(Activity activity){
+    public static void finishActivity(Activity activity) {
         activity.finish();
     }
 

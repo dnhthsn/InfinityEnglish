@@ -41,7 +41,7 @@ public class WelcomeActivity extends BaseActivity {
             new Handler().postDelayed(() -> {
                 userViewModel.checkUser(name, password, binding.root);
                 Users users1 = userViewModel.getCurrentUser();
-                if (users1 != null){
+                if (users1 != null) {
                     MainActivity.starter(WelcomeActivity.this);
                 }
             }, 8000);
