@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityenglish.databinding.ItemDefinitionsBinding;
 import com.example.infinityenglish.models.Definitions;
+import com.example.infinityenglish.util.Const;
 
 import java.util.List;
 
@@ -33,13 +34,13 @@ public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.De
         StringBuilder antonym = new StringBuilder();
 
         if (definitions.get(position).getSynonyms().isEmpty()) {
-            synonym.append("No synonyms for this");
+            synonym.append(Const.Error.noSynonym);
         } else {
             synonym.append(definitions.get(position).getSynonyms());
         }
 
         if (definitions.get(position).getAntonyms().isEmpty()) {
-            antonym.append("No antonyms for this");
+            antonym.append(Const.Error.noAntonym);
         } else {
             antonym.append(definitions.get(position).getAntonyms());
         }

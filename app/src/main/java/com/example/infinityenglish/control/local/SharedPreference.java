@@ -57,13 +57,6 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void getUser(Users users) {
-        String name = sharedPreferences.getString(Const.Sender.name, "");
-        String password = sharedPreferences.getString(Const.Sender.password, "");
-        users.setName(name);
-        users.setPassword(password);
-    }
-
     public void setStateLogin(boolean stateLogin) {
         editor.putBoolean(Const.Sender.loginState, true);
         editor.commit();

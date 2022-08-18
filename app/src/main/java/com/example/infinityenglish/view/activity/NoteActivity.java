@@ -19,6 +19,7 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityNoteBinding;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.adapter.NoteAdapter;
 import com.example.infinityenglish.view.base.BaseActivity;
@@ -38,6 +39,10 @@ public class NoteActivity extends BaseActivity {
     public static void starter(Context context) {
         Intent intent = new Intent(context, NoteActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void finishActivity(Activity activity){
+        activity.finish();
     }
 
     @Override
@@ -102,7 +107,7 @@ public class NoteActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (count > 49) {
-                    Utility.Notice.snack(view, "Max count");
+                    Utility.Notice.snack(view, Const.Error.count);
                 } else {
                     WriteNoteActivity.starter(NoteActivity.this);
                 }

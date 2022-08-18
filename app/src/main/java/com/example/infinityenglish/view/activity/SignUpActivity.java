@@ -22,6 +22,7 @@ import android.widget.RadioButton;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivitySignUpBinding;
+import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -172,7 +173,7 @@ public class SignUpActivity extends BaseActivity {
                     if (cameraAccepted && storageAccepted) {
                         pickFromCamera();
                     } else {
-                        Utility.Notice.snack(getCurrentFocus(), "Camera & Storage permissions are required");
+                        Utility.Notice.snack(getCurrentFocus(), Const.Error.camera);
                     }
                 }
                 break;
@@ -183,7 +184,7 @@ public class SignUpActivity extends BaseActivity {
                     if (storageAccepted) {
                         pickFromGallery();
                     } else {
-                        Utility.Notice.snack(getCurrentFocus(), "Storage permission is required");
+                        Utility.Notice.snack(getCurrentFocus(), Const.Error.storage);
                     }
                 }
                 break;

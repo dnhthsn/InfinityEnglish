@@ -22,7 +22,6 @@ public interface Const {
         String name = "name";
         String password = "password";
         String phone = "phone";
-        String gender = "gender";
         String address = "address";
         String sharePreferences = "dataLogin";
         String users = "users";
@@ -32,7 +31,6 @@ public interface Const {
         String noteContent = "content";
         String loginState = "loginState";
         String searchQuery = "query";
-        String randomWord = "randomWord";
     }
 
     interface Error {
@@ -52,6 +50,11 @@ public interface Const {
         String login = "You have to login to backup data !!!";
         String profileClick = "You have to login to see your profile";
         String audio = "Can't play this audio";
+        String camera = "Camera & Storage permissions are required";
+        String storage = "Storage permission is required";
+        String count = "Max amount of notes";
+        String noSynonym = "No synonyms for this";
+        String noAntonym = "No antonyms for this";
     }
 
     interface Regex {

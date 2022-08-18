@@ -118,7 +118,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 i.putExtra(Const.Sender.noteTitle, notes.get(position).getTitle());
                 i.putExtra(Const.Sender.noteContent, notes.get(position).getContent());
                 holder.binding.getRoot().getContext().startActivity(i);
-                //NoteActivity.finishActivity((Activity) holder.binding.getRoot().getContext());
+                NoteActivity.finishActivity((Activity) holder.binding.getRoot().getContext());
             }
         });
     }

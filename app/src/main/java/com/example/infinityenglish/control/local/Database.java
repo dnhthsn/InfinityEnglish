@@ -3,7 +3,6 @@ package com.example.infinityenglish.control.local;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -130,11 +129,6 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int res = db.delete(TABLE_NOTE, ID + " = " + i, null);
         return res;
-    }
-
-    public void deleteAllNote() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NOTE);
     }
 
     public void deleteAllHistory() {
