@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -39,6 +41,13 @@ public class LoginActivity extends BaseActivity {
 
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
         noteViewModel.init(this);
+
+        binding.loginLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(LoginActivity.this);
+            }
+        });
 
         binding.forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

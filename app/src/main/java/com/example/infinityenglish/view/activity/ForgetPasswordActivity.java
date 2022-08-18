@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityForgetPasswordBinding;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
@@ -40,6 +41,13 @@ public class ForgetPasswordActivity extends BaseActivity {
                 String repassword = binding.inputRepassword.getText().toString();
 
                 userViewModel.updatePassword(name, password, repassword, phone, view);
+            }
+        });
+
+        binding.forgetPasswordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(ForgetPasswordActivity.this);
             }
         });
     }

@@ -57,6 +57,13 @@ public class MainActivity extends BaseActivity {
         binding.inputSearch.setFocusable(false);
         binding.inputSearch.clearFocus();
 
+        binding.mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(MainActivity.this);
+            }
+        });
+
         binding.userAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

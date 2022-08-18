@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityPracticeSpeakingBinding;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 
 import java.util.Locale;
@@ -39,6 +40,14 @@ public class PracticeSpeakingActivity extends BaseActivity {
                 }
             }
         });
+
+        binding.speakingLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(PracticeSpeakingActivity.this);
+            }
+        });
+
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.starter(PracticeSpeakingActivity.this);

@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
 
 import com.example.infinityenglish.R;
@@ -67,6 +68,13 @@ public class ChangeInformationActivity extends BaseActivity {
             binding.inputEmail.setText(users.getEmail());
             binding.inputAddress.setText(users.getAddress());
         }
+
+        binding.changeProfileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(ChangeInformationActivity.this);
+            }
+        });
 
         binding.inputAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

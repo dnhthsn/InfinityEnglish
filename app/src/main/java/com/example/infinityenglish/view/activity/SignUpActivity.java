@@ -59,6 +59,13 @@ public class SignUpActivity extends BaseActivity {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.init(this);
 
+        binding.signUpLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(SignUpActivity.this);
+            }
+        });
+
         binding.inputAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

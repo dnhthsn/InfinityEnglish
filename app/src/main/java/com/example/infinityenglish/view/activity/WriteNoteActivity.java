@@ -14,6 +14,7 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWriteNoteBinding;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -44,6 +45,13 @@ public class WriteNoteActivity extends BaseActivity {
 
         Users users = userViewModel.getCurrentUser();
         boolean state = userViewModel.getStateLogin();
+
+        binding.writeNoteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(WriteNoteActivity.this);
+            }
+        });
 
         binding.clickBack.setOnClickListener(new View.OnClickListener() {
             @Override

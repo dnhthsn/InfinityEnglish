@@ -12,6 +12,7 @@ import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityUpdateNoteBinding;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -43,6 +44,13 @@ public class UpdateNoteActivity extends BaseActivity {
 
         binding.inputNoteTitle.setText(title);
         binding.inputNoteContent.setText(content);
+
+        binding.updateNoteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.Keyboard.hideKeyBoard(UpdateNoteActivity.this);
+            }
+        });
 
         binding.updateNote.setOnClickListener(new View.OnClickListener() {
             @Override
