@@ -16,10 +16,11 @@ import com.example.infinityenglish.view.base.BaseActivity;
 import java.util.Locale;
 
 public class PracticeSpeakingActivity extends BaseActivity {
+    private final float pitch = -1;
+    private final float speechRate = -1;
+
     private ActivityPracticeSpeakingBinding binding;
 
-    private float pitch = -1;
-    private float speechRate = -1;
     private TextToSpeech textToSpeech;
 
     public static void starter(Context context) {
