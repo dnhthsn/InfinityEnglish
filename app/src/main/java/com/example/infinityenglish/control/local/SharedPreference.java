@@ -31,7 +31,7 @@ public class SharedPreference {
     }
 
     public String getWord() {
-        String word = sharedPreferences.getString(Const.Sender.word, "");
+        String word = sharedPreferences.getString(Const.Sender.word, "search");
         return word;
     }
 
@@ -69,6 +69,11 @@ public class SharedPreference {
 
     public void removeStateLogin() {
         editor.remove(Const.Sender.loginState);
+        editor.commit();
+    }
+
+    public void removeWord(){
+        editor.remove(Const.Sender.word);
         editor.commit();
     }
 }

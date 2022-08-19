@@ -63,11 +63,8 @@ public class WordViewModel extends ViewModel {
     }
 
     public void saveWord(String word) {
-        if (word.equals("")){
-            sharedPreference.saveWord("Search");
-        } else {
-            sharedPreference.saveWord(word);
-        }
+        sharedPreference.removeWord();
+        sharedPreference.saveWord(word);
     }
 
     public String getSavedWord() {
