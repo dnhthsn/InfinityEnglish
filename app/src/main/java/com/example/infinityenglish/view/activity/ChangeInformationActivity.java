@@ -31,16 +31,15 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class ChangeInformationActivity extends BaseActivity {
-    private ActivityChangeInformationBinding binding;
-    private UserViewModel userViewModel;
-
     private final int CAMERA_REQUEST_CODE = 100;
     private final int STORAGE_REQUEST_CODE = 101;
     private final int IMAGE_PICK_CAMERA_CODE = 102;
     private final int IMAGE_PICK_GALLERY_CODE = 103;
-
     private String[] cameraPermissions;
     private String[] storagePermissions;
+
+    private ActivityChangeInformationBinding binding;
+    private UserViewModel userViewModel;
 
     private Uri imageUri;
 
