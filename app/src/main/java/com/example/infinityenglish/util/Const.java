@@ -72,4 +72,8 @@ public interface Const {
     interface webUrl {
         String lesson = "file:///android_asset/Lesson%d.html";
     }
+
+    enum State{
+        none, Start, Main, Login
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.view.View;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityLoginBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
@@ -65,7 +67,6 @@ public class LoginActivity extends BaseActivity {
         binding.clickLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userViewModel.setStateLogin(true);
                 String name = binding.inputName.getText().toString();
                 String password = binding.inputPassword.getText().toString();
 
@@ -75,12 +76,26 @@ public class LoginActivity extends BaseActivity {
                     userViewModel.removeUser();
                 }
 
-                userViewModel.checkUser(name, password, binding.loginLayout);
-                Users users1 = userViewModel.getCurrentUser();
-                if (users1 != null) {
-                    MainActivity.starter(LoginActivity.this);
-                }
-                binding.wrongInfo.setText(userViewModel.getMessage());
+                Users users = new Users();
+                users.setName(name);
+                users.setPassword(password);
+                userViewModel.checkUser(users);
+
+                userViewModel.getState().observe(LoginActivity.this, new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        if (state.equals(Const.State.Main)){
+                            MainActivity.starter(LoginActivity.this);
+                        }
+                    }
+                });
+
+                userViewModel.getMessage().observe(LoginActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String message) {
+                        binding.wrongInfo.setText(message);
+                    }
+                });
             }
         });
     }

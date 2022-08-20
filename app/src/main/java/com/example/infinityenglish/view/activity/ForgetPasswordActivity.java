@@ -1,6 +1,7 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -41,6 +42,13 @@ public class ForgetPasswordActivity extends BaseActivity {
                 String rePassword = binding.inputRepassword.getText().toString();
 
                 userViewModel.updatePassword(name, password, rePassword, phone, view);
+
+                userViewModel.getMessage().observe(ForgetPasswordActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        Utility.Notice.snack(view, s);
+                    }
+                });
             }
         });
 

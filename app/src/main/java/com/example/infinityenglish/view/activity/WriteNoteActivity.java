@@ -1,16 +1,19 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWriteNoteBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.NoteViewModel;
@@ -41,7 +44,6 @@ public class WriteNoteActivity extends BaseActivity {
         userViewModel.init(WriteNoteActivity.this);
 
         Users users = userViewModel.getCurrentUser();
-        boolean state = userViewModel.getStateLogin();
 
         binding.writeNoteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +65,23 @@ public class WriteNoteActivity extends BaseActivity {
                 String title = binding.inputNoteTitle.getText().toString();
                 String content = binding.inputNoteContent.getText().toString();
 
-                if (state) {
-                    noteViewModel.addOnlineNote(title, content, users, view);
-                    finish();
-                } else {
-                    noteViewModel.addNote(title, content);
-                    finish();
-                }
+                userViewModel.getState().observe(WriteNoteActivity.this, new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        switch (state) {
+                            case Main:
+                                noteViewModel.addOnlineNote(title, content, users, view);
+                                finish();
+                                break;
+                            case Start:
+                                noteViewModel.addNote(title, content);
+                                finish();
+                                break;
+                            case none:
+                                break;
+                        }
+                    }
+                });
             }
         });
     }

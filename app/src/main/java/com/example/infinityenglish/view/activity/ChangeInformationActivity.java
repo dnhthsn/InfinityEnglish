@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -102,7 +103,24 @@ public class ChangeInformationActivity extends BaseActivity {
                 String gender = genderRad.getText().toString();
 
                 String avatar = String.valueOf(imageUri);
-                userViewModel.updateUser(name, password, address, email, phone, gender, avatar, view);
+                Users users = new Users(name, password, address, email, phone, gender, avatar);
+                userViewModel.updateUser(users);
+
+                userViewModel.getState().observe(ChangeInformationActivity.this, new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        if (state.equals(Const.State.Login)){
+                            LoginActivity.starter(ChangeInformationActivity.this);
+                        }
+                    }
+                });
+
+                userViewModel.getMessage().observe(ChangeInformationActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        Utility.Notice.snack(view, s);
+                    }
+                });
             }
         });
 

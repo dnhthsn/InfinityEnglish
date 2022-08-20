@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.infinityenglish.R;
@@ -65,35 +66,47 @@ public class NoteActivity extends BaseActivity {
 
         noteAdapter = new NoteAdapter();
 
-        boolean state = userViewModel.getStateLogin();
-
         Users users = userViewModel.getCurrentUser();
 
-        if (state) {
-            noteViewModel.getOnlineNotes(users).observe(NoteActivity.this, new Observer<List<Notes>>() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onChanged(List<Notes> notes) {
-                    if (notes != null) {
-                        count = notes.size();
-                        noteAdapter.setNotes(notes);
-                        noteAdapter.notifyDataSetChanged();
+        userViewModel.checkUser(users);
+
+        userViewModel.getState().observe(this, new Observer<Const.State>() {
+            @Override
+            public void onChanged(Const.State state) {
+                switch (state) {
+                    case Main: {
+                        noteViewModel.getOnlineNotes(users).observe(NoteActivity.this, new Observer<List<Notes>>() {
+                            @SuppressLint("NotifyDataSetChanged")
+                            @Override
+                            public void onChanged(List<Notes> notes) {
+                                if (notes != null) {
+                                    count = notes.size();
+                                    noteAdapter.setNotes(notes);
+                                    noteAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        break;
                     }
-                }
-            });
-        } else {
-            noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onChanged(List<Notes> notes) {
-                    if (notes != null) {
-                        count = notes.size();
-                        noteAdapter.setNotes(notes);
-                        noteAdapter.notifyDataSetChanged();
+                    case Start: {
+                        noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
+                            @SuppressLint("NotifyDataSetChanged")
+                            @Override
+                            public void onChanged(List<Notes> notes) {
+                                if (notes != null) {
+                                    count = notes.size();
+                                    noteAdapter.setNotes(notes);
+                                    noteAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        break;
                     }
+                    case none:
+                        break;
                 }
-            });
-        }
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.noteList.setLayoutManager(layoutManager);

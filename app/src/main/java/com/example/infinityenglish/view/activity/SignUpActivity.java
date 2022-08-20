@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -16,12 +17,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivitySignUpBinding;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
@@ -86,7 +89,24 @@ public class SignUpActivity extends BaseActivity {
                 String gender = genderRad.getText().toString();
 
                 String avatar = String.valueOf(imageUri);
-                userViewModel.addUser(name, password, address, email, phone, gender, avatar, view);
+                Users users = new Users(name, password, address, email, phone, gender, avatar);
+                userViewModel.addUser(users, view);
+
+                userViewModel.getState().observe(SignUpActivity.this, new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        if (state.equals(Const.State.Login)){
+                            LoginActivity.starter(SignUpActivity.this);
+                        }
+                    }
+                });
+
+                userViewModel.getMessage().observe(SignUpActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        Utility.Notice.snack(view, s);
+                    }
+                });
             }
         });
 

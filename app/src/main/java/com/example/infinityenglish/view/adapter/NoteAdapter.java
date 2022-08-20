@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,7 +51,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         Repository repository = new Repository(holder.binding.getRoot().getContext());
         UserViewModel userViewModel = new ViewModelProvider((ViewModelStoreOwner) holder.binding.getRoot().getContext()).get(UserViewModel.class);
         userViewModel.init(holder.binding.getRoot().getContext());
-        boolean state = userViewModel.getStateLogin();
         Users users = userViewModel.getCurrentUser();
 
         viewBinderHelper.bind(holder.binding.swipeNote, String.valueOf(notes.get(position).getId()));
@@ -62,51 +62,54 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
-                if (state) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                userViewModel.getState().observe(holder.binding.getLifecycleOwner(), new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                    builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
+                        switch (state) {
+                            case Main:
+                                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                                        notes.remove(position);
+                                        notifyDataSetChanged();
+                                    }
+                                });
+                                break;
+                            case Start:
+                                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                });
+
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                                        notes.remove(position);
+                                        notifyDataSetChanged();
+                                    }
+                                });
+                                break;
+                            case none:
+                                break;
                         }
-                    });
 
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
-                            notes.remove(position);
-                            notifyDataSetChanged();
-                        }
-                    });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-                    dialog.show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-                    builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_delete_permanent, null));
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    });
-
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
-                            notes.remove(position);
-                            notifyDataSetChanged();
-                        }
-                    });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-                    dialog.show();
-                }
+                        AlertDialog dialog = builder.create();
+                        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
+                        dialog.show();
+                    }
+                });
             }
         });
 

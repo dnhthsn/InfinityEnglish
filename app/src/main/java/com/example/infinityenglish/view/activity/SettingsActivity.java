@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,17 +66,26 @@ public class SettingsActivity extends BaseActivity {
         binding.backup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean state = userViewModel.getStateLogin();
-                if (state) {
-                    noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
-                        @Override
-                        public void onChanged(List<Notes> notes) {
-                            noteViewModel.backupNote(notes, users, view);
+                userViewModel.getState().observe(SettingsActivity.this, new Observer<Const.State>() {
+                    @Override
+                    public void onChanged(Const.State state) {
+                        switch (state) {
+                            case Main:
+                                noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
+                                    @Override
+                                    public void onChanged(List<Notes> notes) {
+                                        noteViewModel.backupNote(notes, users, view);
+                                    }
+                                });
+                                break;
+                            case Start:
+                                Utility.Notice.snack(view, Const.Error.login);
+                                break;
+                            case none:
+                                break;
                         }
-                    });
-                } else {
-                    Utility.Notice.snack(view, Const.Error.login);
-                }
+                    }
+                });
             }
         });
 
@@ -102,7 +112,6 @@ public class SettingsActivity extends BaseActivity {
             public void onClick(View view) {
                 if (binding.clickLogout.getText().equals("Back to Login")) {
                     StartActivity.starter(SettingsActivity.this);
-                    userViewModel.removeStateLogin();
                     SettingsActivity.finishActivity(SettingsActivity.this);
                 } else {
                     Dialog dialog = new Dialog(SettingsActivity.this);
@@ -116,8 +125,8 @@ public class SettingsActivity extends BaseActivity {
                     binding.clickLogout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            userViewModel.removeCurrentUser();
                             StartActivity.starter(SettingsActivity.this);
-                            userViewModel.removeStateLogin();
                             dialog.dismiss();
                             SettingsActivity.finishActivity(SettingsActivity.this);
                         }

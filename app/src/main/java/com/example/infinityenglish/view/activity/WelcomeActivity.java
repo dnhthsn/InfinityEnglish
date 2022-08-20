@@ -1,6 +1,7 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,8 @@ import android.os.Handler;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityWelcomeBinding;
 import com.example.infinityenglish.models.Users;
+import com.example.infinityenglish.util.Const;
+import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
 
@@ -27,19 +30,22 @@ public class WelcomeActivity extends BaseActivity {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.init(this);
 
-        boolean state = userViewModel.getStateLogin();
         Users users = userViewModel.getCurrentUser();
+        userViewModel.checkUser(users);
 
-        if (state) {
-            new Handler().postDelayed(() -> {
-                if (users != null) {
-                    MainActivity.starter(WelcomeActivity.this);
+        userViewModel.getState().observe(this, new Observer<Const.State>() {
+            @Override
+            public void onChanged(Const.State state) {
+                if (state.equals(Const.State.Main)) {
+                    new Handler().postDelayed(() -> {
+                        MainActivity.starter(WelcomeActivity.this);
+                    }, 8000);
+                } else if (state.equals(Const.State.Start)) {
+                    new Handler().postDelayed(() -> {
+                        StartActivity.starter(WelcomeActivity.this);
+                    }, 8000);
                 }
-            }, 8000);
-        } else {
-            new Handler().postDelayed(() -> {
-                StartActivity.starter(WelcomeActivity.this);
-            }, 8000);
-        }
+            }
+        });
     }
 }
