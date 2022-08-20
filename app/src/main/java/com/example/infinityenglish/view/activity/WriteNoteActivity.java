@@ -43,7 +43,6 @@ public class WriteNoteActivity extends BaseActivity {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.init(WriteNoteActivity.this);
 
-        Users users = userViewModel.getCurrentUser();
 
         binding.writeNoteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,29 +58,18 @@ public class WriteNoteActivity extends BaseActivity {
             }
         });
 
+        Users users = userViewModel.getCurrentUser();
+        userViewModel.checkUser(users);
+
         binding.addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = binding.inputNoteTitle.getText().toString();
                 String content = binding.inputNoteContent.getText().toString();
 
-                userViewModel.getState().observe(WriteNoteActivity.this, new Observer<Const.State>() {
-                    @Override
-                    public void onChanged(Const.State state) {
-                        switch (state) {
-                            case Main:
-                                noteViewModel.addOnlineNote(title, content, users, view);
-                                finish();
-                                break;
-                            case Start:
-                                noteViewModel.addNote(title, content);
-                                finish();
-                                break;
-                            case none:
-                                break;
-                        }
-                    }
-                });
+                noteViewModel.addNote(title, content);
+                NoteActivity.starter(WriteNoteActivity.this);
+                finish();
             }
         });
     }

@@ -52,7 +52,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                 userViewModel.getMessage().observe(ForgetPasswordActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
-                        if (s != null){
+                        if (!s.equals("")){
                             Utility.Notice.snack(view, s);
                         }
                     }

@@ -22,6 +22,11 @@ import java.util.List;
 public class NoteViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<List<Notes>> notes = new MutableLiveData<>();
+    private MutableLiveData<String> message = new MutableLiveData<>();
+
+    public MutableLiveData<String> getMessage() {
+        return message;
+    }
 
     public void init(Context context) {
         this.repository = new Repository(context);
@@ -32,38 +37,8 @@ public class NoteViewModel extends ViewModel {
         repository.addNote(notes);
     }
 
-    public void addOnlineNote(String title, String content, Users users, View view) {
-        Notes notes = new Notes(title, content);
-        repository.addNote(notes);
-        repository.getNote(new Callback() {
-            @Override
-            public void getNotes(List<Notes> list) {
-                super.getNotes(list);
-                repository.syncNote(list, users, view);
-            }
-        });
-    }
-
     public void backupNote(List<Notes> notes, Users users, View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-        builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_backup, null));
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            }
-        });
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                repository.syncNote(notes, users, view);
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.round_corner_white);
-        dialog.show();
+        repository.syncNote(notes, users, view);
     }
 
     public MutableLiveData<List<Notes>> getNotes() {
@@ -88,10 +63,9 @@ public class NoteViewModel extends ViewModel {
         return notes;
     }
 
-    public void updateNote(int id, String title, String content, View view) {
-        Notes notes = new Notes(id, title, content);
+    public void updateNote(Notes notes) {
         repository.updateNote(notes);
-        Utility.Notice.snack(view, Const.Success.update);
+        message.setValue(Const.Success.update);
     }
 
     public void updateOnlineNote(int id, String title, String content, View view, Users users) {

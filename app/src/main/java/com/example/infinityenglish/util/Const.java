@@ -74,6 +74,6 @@ public interface Const {
     }
 
     enum State{
-        none, Start, Main, Login
+        Start, Main, Login
     }
 }

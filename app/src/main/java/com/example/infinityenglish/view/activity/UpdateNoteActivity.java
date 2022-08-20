@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityUpdateNoteBinding;
+import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
@@ -65,19 +66,24 @@ public class UpdateNoteActivity extends BaseActivity {
                         int id = getIntent().getIntExtra(Const.Sender.noteId, 0);
                         String noteTitle = binding.inputNoteTitle.getText().toString();
                         String noteContent = binding.inputNoteContent.getText().toString();
-                        switch (state) {
-                            case Main:
-                                noteViewModel.updateOnlineNote(id, noteTitle, noteContent, view, users);
-                                NoteActivity.starter(UpdateNoteActivity.this);
-                                finish();
-                                break;
-                            case Start:
-                                noteViewModel.updateNote(id, noteTitle, noteContent, view);
-                                NoteActivity.starter(UpdateNoteActivity.this);
-                                finish();
-                                break;
-                            case none:
-                                break;
+                        Notes notes = new Notes(id, title, content);
+                        if (state.equals(Const.State.Main)) {
+                            noteViewModel.updateOnlineNote(id, noteTitle, noteContent, view, users);
+                            NoteActivity.starter(UpdateNoteActivity.this);
+                            finish();
+                        } else if (state.equals(Const.State.Start)) {
+                            noteViewModel.updateNote(notes);
+                            NoteActivity.starter(UpdateNoteActivity.this);
+                            finish();
+                        }
+                    }
+                });
+
+                noteViewModel.getMessage().observe(UpdateNoteActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        if (s != null) {
+                            Utility.Notice.snack(view, s);
                         }
                     }
                 });

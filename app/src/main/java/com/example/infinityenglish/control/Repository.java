@@ -215,7 +215,7 @@ public class Repository {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Utility.Notice.snack(view, Const.Success.created);
+                                            Utility.Notice.snack(view, Const.Success.uploaded);
                                         } else {
                                             Utility.Notice.snack(view, Const.Error.network);
                                         }

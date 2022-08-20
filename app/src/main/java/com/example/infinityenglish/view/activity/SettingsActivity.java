@@ -63,26 +63,23 @@ public class SettingsActivity extends BaseActivity {
             binding.clickLogout.setText("Back to Login");
         }
 
+        userViewModel.checkUser(users);
+
         binding.backup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 userViewModel.getState().observe(SettingsActivity.this, new Observer<Const.State>() {
                     @Override
                     public void onChanged(Const.State state) {
-                        switch (state) {
-                            case Main:
-                                noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
-                                    @Override
-                                    public void onChanged(List<Notes> notes) {
-                                        noteViewModel.backupNote(notes, users, view);
-                                    }
-                                });
-                                break;
-                            case Start:
-                                Utility.Notice.snack(view, Const.Error.login);
-                                break;
-                            case none:
-                                break;
+                        if (state.equals(Const.State.Main)) {
+                            noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
+                                @Override
+                                public void onChanged(List<Notes> notes) {
+                                    noteViewModel.backupNote(notes, users, view);
+                                }
+                            });
+                        } else if (state.equals(Const.State.Start)) {
+                            Utility.Notice.snack(view, Const.Error.login);
                         }
                     }
                 });

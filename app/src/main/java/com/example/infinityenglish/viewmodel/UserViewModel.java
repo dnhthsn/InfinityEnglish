@@ -56,20 +56,20 @@ public class UserViewModel extends ViewModel {
         Matcher matcher = pattern.matcher(email);
 
         if (TextUtils.isEmpty(name) || name.length() < 3) {
-            message.postValue(Const.Error.name);
+            message.setValue(Const.Error.name);
         } else if (TextUtils.isEmpty(phone)) {
-            message.postValue(Const.Error.phone);
+            message.setValue(Const.Error.phone);
         } else if (TextUtils.isEmpty(password) || password.length() < 8) {
-            message.postValue(Const.Error.password);
+            message.setValue(Const.Error.password);
         } else if (TextUtils.isEmpty(address)) {
-            message.postValue(Const.Error.address);
+            message.setValue(Const.Error.address);
         } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
-            message.postValue(Const.Error.email);
+            message.setValue(Const.Error.email);
         } else if (avatar.equals("null")) {
-            message.postValue(Const.Error.avatar);
+            message.setValue(Const.Error.avatar);
         } else {
-            message.postValue(Const.Success.created);
-            state.postValue(Const.State.Login);
+            message.setValue(Const.Success.created);
+            state.setValue(Const.State.Login);
             repository.addUser(users, view);
         }
     }
@@ -84,19 +84,19 @@ public class UserViewModel extends ViewModel {
         Matcher matcher = pattern.matcher(email);
 
         if (TextUtils.isEmpty(name) || name.length() < 3) {
-            message.postValue(Const.Error.name);
+            message.setValue(Const.Error.name);
         } else if (TextUtils.isEmpty(phone)) {
-            message.postValue(Const.Error.phone);
+            message.setValue(Const.Error.phone);
         } else if (TextUtils.isEmpty(password) || password.length() < 8) {
-            message.postValue(Const.Error.password);
+            message.setValue(Const.Error.password);
         } else if (TextUtils.isEmpty(address)) {
-            message.postValue(Const.Error.address);
+            message.setValue(Const.Error.address);
         } else if (TextUtils.isEmpty(email) || !matcher.matches()) {
-            message.postValue(Const.Error.email);
+            message.setValue(Const.Error.email);
         } else {
             repository.updateUser(users);
-            state.postValue(Const.State.Login);
-            message.postValue(Const.Success.update);
+            state.setValue(Const.State.Login);
+            message.setValue(Const.Success.update);
         }
     }
 
@@ -106,13 +106,13 @@ public class UserViewModel extends ViewModel {
         String phone = users.getPhone();
 
         if (TextUtils.isEmpty(name) || name.length() < 3) {
-            message.postValue(Const.Error.name);
+            message.setValue(Const.Error.name);
         } else if (TextUtils.isEmpty(password) || password.length() < 8) {
-            message.postValue(Const.Error.password);
+            message.setValue(Const.Error.password);
         } else if (!password.equals(rePassword)) {
-            message.postValue(Const.Error.notMatch);
+            message.setValue(Const.Error.notMatch);
         } else {
-            message.postValue(null);
+            message.setValue("");
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_update, null));
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -153,7 +153,7 @@ public class UserViewModel extends ViewModel {
 
     public void removeCurrentUser() {
         sharedPreference.removeCurrentUser();
-        state.postValue(Const.State.none);
+        state.setValue(Const.State.Start);
     }
 
     public void getUserAvatar(Users users, View view, CircleImageView circleImageView) {
@@ -172,9 +172,9 @@ public class UserViewModel extends ViewModel {
             String name = users.getName();
             String password = users.getPassword();
             if (TextUtils.isEmpty(name)) {
-                message.postValue(Const.Error.name);
+                message.setValue(Const.Error.name);
             } else if (TextUtils.isEmpty(password)) {
-                message.postValue(Const.Error.password);
+                message.setValue(Const.Error.password);
             } else {
                 repository.getUser(new Callback() {
                     @Override
@@ -183,18 +183,20 @@ public class UserViewModel extends ViewModel {
                         for (Users user : list) {
                             if (user.getName().equals(name) && user.getPassword().equals(password)) {
                                 sharedPreference.saveCurrentUser(user);
-                                state.postValue(Const.State.Main);
-                                message.postValue("");
+                                state.setValue(Const.State.Main);
+                                message.setValue("");
                                 break;
                             } else {
-                                message.postValue(Const.Error.information);
+                                state.setValue(Const.State.Start);
+                                message.setValue(Const.Error.information);
+                                break;
                             }
                         }
                     }
                 });
             }
         } else {
-            state.postValue(Const.State.Start);
+            state.setValue(Const.State.Start);
         }
     }
 }

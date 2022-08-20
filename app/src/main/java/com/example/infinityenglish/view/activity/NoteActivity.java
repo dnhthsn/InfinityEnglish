@@ -70,40 +70,14 @@ public class NoteActivity extends BaseActivity {
 
         userViewModel.checkUser(users);
 
-        userViewModel.getState().observe(this, new Observer<Const.State>() {
+        noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
-            public void onChanged(Const.State state) {
-                switch (state) {
-                    case Main: {
-                        noteViewModel.getOnlineNotes(users).observe(NoteActivity.this, new Observer<List<Notes>>() {
-                            @SuppressLint("NotifyDataSetChanged")
-                            @Override
-                            public void onChanged(List<Notes> notes) {
-                                if (notes != null) {
-                                    count = notes.size();
-                                    noteAdapter.setNotes(notes);
-                                    noteAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
-                        break;
-                    }
-                    case Start: {
-                        noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
-                            @SuppressLint("NotifyDataSetChanged")
-                            @Override
-                            public void onChanged(List<Notes> notes) {
-                                if (notes != null) {
-                                    count = notes.size();
-                                    noteAdapter.setNotes(notes);
-                                    noteAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
-                        break;
-                    }
-                    case none:
-                        break;
+            public void onChanged(List<Notes> notes) {
+                if (notes != null) {
+                    count = notes.size();
+                    noteAdapter.setNotes(notes);
+                    noteAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -122,6 +96,7 @@ public class NoteActivity extends BaseActivity {
                     Utility.Notice.snack(view, Const.Error.count);
                 } else {
                     WriteNoteActivity.starter(NoteActivity.this);
+                    finish();
                 }
             }
         });
