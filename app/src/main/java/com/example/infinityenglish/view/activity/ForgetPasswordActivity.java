@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.databinding.ActivityForgetPasswordBinding;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.UserViewModel;
@@ -41,12 +42,19 @@ public class ForgetPasswordActivity extends BaseActivity {
                 String phone = binding.inputPhone.getText().toString();
                 String rePassword = binding.inputRepassword.getText().toString();
 
-                userViewModel.updatePassword(name, password, rePassword, phone, view);
+                Users users = new Users();
+                users.setName(name);
+                users.setPassword(password);
+                users.setPhone(phone);
+
+                userViewModel.updatePassword(users, rePassword, view);
 
                 userViewModel.getMessage().observe(ForgetPasswordActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
-                        Utility.Notice.snack(view, s);
+                        if (s != null){
+                            Utility.Notice.snack(view, s);
+                        }
                     }
                 });
             }

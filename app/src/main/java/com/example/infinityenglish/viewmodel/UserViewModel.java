@@ -41,7 +41,7 @@ public class UserViewModel extends ViewModel {
         return message;
     }
 
-    public MutableLiveData<Const.State> getState(){
+    public MutableLiveData<Const.State> getState() {
         return state;
     }
 
@@ -68,6 +68,7 @@ public class UserViewModel extends ViewModel {
         } else if (avatar.equals("null")) {
             message.postValue(Const.Error.avatar);
         } else {
+            message.postValue(Const.Success.created);
             state.postValue(Const.State.Login);
             repository.addUser(users, view);
         }
@@ -99,7 +100,11 @@ public class UserViewModel extends ViewModel {
         }
     }
 
-    public void updatePassword(String name, String password, String rePassword, String phone, View view) {
+    public void updatePassword(Users users, String rePassword, View view) {
+        String name = users.getName();
+        String password = users.getPassword();
+        String phone = users.getPhone();
+
         if (TextUtils.isEmpty(name) || name.length() < 3) {
             message.postValue(Const.Error.name);
         } else if (TextUtils.isEmpty(password) || password.length() < 8) {
@@ -107,6 +112,7 @@ public class UserViewModel extends ViewModel {
         } else if (!password.equals(rePassword)) {
             message.postValue(Const.Error.notMatch);
         } else {
+            message.postValue(null);
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setView(LayoutInflater.from(view.getContext()).inflate(R.layout.dialog_update, null));
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -162,7 +168,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public void checkUser(Users users) {
-        if (users != null){
+        if (users != null) {
             String name = users.getName();
             String password = users.getPassword();
             if (TextUtils.isEmpty(name)) {
