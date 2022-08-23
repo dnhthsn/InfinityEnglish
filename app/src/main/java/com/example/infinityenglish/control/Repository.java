@@ -38,11 +38,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Repository {
-    private Database database;
     private FirebaseDatabase db;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private FirebaseStorage firebaseStorage;
+    private Database database;
 
     public Repository(Context context) {
         this.database = new Database(context);
