@@ -1,5 +1,6 @@
 package com.example.infinityenglish.view.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -73,6 +74,31 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
                 binding.edtMsg.setText("");
                 binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
                 chatAdapter.notifyDataSetChanged();
+            }
+        });
+
+        binding.chatRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy == chatsModels.size() - 1) {
+                    binding.scrollDown.setVisibility(View.INVISIBLE);
+                } else if (dy < 0) {
+                    binding.scrollDown.setVisibility(View.VISIBLE);
+                    binding.scrollDown.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            binding.scrollDown.setVisibility(View.INVISIBLE);
+                            binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
+                        }
+                    });
+                }
             }
         });
 
