@@ -95,7 +95,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
                         @Override
                         public void onClick(View view) {
                             binding.scrollDown.setVisibility(View.INVISIBLE);
-                            binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
+                            binding.chatRecycler.scrollToPosition(chatsModels.size());
                         }
                     });
                 }
