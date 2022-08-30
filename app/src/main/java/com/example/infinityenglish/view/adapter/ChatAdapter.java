@@ -1,6 +1,5 @@
 package com.example.infinityenglish.view.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityenglish.R;
+import com.example.infinityenglish.databinding.ItemBotChatBinding;
+import com.example.infinityenglish.databinding.ItemUserChatBinding;
 import com.example.infinityenglish.models.ChatsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter {
@@ -26,14 +26,13 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
+        ItemUserChatBinding itemUserChatBinding = ItemUserChatBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemBotChatBinding itemBotChatBinding = ItemBotChatBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         switch (viewType) {
             case 0:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_holder, parent, false);
-                return new userViewHolder(view);
+                return new userViewHolder(itemUserChatBinding);
             case 1:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_reply, parent, false);
-                return new botViewHolder(view);
+                return new botViewHolder(itemBotChatBinding);
 
         }
         return null;
@@ -44,10 +43,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
         ChatsModel chatsModel = chatsmodalArrayList.get(position);
         switch (chatsmodalArrayList.get(position).getSender()) {
             case "user":
-                ((userViewHolder) holder).userMsg.setText(chatsModel.getMessage());
+                ((userViewHolder) holder).binding.userMsg.setText(chatsModel.getMessage());
                 break;
             case "bot":
-                ((botViewHolder) holder).botReply.setText(chatsModel.getMessage());
+                ((botViewHolder) holder).binding.botReply.setText(chatsModel.getMessage());
                 break;
 
         }
@@ -72,20 +71,22 @@ public class ChatAdapter extends RecyclerView.Adapter {
     }
 
     public static class userViewHolder extends RecyclerView.ViewHolder {
-        TextView userMsg;
+        private ItemUserChatBinding binding;
 
-        public userViewHolder(@NonNull View itemView) {
-            super(itemView);
-            userMsg = itemView.findViewById(R.id.userMsg);
+        public userViewHolder(ItemUserChatBinding binding) {
+            super(binding.getRoot());
+
+            this.binding = binding;
         }
     }
 
     public static class botViewHolder extends RecyclerView.ViewHolder {
-        TextView botReply;
+        private ItemBotChatBinding binding;
 
-        public botViewHolder(@NonNull View itemView) {
-            super(itemView);
-            botReply = itemView.findViewById(R.id.bot_reply);
+        public botViewHolder(ItemBotChatBinding binding) {
+            super(binding.getRoot());
+
+            this.binding = binding;
         }
     }
 }
