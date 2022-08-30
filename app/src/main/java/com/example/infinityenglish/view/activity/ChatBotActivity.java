@@ -10,9 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.remote.RequestChatBotManager;
@@ -42,7 +39,6 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         context.startActivity(intent);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +54,13 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         binding.chatRecycler.setLayoutManager(layoutManager);
         binding.chatRecycler.setAdapter(chatAdapter);
 
+        binding.clickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         binding.sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +71,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
                 chatsModels.add(new ChatsModel(binding.edtMsg.getText().toString(), USER_KEY));
                 chatBotViewModel.getChatMessage(ChatBotActivity.this, binding.edtMsg.getText().toString());
                 binding.edtMsg.setText("");
-                binding.chatRecycler.scrollToPosition(chatsModels.size()-1);
+                binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
                 chatAdapter.notifyDataSetChanged();
             }
         });
@@ -78,7 +81,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
 
     public void showData(MessageModel messageModel) {
         chatsModels.add(new ChatsModel(messageModel.getCnt(), BOT_KEY));
-        binding.chatRecycler.scrollToPosition(chatsModels.size()-1);
+        binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
         chatAdapter.notifyDataSetChanged();
     }
 
