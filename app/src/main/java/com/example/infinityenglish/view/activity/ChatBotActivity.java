@@ -34,6 +34,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
 
     private List<ChatsModel> chatsModels;
     private ChatAdapter chatAdapter;
+    private LinearLayoutManager layoutManager;
 
     public static void starter(Context context) {
         Intent intent = new Intent(context, ChatBotActivity.class);
@@ -50,7 +51,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         chatBotViewModel = new ViewModelProvider(this).get(ChatBotViewModel.class);
 
         chatAdapter = new ChatAdapter();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         chatsModels = new ArrayList<>();
         binding.chatRecycler.setLayoutManager(layoutManager);
         binding.chatRecycler.setAdapter(chatAdapter);
@@ -81,6 +82,10 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                int currentFirstVisible = layoutManager.findLastVisibleItemPosition();
+                if (currentFirstVisible == chatsModels.size() - 1){
+                    binding.scrollDown.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -88,7 +93,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (dy > 0) {
-                    binding.scrollDown.setVisibility(View.INVISIBLE);
+                    //binding.scrollDown.setVisibility(View.INVISIBLE);
                 } else if (dy < 0) {
                     binding.scrollDown.setVisibility(View.VISIBLE);
                     binding.scrollDown.setOnClickListener(new View.OnClickListener() {
