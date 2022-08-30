@@ -116,5 +116,12 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+
+        binding.chatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChatBotActivity.starter(MainActivity.this);
+            }
+        });
     }
 }
