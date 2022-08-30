@@ -87,7 +87,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (dy == chatsModels.size() - 1) {
+                if (dy > 0) {
                     binding.scrollDown.setVisibility(View.INVISIBLE);
                 } else if (dy < 0) {
                     binding.scrollDown.setVisibility(View.VISIBLE);
@@ -95,7 +95,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
                         @Override
                         public void onClick(View view) {
                             binding.scrollDown.setVisibility(View.INVISIBLE);
-                            binding.chatRecycler.scrollToPosition(chatsModels.size());
+                            binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
                         }
                     });
                 }
