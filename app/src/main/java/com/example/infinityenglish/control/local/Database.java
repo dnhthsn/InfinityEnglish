@@ -15,38 +15,26 @@ public class Database extends SQLiteOpenHelper {
     private final static String DATABASE_NAME = "english_db";
     private final static int VERSION = 1;
 
-    private String TABLE_USER = "users";
-    private String NAME = "name";
-    private String PASSWORD = "password";
-    private String ADDRESS = "address";
-    private String EMAIL = "email";
-    private String PHONE = "phone";
-    private String GENDER = "gender";
-    private String AVATAR = "avatar";
+    private final String TABLE_USER = "users";
+    private final String NAME = "name";
+    private final String PASSWORD = "password";
+    private final String ADDRESS = "address";
+    private final String EMAIL = "email";
+    private final String PHONE = "phone";
+    private final String GENDER = "gender";
+    private final String AVATAR = "avatar";
 
-    private String TABLE_HISTORY = "histories";
-    private String WORD = "word";
+    private final String TABLE_HISTORY = "histories";
+    private final String WORD = "word";
 
-    private String TABLE_NOTE = "notes";
-    private String ID = "id";
-    private String TITLE = "title";
-    private String CONTENT = "content";
+    private final String TABLE_NOTE = "notes";
+    private final String ID = "id";
+    private final String TITLE = "title";
+    private final String CONTENT = "content";
 
-    private String createTableUser = "CREATE TABLE " + TABLE_USER + " ( " + NAME + " TEXT PRIMARY KEY UNIQUE, "
-            + PASSWORD + " TEXT, "
-            + ADDRESS + " TEXT, "
-            + EMAIL + " TEXT, "
-            + PHONE + " TEXT, "
-            + GENDER + " TEXT, "
-            + AVATAR + " TEXT)";
+    private final String createTableHistory = "CREATE TABLE " + TABLE_HISTORY + " ( " + WORD + " TEXT PRIMARY KEY UNIQUE)";
 
-    private String createTableHistory = "CREATE TABLE " + TABLE_HISTORY + " ( " + WORD + " TEXT PRIMARY KEY UNIQUE)";
-
-    private String createTableNote = "CREATE TABLE " + TABLE_NOTE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + TITLE + " TEXT, "
-            + CONTENT + " TEXT)";
-
-    private String insertUser = "INSERT INTO " + TABLE_USER + " VAlUES ('1','1','1','1','1','male', null)";
+    private final String insertUser = "INSERT INTO " + TABLE_USER + " VAlUES ('1','1','1','1','1','male', null)";
 
     public Database(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -54,8 +42,18 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String createTableUser = "CREATE TABLE " + TABLE_USER + " ( " + NAME + " TEXT PRIMARY KEY UNIQUE, "
+                + PASSWORD + " TEXT, "
+                + ADDRESS + " TEXT, "
+                + EMAIL + " TEXT, "
+                + PHONE + " TEXT, "
+                + GENDER + " TEXT, "
+                + AVATAR + " TEXT)";
         sqLiteDatabase.execSQL(createTableUser);
         sqLiteDatabase.execSQL(createTableHistory);
+        String createTableNote = "CREATE TABLE " + TABLE_NOTE + " ( " + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TITLE + " TEXT, "
+                + CONTENT + " TEXT)";
         sqLiteDatabase.execSQL(createTableNote);
 
         sqLiteDatabase.execSQL(insertUser);
@@ -67,14 +65,12 @@ public class Database extends SQLiteOpenHelper {
 
     public Cursor getHistory() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_HISTORY, null);
-        return res;
+        return db.rawQuery("SELECT * FROM " + TABLE_HISTORY, null);
     }
 
     public Cursor getNote() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NOTE, null);
-        return res;
+        return db.rawQuery("SELECT * FROM " + TABLE_NOTE, null);
     }
 
     public void addHistory(Histories histories) {
@@ -127,8 +123,7 @@ public class Database extends SQLiteOpenHelper {
 
     public int deleteNote(Integer i) {
         SQLiteDatabase db = this.getReadableDatabase();
-        int res = db.delete(TABLE_NOTE, ID + " = " + i, null);
-        return res;
+        return db.delete(TABLE_NOTE, ID + " = " + i, null);
     }
 
     public void deleteAllHistory() {

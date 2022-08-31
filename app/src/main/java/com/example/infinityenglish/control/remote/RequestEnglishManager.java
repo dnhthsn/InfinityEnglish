@@ -76,14 +76,13 @@ public class RequestEnglishManager {
 
     private static class CustomInterceptor implements Interceptor {
 
+        @NonNull
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
 
             Request request = chain.request();
 
-            okhttp3.Response response = chain.proceed(request);
-
-            return response;
+            return chain.proceed(request);
         }
     }
 }

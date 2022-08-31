@@ -57,21 +57,6 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void setStateLogin(boolean stateLogin) {
-        editor.putBoolean(Const.Sender.loginState, true);
-        editor.commit();
-    }
-
-    public boolean getStateLogin() {
-        boolean stateLogin = sharedPreferences.getBoolean(Const.Sender.loginState, false);
-        return stateLogin;
-    }
-
-    public void removeStateLogin() {
-        editor.remove(Const.Sender.loginState);
-        editor.commit();
-    }
-
     public void removeWord(){
         editor.remove(Const.Sender.word);
         editor.commit();

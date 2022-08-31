@@ -2,11 +2,9 @@ package com.example.infinityenglish.control.remote;
 
 import androidx.annotation.NonNull;
 
-import com.example.infinityenglish.models.APIResponse;
 import com.example.infinityenglish.models.MessageModel;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -43,7 +41,7 @@ public class RequestChatBotManager {
         Call<MessageModel> call = retroFitApi.getMessage(url);
         call.enqueue(new Callback<MessageModel>() {
             @Override
-            public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
+            public void onResponse(@NonNull Call<MessageModel> call, @NonNull Response<MessageModel> response) {
                 if(response.isSuccessful()){
                     MessageModel messageModel = response.body();
                     listener.onFetchData(messageModel, response.message());
@@ -51,7 +49,7 @@ public class RequestChatBotManager {
             }
 
             @Override
-            public void onFailure(Call<MessageModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<MessageModel> call, @NonNull Throwable t) {
                 listener.onError("No response");
             }
         });
@@ -70,14 +68,13 @@ public class RequestChatBotManager {
 
     private static class CustomInterceptor implements Interceptor {
 
+        @NonNull
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
 
             Request request = chain.request();
 
-            okhttp3.Response response = chain.proceed(request);
-
-            return response;
+            return chain.proceed(request);
         }
     }
 }

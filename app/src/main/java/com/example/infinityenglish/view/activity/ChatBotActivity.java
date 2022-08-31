@@ -1,12 +1,12 @@
 package com.example.infinityenglish.view.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +41,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         context.startActivity(intent);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,26 +57,18 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         binding.chatRecycler.setLayoutManager(layoutManager);
         binding.chatRecycler.setAdapter(chatAdapter);
 
-        binding.clickBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        binding.clickBack.setOnClickListener(view -> finish());
 
-        binding.sendBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.edtMsg.getText().toString().isEmpty()) {
-                    Utility.Notice.snack(view, "Please enter your message");
-                    return;
-                }
-                chatsModels.add(new ChatsModel(binding.edtMsg.getText().toString(), USER_KEY));
-                chatBotViewModel.getChatMessage(ChatBotActivity.this, binding.edtMsg.getText().toString());
-                binding.edtMsg.setText("");
-                binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
-                chatAdapter.notifyDataSetChanged();
+        binding.sendBtn.setOnClickListener(view -> {
+            if (binding.edtMsg.getText().toString().isEmpty()) {
+                Utility.Notice.snack(view, "Please enter your message");
+                return;
             }
+            chatsModels.add(new ChatsModel(binding.edtMsg.getText().toString(), USER_KEY));
+            chatBotViewModel.getChatMessage(ChatBotActivity.this, binding.edtMsg.getText().toString());
+            binding.edtMsg.setText("");
+            binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
+            chatAdapter.notifyDataSetChanged();
         });
 
         binding.chatRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -83,7 +76,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int currentFirstVisible = layoutManager.findLastVisibleItemPosition();
-                if (currentFirstVisible == chatsModels.size() - 1){
+                if (currentFirstVisible == chatsModels.size() - 1) {
                     binding.scrollDown.setVisibility(View.INVISIBLE);
                 }
             }
@@ -92,16 +85,11 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (dy > 0) {
-                    //binding.scrollDown.setVisibility(View.INVISIBLE);
-                } else if (dy < 0) {
+                if (dy < 0) {
                     binding.scrollDown.setVisibility(View.VISIBLE);
-                    binding.scrollDown.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            binding.scrollDown.setVisibility(View.INVISIBLE);
-                            binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
-                        }
+                    binding.scrollDown.setOnClickListener(view -> {
+                        binding.scrollDown.setVisibility(View.INVISIBLE);
+                        binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
                     });
                 }
             }
@@ -110,6 +98,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         chatAdapter.setChatsmodalArrayList(chatsModels);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void showData(MessageModel messageModel) {
         chatsModels.add(new ChatsModel(messageModel.getCnt(), BOT_KEY));
         binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
@@ -125,6 +114,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         showData(messageModel);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onError(String message) {
         chatsModels.add(new ChatsModel("no response", BOT_KEY));
