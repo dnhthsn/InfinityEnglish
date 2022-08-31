@@ -16,6 +16,9 @@ public interface Const {
         String notes = "notes";
         String databaseLink = "https://test-b2d47-default-rtdb.asia-southeast1.firebasedatabase.app/";
         String storageLink = "gs://test-b2d47.appspot.com";
+        String message = "message";
+        String sender = "sender";
+        String chatBot = "Chat Bot";
     }
 
     interface Sender {

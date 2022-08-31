@@ -17,10 +17,12 @@ import com.example.infinityenglish.control.remote.RequestChatBotManager;
 import com.example.infinityenglish.databinding.ActivityChatBotBinding;
 import com.example.infinityenglish.models.ChatsModel;
 import com.example.infinityenglish.models.MessageModel;
+import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.adapter.ChatAdapter;
 import com.example.infinityenglish.view.base.BaseActivity;
 import com.example.infinityenglish.viewmodel.ChatBotViewModel;
+import com.example.infinityenglish.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
 
     private ActivityChatBotBinding binding;
     private ChatBotViewModel chatBotViewModel;
+    private UserViewModel userViewModel;
 
     private List<ChatsModel> chatsModels;
     private ChatAdapter chatAdapter;
@@ -50,6 +53,10 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
         binding = DataBindingUtil.setContentView(ChatBotActivity.this, R.layout.activity_chat_bot);
 
         chatBotViewModel = new ViewModelProvider(this).get(ChatBotViewModel.class);
+        chatBotViewModel.init(this);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.init(this);
 
         chatAdapter = new ChatAdapter();
         layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -95,12 +102,18 @@ public class ChatBotActivity extends BaseActivity implements RequestChatBotManag
             }
         });
 
+        Users users = userViewModel.getCurrentUser();
+
         chatAdapter.setChatsmodalArrayList(chatsModels);
+        if (users != null){
+            chatBotViewModel.addChatBotMessage(chatsModels, users, binding.getRoot());
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void showData(MessageModel messageModel) {
-        chatsModels.add(new ChatsModel(messageModel.getCnt(), BOT_KEY));
+        ChatsModel chatsModel = new ChatsModel(messageModel.getCnt(), BOT_KEY);
+        chatsModels.add(chatsModel);
         binding.chatRecycler.scrollToPosition(chatsModels.size() - 1);
         chatAdapter.notifyDataSetChanged();
     }

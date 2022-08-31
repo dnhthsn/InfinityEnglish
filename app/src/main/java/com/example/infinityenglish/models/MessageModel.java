@@ -10,8 +10,4 @@ public class MessageModel {
     public String getCnt() {
         return cnt;
     }
-
-    public void setCnt(String cnt) {
-        this.cnt = cnt;
-    }
 }

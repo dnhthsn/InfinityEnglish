@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
 import com.example.infinityenglish.control.local.SharedPreference;
+import com.example.infinityenglish.control.remote.RequestUserManager;
 import com.example.infinityenglish.control.rest.Callback;
 import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
@@ -31,10 +32,12 @@ public class UserViewModel extends ViewModel {
     private SharedPreference sharedPreference;
     private MutableLiveData<String> message = new MutableLiveData<>();
     private MutableLiveData<Const.State> state = new MutableLiveData<>();
+    private RequestUserManager requestUserManager;
 
     public void init(Context context) {
         this.repository = new Repository(context);
         sharedPreference = new SharedPreference(context);
+        requestUserManager = new RequestUserManager();
     }
 
     public MutableLiveData<String> getMessage() {
@@ -70,7 +73,8 @@ public class UserViewModel extends ViewModel {
         } else {
             message.setValue(Const.Success.created);
             state.setValue(Const.State.Login);
-            repository.addUser(users, view);
+            //repository.addUser(users, view);
+            requestUserManager.saveUserAPI(users, view.getContext());
         }
     }
 

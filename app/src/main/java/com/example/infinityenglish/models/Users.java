@@ -3,7 +3,14 @@ package com.example.infinityenglish.models;
 import java.io.Serializable;
 
 public class Users implements Serializable {
-    private String name, password, address, email, phone, gender, avatar;
+    private int id;
+    private String name;
+    private String password;
+    private String address;
+    private String email;
+    private String phone;
+    private String gender;
+    private String avatar;
 
     public Users() {
     }
@@ -16,6 +23,21 @@ public class Users implements Serializable {
         this.phone = phone;
         this.gender = gender;
         this.avatar = avatar;
+    }
+
+    public Users(int id, String name, String password, String address, String email, String phone, String gender, String avatar) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.avatar = avatar;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

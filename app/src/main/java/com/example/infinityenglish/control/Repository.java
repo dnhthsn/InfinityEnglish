@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.infinityenglish.control.local.Database;
 import com.example.infinityenglish.control.rest.Callback;
+import com.example.infinityenglish.models.ChatsModel;
 import com.example.infinityenglish.models.Histories;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
@@ -333,5 +334,64 @@ public class Repository {
     public void deleteAllHistory(View view) {
         database.deleteAllHistory();
         Utility.Notice.snack(view, Const.Success.deleted);
+    }
+
+    public void addChatBot(List<ChatsModel> chatsModels, Users users, View view) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (ChatsModel chatsModel : chatsModels) {
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put(Const.Database.message, chatsModel.getMessage());
+                    userdataMap.put(Const.Database.sender, chatsModel.getSender());
+
+                    databaseReference.child(Const.Database.user)
+                            .child(users.getName())
+                            .child(Const.Database.chatBot)
+                            .child(chatsModel.getSender())
+                            .updateChildren(userdataMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Utility.Notice.snack(view, Const.Success.uploaded);
+                                    } else {
+                                        Utility.Notice.snack(view, Const.Error.network);
+                                    }
+                                }
+                            });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void getChatBotMessage(Users users, Callback callback){
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<ChatsModel> list = new ArrayList<>();
+                ChatsModel chatsModel;
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    chatsModel = data.getValue(ChatsModel.class);
+                    list.add(chatsModel);
+                }
+                callback.getChatBotMessage(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.child(Const.Database.user)
+                .child(users.getName())
+                .child(Const.Database.chatBot)
+                .addValueEventListener(postListener);
     }
 }
