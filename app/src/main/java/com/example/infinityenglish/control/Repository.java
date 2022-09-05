@@ -162,6 +162,23 @@ public class Repository {
         storageReference.putFile(Uri.parse(users.getAvatar()));
     }
 
+    public void uploadAvatar(Users users, View view){
+        storageReference = firebaseStorage.getReference("images/" + users.getName());
+
+        storageReference.putFile(Uri.parse(users.getAvatar()))
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Utility.Notice.snack(view, Const.Success.uploaded);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
     public void updatePassword(Users users, View view) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

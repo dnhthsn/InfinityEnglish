@@ -29,9 +29,19 @@ public class RequestUserManager {
                 .build();
     }
 
-    public void getUserAPI(OnFetchDataListener listener) {
+    public void getUserAPI(com.example.infinityenglish.control.rest.Callback callback) {
         CallUser callUser = retrofit.create(CallUser.class);
-        Call<List<Users>> call = callUser.getAllUser();
+        callUser.getAllUser().enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                callback.getUser(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void saveUserAPI(Users users, Context context) {

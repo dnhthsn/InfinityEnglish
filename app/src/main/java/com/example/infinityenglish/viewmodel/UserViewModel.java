@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -20,6 +22,9 @@ import com.example.infinityenglish.models.Users;
 import com.example.infinityenglish.util.Const;
 import com.example.infinityenglish.util.Utility;
 import com.example.infinityenglish.view.activity.LoginActivity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -75,6 +80,7 @@ public class UserViewModel extends ViewModel {
             state.setValue(Const.State.Login);
             //repository.addUser(users, view);
             requestUserManager.saveUserAPI(users, view.getContext());
+            repository.uploadAvatar(users, view);
         }
     }
 
@@ -180,7 +186,7 @@ public class UserViewModel extends ViewModel {
             } else if (TextUtils.isEmpty(password)) {
                 message.setValue(Const.Error.password);
             } else {
-                repository.getUser(new Callback() {
+                requestUserManager.getUserAPI(new Callback() {
                     @Override
                     public void getUser(List<Users> list) {
                         super.getUser(list);
@@ -193,7 +199,6 @@ public class UserViewModel extends ViewModel {
                             } else {
                                 state.setValue(Const.State.Start);
                                 message.setValue(Const.Error.information);
-                                break;
                             }
                         }
                     }
