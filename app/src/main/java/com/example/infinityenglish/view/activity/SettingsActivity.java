@@ -72,7 +72,7 @@ public class SettingsActivity extends BaseActivity {
                     @Override
                     public void onChanged(Const.State state) {
                         if (state.equals(Const.State.Main)) {
-                            noteViewModel.getNotes().observe(SettingsActivity.this, new Observer<List<Notes>>() {
+                            noteViewModel.getNotes(users.getId()).observe(SettingsActivity.this, new Observer<List<Notes>>() {
                                 @Override
                                 public void onChanged(List<Notes> notes) {
                                     noteViewModel.backupNote(notes, users, view);

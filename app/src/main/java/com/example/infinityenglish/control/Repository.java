@@ -269,7 +269,9 @@ public class Repository {
             Integer id = cursor.getInt(0);
             String title = cursor.getString(1);
             String content = cursor.getString(2);
-            notes = new Notes(id, title, content);
+
+            //chưa set user
+            notes = new Notes(id, title, content, 1);
             list.add(notes);
         }
         callback.getNotes(list);

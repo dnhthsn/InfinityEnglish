@@ -66,7 +66,9 @@ public class UpdateNoteActivity extends BaseActivity {
                         int id = getIntent().getIntExtra(Const.Sender.noteId, 0);
                         String noteTitle = binding.inputNoteTitle.getText().toString();
                         String noteContent = binding.inputNoteContent.getText().toString();
-                        Notes notes = new Notes(id, title, content);
+
+                        //chưa set user
+                        Notes notes = new Notes(id, title, content, 1);
                         if (state.equals(Const.State.Main)) {
                             noteViewModel.updateOnlineNote(id, noteTitle, noteContent, view, users);
                             NoteActivity.starter(UpdateNoteActivity.this);

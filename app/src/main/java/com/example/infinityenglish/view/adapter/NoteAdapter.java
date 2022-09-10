@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.infinityenglish.R;
 import com.example.infinityenglish.control.Repository;
+import com.example.infinityenglish.control.remote.RequestUserManager;
 import com.example.infinityenglish.databinding.ItemNotesBinding;
 import com.example.infinityenglish.models.Notes;
 import com.example.infinityenglish.models.Users;
@@ -32,6 +33,7 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
     private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private List<Notes> notes;
+    private RequestUserManager requestUserManager = new RequestUserManager();
 
     @SuppressLint("NotifyDataSetChanged")
     public void setNotes(List<Notes> notes) {
@@ -50,6 +52,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Repository repository = new Repository(holder.binding.getRoot().getContext());
+
+
         UserViewModel userViewModel = new ViewModelProvider((ViewModelStoreOwner) holder.binding.getRoot().getContext()).get(UserViewModel.class);
         userViewModel.init(holder.binding.getRoot().getContext());
         Users users = userViewModel.getCurrentUser();
@@ -81,7 +85,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
+//                                    repository.deleteOnlineNote(users, notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                                    requestUserManager.deleteNoteAPI(notes.get(position),holder.binding.getRoot().getContext() );
                                     notes.remove(position);
                                     notifyDataSetChanged();
                                 }
@@ -102,7 +107,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
+//                                    repository.deleteNote(notes.get(position).getId(), holder.binding.getRoot().getRootView());
+                                    requestUserManager.deleteNoteAPI(notes.get(position),holder.binding.getRoot().getContext() );
+
                                     notes.remove(position);
                                     notifyDataSetChanged();
                                 }

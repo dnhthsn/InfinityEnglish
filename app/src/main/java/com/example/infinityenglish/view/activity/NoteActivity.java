@@ -70,7 +70,7 @@ public class NoteActivity extends BaseActivity {
 
         userViewModel.checkUser(users);
 
-        noteViewModel.getNotes().observe(NoteActivity.this, new Observer<List<Notes>>() {
+        noteViewModel.getNotes(users.getId()).observe(NoteActivity.this, new Observer<List<Notes>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(List<Notes> notes) {

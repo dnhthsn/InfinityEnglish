@@ -77,26 +77,11 @@ public class UserViewModel extends ViewModel {
             message.setValue(Const.Error.avatar);
         } else {
             //repository.addUser(users, view);
-
+            message.setValue(Const.Success.created);
+            state.setValue(Const.State.Login);
+            requestUserManager.saveUserAPI(users, view.getContext());
+            repository.uploadAvatar(users, view);
             //lỗi chỉ kiểm tra giá trị đầu tiên
-            requestUserManager.getUserAPI(new Callback() {
-                @Override
-                public void getUser(List<Users> list) {
-                    super.getUser(list);
-
-                    for (Users user : list) {
-                        if (!user.getName().equals(name)) {
-                            message.setValue(Const.Error.existed);
-                        } else {
-                            message.setValue(Const.Success.created);
-                            state.setValue(Const.State.Login);
-                            requestUserManager.saveUserAPI(users, view.getContext());
-                            repository.uploadAvatar(users, view);
-                            break;
-                        }
-                    }
-                }
-            });
 
         }
     }
